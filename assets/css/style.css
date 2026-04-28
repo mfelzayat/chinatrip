@@ -134,7 +134,7 @@ a:hover { color: var(--jade-light); }
 .site-header__bg {
   position: absolute;
   inset: 0;
-  background: url('../images/zhangjiajie-avatar.png') center/cover no-repeat;
+  background: url('../images/zhangjiajie-avatar.jpg') center/cover no-repeat;
   animation: kenburns 20s ease-in-out infinite alternate;
   opacity: .6;
 }
