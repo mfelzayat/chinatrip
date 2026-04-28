@@ -1,5 +1,5 @@
 /* ============================================================
-   China Trip 2026 — Style Sheet
+   China Trip 2026 — Style Sheet (v3.0)
    Palette: ink / paper / jade / terracotta / gold
    ============================================================ */
 
@@ -58,8 +58,21 @@ a:hover { color: var(--jade-light); }
   font-weight: 500;
   position: relative;
   z-index: 200;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem .75rem;
 }
-.visa-banner span { opacity: .75; margin-right: .5rem; }
+.visa-banner span { opacity: .75; }
+.visa-banner .countdown {
+  background: rgba(255,255,255,.18);
+  padding: .12rem .55rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  opacity: 1;
+}
 
 /* ── Sticky Nav ── */
 .day-nav {
@@ -76,6 +89,7 @@ a:hover { color: var(--jade-light); }
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 .day-nav::-webkit-scrollbar { display: none; }
 
@@ -101,7 +115,7 @@ a:hover { color: var(--jade-light); }
   font-size: .68rem;
   font-weight: 500;
   line-height: 1.2;
-  transition: background .2s, color .2s;
+  transition: background .2s, color .2s, transform .15s;
   white-space: nowrap;
   letter-spacing: .02em;
 }
@@ -112,6 +126,7 @@ a:hover { color: var(--jade-light); }
 }
 .day-nav__btn:hover {
   background: var(--paper-dark);
+  transform: translateY(-1px);
 }
 .day-nav__btn.active {
   background: var(--terracotta);
@@ -134,9 +149,9 @@ a:hover { color: var(--jade-light); }
 .site-header__bg {
   position: absolute;
   inset: 0;
-  background: url('../images/zhangjiajie-avatar.jpg') center/cover no-repeat;
+  background: url('../images/great-wall-mutianyu-1.jpg') center/cover no-repeat;
   animation: kenburns 20s ease-in-out infinite alternate;
-  opacity: .6;
+  opacity: .65;
 }
 
 @keyframes kenburns {
@@ -186,6 +201,17 @@ a:hover { color: var(--jade-light); }
   letter-spacing: .08em;
 }
 
+.site-header__weather {
+  margin-top: 1.4rem;
+  font-size: .85rem;
+  opacity: .85;
+  background: rgba(0,0,0,.35);
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.14);
+}
+
 .site-header__scroll {
   position: absolute;
   bottom: 2rem;
@@ -206,8 +232,13 @@ a:hover { color: var(--jade-light); }
 .day-section {
   padding: 0 0 4rem;
   border-bottom: 1px solid var(--gold-light);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .55s ease, transform .55s ease;
 }
+.day-section.in-view { opacity: 1; transform: translateY(0); }
 
+.day-section:first-of-type { opacity: 1; transform: none; }
 .day-section:last-of-type { border-bottom: none; }
 
 /* Alternating section bg */
@@ -420,6 +451,7 @@ a:hover { color: var(--jade-light); }
   font-weight: 600;
   letter-spacing: .03em;
   transition: background .2s, color .2s;
+  margin-right: .3rem;
 }
 .btn-maps:hover {
   background: var(--jade);
@@ -486,6 +518,67 @@ a:hover { color: var(--jade-light); }
   padding: 2.5rem 1.5rem;
 }
 
+/* ══════════════════════════════════════════
+   PHOTO STRIP (gallery, 3+ per visit point)
+   ══════════════════════════════════════════ */
+.strip-heading {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 1.7rem 0 .6rem;
+  letter-spacing: .01em;
+  border-left: 3px solid var(--terracotta);
+  padding-left: .65rem;
+}
+
+.photo-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 0 14px;
+  margin-bottom: .4rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-light) transparent;
+}
+.photo-strip::-webkit-scrollbar { height: 6px; }
+.photo-strip::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 999px; }
+.photo-strip::-webkit-scrollbar-track { background: transparent; }
+
+.photo-strip img {
+  flex: 0 0 auto;
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  cursor: zoom-in;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.photo-strip img:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 600px) {
+  .photo-strip img { width: 220px; height: 160px; }
+}
+
+.photo-strip[data-credit]::after {
+  content: attr(data-credit);
+  display: block;
+  flex: 0 0 auto;
+  font-size: .65rem;
+  color: #8a7e6a;
+  align-self: center;
+  padding-left: .6rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
 /* ── Extras / Bottom sections ── */
 .extras {
   background: var(--ink);
@@ -520,6 +613,12 @@ a:hover { color: var(--jade-light); }
   border-bottom: 1px solid rgba(200,169,110,.25);
   padding-bottom: .5rem;
 }
+.extras h2 [dir="rtl"] { display: inline-block; margin-right: .35rem; }
+
+/* span the apps and costs cards across the full grid */
+.apps-card, .costs-card, .checklist-card {
+  grid-column: 1 / -1;
+}
 
 /* Phrasebook */
 .phrases { list-style: none; }
@@ -536,7 +635,7 @@ a:hover { color: var(--jade-light); }
 .phrase:first-child { font-weight: 700; font-size: .7rem; color: var(--gold); text-transform: uppercase; letter-spacing: .06em; }
 .phrase .zh { font-family: var(--ff-zh); color: var(--gold-light); font-size: .9rem; }
 .phrase .py { color: #a0c4ff; font-style: italic; }
-.phrase .ar { direction: rtl; font-size: .85rem; }
+.phrase .ar { font-size: .85rem; }
 
 /* Practical tips */
 .tips-list { list-style: none; }
@@ -553,6 +652,181 @@ a:hover { color: var(--jade-light); }
 .emergency-block { font-size: .84rem; }
 .emergency-block p { margin-bottom: .6rem; line-height: 1.5; }
 .emergency-block strong { color: var(--gold); }
+
+/* ══════════════════════════════════════════
+   PRE-DEPARTURE CHECKLIST (with localStorage)
+   ══════════════════════════════════════════ */
+.checklist-hint {
+  font-size: .78rem;
+  color: var(--gold-light);
+  margin-bottom: .6rem;
+  font-style: italic;
+}
+
+.checklist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .25rem;
+}
+@media (min-width: 768px) { .checklist { grid-template-columns: 1fr 1fr; gap: .25rem .9rem; } }
+
+.checklist li {
+  padding: .35rem 0;
+  border-bottom: 1px solid rgba(246,240,231,.08);
+  font-size: .82rem;
+}
+.checklist label {
+  display: flex;
+  gap: .55rem;
+  align-items: flex-start;
+  cursor: pointer;
+  line-height: 1.45;
+  user-select: none;
+}
+.checklist input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: .15rem;
+  cursor: pointer;
+  accent-color: var(--terracotta);
+  flex-shrink: 0;
+}
+.checklist label:has(input:checked) {
+  color: rgba(246,240,231,.45);
+  text-decoration: line-through;
+  text-decoration-color: rgba(193,84,62,.55);
+}
+
+.btn-reset {
+  margin-top: 1rem;
+  background: transparent;
+  color: var(--gold-light);
+  border: 1px solid rgba(200,169,110,.4);
+  padding: .35rem 1rem;
+  border-radius: var(--radius);
+  font-size: .78rem;
+  cursor: pointer;
+  font-family: var(--ff-ui);
+  transition: background .15s, color .15s;
+}
+.btn-reset:hover { background: var(--gold); color: var(--ink); }
+
+/* ══════════════════════════════════════════
+   COSTS TABLE
+   ══════════════════════════════════════════ */
+.costs-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.04);
+  padding: .25rem;
+}
+
+.costs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  min-width: 460px;
+}
+.costs-table th, .costs-table td {
+  padding: .65rem .8rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(246,240,231,.08);
+}
+.costs-table thead th {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--gold);
+  font-weight: 700;
+}
+.costs-table tbody tr:nth-child(even) { background: rgba(255,255,255,.02); }
+.costs-table tbody tr:hover { background: rgba(200,169,110,.08); }
+.costs-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--paper);
+}
+.costs-table tfoot th {
+  background: rgba(193,84,62,.2);
+  font-size: .92rem;
+  font-weight: 700;
+  border-top: 2px solid var(--terracotta);
+  letter-spacing: .02em;
+  color: var(--white);
+}
+.costs-table tfoot th.num {
+  color: var(--gold-light);
+  text-align: right;
+}
+.costs-note {
+  font-size: .75rem;
+  color: rgba(246,240,231,.6);
+  margin-top: .6rem;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════
+   APPS GRID (with favicons)
+   ══════════════════════════════════════════ */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: .75rem;
+}
+
+.app-tile {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(200,169,110,.18);
+  border-radius: var(--radius);
+  padding: .85rem .9rem;
+  text-align: center;
+  transition: transform .15s ease, background .15s, border-color .15s;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+}
+.app-tile:hover {
+  transform: translateY(-3px);
+  background: rgba(200,169,110,.1);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.app-tile img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--white);
+  padding: 4px;
+}
+.app-tile__name {
+  font-weight: 600;
+  font-size: .82rem;
+}
+.app-tile__desc {
+  font-size: .7rem;
+  color: rgba(246,240,231,.6);
+  line-height: 1.3;
+}
+
+/* ══════════════════════════════════════════
+   Weather strip below grid
+   ══════════════════════════════════════════ */
+.extras__weather-strip {
+  margin-top: 3rem;
+  padding: 1rem 1.4rem;
+  background: rgba(200,169,110,.08);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  font-size: .85rem;
+  color: var(--paper);
+  line-height: 1.6;
+}
+.extras__weather-strip strong { color: var(--gold-light); }
 
 /* ── Footer ── */
 footer {
@@ -576,6 +850,14 @@ footer .footer__ref {
   font-size: .75rem;
   letter-spacing: .04em;
 }
+
+footer .footer__attribution {
+  font-size: .72rem;
+  color: rgba(246,240,231,.4);
+  margin-bottom: .8rem;
+  letter-spacing: .02em;
+}
+footer .footer__attribution a { color: var(--gold-light); text-decoration: underline; }
 
 .btn-print {
   display: inline-flex;
@@ -630,29 +912,25 @@ footer .footer__ref {
   display: block;
 }
 
-/* ── Small/thumbnail image override (Bund, Disney Castle) ── */
-.img-thumb-container {
-  max-height: 260px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--ink);
-  border-radius: var(--radius);
-}
-.img-thumb-container img {
-  width: auto;
-  max-width: 100%;
-  max-height: 260px;
-  object-fit: contain;
-}
-
 /* ── Lightbox ── */
 #lightbox { transition: opacity .2s; }
 #lightbox img { animation: lbFadeIn .25s ease; }
 @keyframes lbFadeIn {
   from { opacity: 0; transform: scale(.95); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+/* ══════════════════════════════════════════
+   Confetti (when checklist item is ticked)
+   ══════════════════════════════════════════ */
+.confetti-piece {
+  position: fixed;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 2px;
+  will-change: transform, opacity;
 }
 
 /* ============================================================
@@ -669,13 +947,18 @@ footer .footer__ref {
   .btn-print,
   .map-embed,
   .btn-maps,
+  .btn-reset,
   footer .footer__love { color: #000 !important; }
 
   .visa-banner,
-  .day-nav { display: none !important; }
+  .day-nav,
+  .photo-strip,
+  .strip-heading,
+  .site-header__weather { display: none !important; }
 
   body { background: #fff; color: #000; font-size: 10pt; }
 
+  .day-section { opacity: 1 !important; transform: none !important; }
   .day-hero { height: 30vh !important; }
   .site-header { height: 25vh !important; }
 
@@ -688,10 +971,19 @@ footer .footer__ref {
   .day-section { page-break-before: always; border-bottom: 1px solid #ccc !important; }
   .day-section:first-of-type { page-break-before: auto; }
 
-  .extras { background: var(--paper-dark) !important; color: #000 !important; }
-  .extras h2 { color: #000 !important; }
+  .extras { background: #f5f5f5 !important; color: #000 !important; }
+  .extras h2 { color: #000 !important; border-bottom-color: #aaa !important; }
   .phrase .zh { color: #333 !important; }
   .phrase .py { color: #555 !important; }
+  .costs-table { color: #000 !important; }
+  .costs-table th, .costs-table td { border-bottom-color: #ccc !important; color: #000 !important; }
+  .costs-table thead th, .costs-table tfoot th { color: #000 !important; }
+  .costs-table tfoot th { background: #f0f0f0 !important; }
+  .extras__weather-strip { background: #f0f0f0 !important; color: #000 !important; }
+  .app-tile { background: #f7f7f7 !important; color: #000 !important; border-color: #ccc !important; }
+  .app-tile__desc { color: #555 !important; }
+  .checklist label { color: #000 !important; }
+  .checklist label:has(input:checked) { color: #888 !important; }
 
   a { color: #000 !important; }
   a[href]::after { content: " (" attr(href) ")"; font-size: 8pt; }

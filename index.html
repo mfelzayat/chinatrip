@@ -6,16 +6,16 @@
   <title>China Trip June 2026 — Elzayat Family</title>
   <meta name="description" content="Interactive itinerary for the Elzayat family China adventure: Beijing · Xi'an · Shanghai · Disneyland — 18 Jun to 1 Jul 2026." />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Preload first hero image -->
-  <link rel="preload" as="image" href="assets/images/great-wall-mutianyu.jpg" />
-  <!-- v2.0 — restructured 28 Apr 2026: Zhangjiajie/Hangzhou → Xi'an -->
+  <link rel="preload" as="image" href="assets/images/great-wall-mutianyu-1.jpg" />
+  <!-- v3.0 — Western food pivot, real photos (3+ per visit point), UX polish -->
 </head>
 <body>
 
-  <!-- ══ Visa Banner ══ -->
+  <!-- ══ Visa Banner + Countdown ══ -->
   <div class="visa-banner" role="alert">
     <span>📋</span>
     Visa application in progress &nbsp;·&nbsp; Processing time ~6 working days
+    <span class="countdown" id="countdown" aria-live="polite"></span>
   </div>
 
   <!-- ══ Sticky Day Nav ══ -->
@@ -59,7 +59,7 @@
       </button>
       <button class="day-nav__btn" data-day="10">
         <span class="nav-num">10</span>
-        <span>Shanghai</span>
+        <span>Disney 1</span>
       </button>
       <button class="day-nav__btn" data-day="11">
         <span class="nav-num">11</span>
@@ -67,7 +67,7 @@
       </button>
       <button class="day-nav__btn" data-day="12">
         <span class="nav-num">12</span>
-        <span>Disney 3</span>
+        <span>Bund</span>
       </button>
       <button class="day-nav__btn" data-day="13">
         <span class="nav-num">13</span>
@@ -91,6 +91,7 @@
       <p class="site-header__sub">18 June – 1 July 2026</p>
       <p class="site-header__sub">Beijing · Xi'an · Shanghai · Disneyland</p>
       <p class="site-header__ref">Booking Ref: 1653713358976673</p>
+      <p class="site-header__weather" id="weatherWidget" aria-live="polite"></p>
     </div>
     <div class="site-header__scroll" aria-hidden="true">↓</div>
   </header>
@@ -134,7 +135,7 @@
     <section class="day-section" data-day="2" id="day-2">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/peking-duck.jpg" alt="Peking Duck dinner in Beijing" loading="lazy" />
+          <img src="assets/images/wangfujing-night-1.jpg" alt="Wangfujing district, Beijing" loading="lazy" />
         </div>
         <div class="day-content">
           <div class="stamp" aria-label="Day 2">
@@ -148,7 +149,7 @@
             <li><span class="time">03:50</span> EK 306 departs Dubai (DXB) — Emirates</li>
             <li><span class="time">15:25</span> Land Beijing Capital (PEK)</li>
             <li><span class="time">17:00</span> Check-in The Imperial Mansion · Marriott</li>
-            <li><span class="time">19:30</span> Dinner at Quanjude Wangfujing</li>
+            <li><span class="time">19:30</span> Dinner at <strong>Capital M</strong> — modern European, river-view balcony over Tiananmen</li>
           </ul>
 
           <div class="stops">
@@ -156,17 +157,17 @@
               <div class="stop__icon">🏨</div>
               <div class="stop__body">
                 <div class="stop__name">The Imperial Mansion · Beijing — Marriott Executive Apartments</div>
-                <div class="stop__desc">Two-Bedroom Premium Apartment · Dongcheng District · 4 nights (19→23 Jun) · Booking #6845.657.812 · CNY 13,183 (EGP 101,529, breakfast included)</div>
+                <div class="stop__desc">Two-Bedroom Premium Apartment · Dongcheng District · 4 nights (19→23 Jun) · Booking #6845.657.812 · CNY 13,183 (EGP 101,529, breakfast included — full Western buffet daily)</div>
                 <a href="https://www.google.com/maps/search/?api=1&query=The+Imperial+Mansion+Beijing+Marriott+Executive+Apartments" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
                 <a href="https://www.marriott.com/hotels/travel/bjsim-the-imperial-mansion-beijing-marriott-executive-apartments" target="_blank" rel="noopener" class="btn-maps">🌐 Hotel Website</a>
               </div>
             </div>
             <div class="stop">
-              <div class="stop__icon">🦆</div>
+              <div class="stop__icon">🍽️</div>
               <div class="stop__body">
-                <div class="stop__name">Quanjude Wangfujing</div>
-                <div class="stop__desc">Beijing's most celebrated Peking Duck restaurant · serving since 1864 · ceremonial carving tableside</div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Quanjude+Wangfujing+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+                <div class="stop__name">Capital M (modern European)</div>
+                <div class="stop__desc">Iconic dining balcony above Qianmen · Australian-European menu by chef Michelle Garnaut · seafood, lamb, pasta, duck (Western style) · stunning Tiananmen view at sunset · kid-friendly with proper menus and clean classics</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Capital+M+restaurant+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
               </div>
             </div>
           </div>
@@ -179,7 +180,14 @@
 
           <div class="tip-box">
             <span class="tip-box__icon">💡</span>
-            <span>Beijing PEK immigration can take 45–90 min. Fast-track via priority lane if available. Order duck wrap appetiser at Quanjude — kids love assembling them.</span>
+            <span>Beijing PEK immigration can take 45–90 min. Fast-track via priority lane if available. Capital M takes reservations on OpenTable / direct — book ahead, ask for the balcony.</span>
+          </div>
+
+          <h3 class="strip-heading">Beijing first impressions</h3>
+          <div class="photo-strip" data-credit="Wangfujing — Wikimedia Commons">
+            <img src="assets/images/wangfujing-night-1.jpg" alt="Wangfujing pedestrian shopping street, Beijing" loading="lazy" />
+            <img src="assets/images/wangfujing-night-2.jpg" alt="WF Central, Wangfujing" loading="lazy" />
+            <img src="assets/images/wangfujing-night-3.jpg" alt="Beijing APM mall, Wangfujing" loading="lazy" />
           </div>
         </div>
       </div>
@@ -190,7 +198,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="3" id="day-3">
       <div class="day-hero">
-        <img src="assets/images/forbidden-city.jpg" alt="Forbidden City, Beijing" loading="lazy" />
+        <img src="assets/images/forbidden-city-1.jpg" alt="Forbidden City, Beijing" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -208,10 +216,11 @@
         <ul class="timeline">
           <li><span class="time">09:00</span> Forbidden City (Gu Gong) — enter through Meridian Gate</li>
           <li><span class="time">12:00</span> Tiananmen Square walk</li>
-          <li><span class="time">13:00</span> Lunch: Siji Minfu (near Forbidden City)</li>
+          <li><span class="time">13:00</span> Lunch: <strong>Element Fresh</strong> (Oriental Plaza) — Western salads, sandwiches, pasta, smoothies · kid-perfect</li>
           <li><span class="time">14:00</span> Jingshan Park — panoramic overlook of golden roofs</li>
           <li><span class="time">16:30</span> Rest at hotel</li>
-          <li><span class="time">19:00</span> Wangfujing Snack Street evening stroll</li>
+          <li><span class="time">19:00</span> Dinner: <strong>Mio</strong> — Italian fine dining at Four Seasons Beijing</li>
+          <li><span class="time">21:00</span> Optional Wangfujing pedestrian-street stroll (the kids will want a quick look at the snack lane — eat lightly)</li>
         </ul>
 
         <div class="stops">
@@ -219,7 +228,7 @@
             <div class="stop__icon">🏰</div>
             <div class="stop__body">
               <div class="stop__name">Forbidden City (Palace Museum)</div>
-              <div class="stop__desc">The world's largest palace complex · 9,999 rooms · Ming & Qing dynasties · 600 years of imperial history</div>
+              <div class="stop__desc">The world's largest palace complex · 9,999 rooms · Ming &amp; Qing dynasties · 600 years of imperial history</div>
               <a href="https://www.google.com/maps/search/?api=1&query=Forbidden+City+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
@@ -239,25 +248,28 @@
               <a href="https://www.google.com/maps/search/?api=1&query=Jingshan+Park+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
-          <div class="stop">
-            <div class="stop__icon">🍢</div>
-            <div class="stop__body">
-              <div class="stop__name">Wangfujing Snack Street</div>
-              <div class="stop__desc">Beijing's famous night-food street · scorpions, candied hawthorn, jianbing, stinky tofu · great for adventurous kids</div>
-              <a href="https://www.google.com/maps/search/?api=1&query=Wangfujing+Snack+Street+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
-            </div>
-          </div>
         </div>
 
         <div class="info-card">
-          <div class="info-card__label">🍜 Lunch</div>
-          <div class="info-card__title">Siji Minfu</div>
-          <div class="info-card__detail">Classic Beijing cuisine near the Forbidden City · braised pork, lamb, noodles · family-friendly</div>
+          <div class="info-card__label">🍽️ Dining notes — Western-leaning</div>
+          <div class="info-card__title">Lunch: Element Fresh · Dinner: Mio (Four Seasons)</div>
+          <div class="info-card__detail">Element Fresh = Beijing's best healthy Western chain (multiple branches near Wangfujing/Oriental Plaza). Mio = Italian fine dining inside Four Seasons Beijing — handmade pasta, wood-fired pizza, kid-friendly. Backup if you want a quick must-try Chinese light option: <strong>Jing Yaa Tang</strong> at The Opposite House does elegant modern dim sum in a Western-styled room.</div>
         </div>
 
         <div class="tip-box">
           <span class="tip-box__icon">💡</span>
           <span>Book Forbidden City tickets online ahead of time — walk-ins are limited. Go early to beat crowds. The rear imperial garden (Yuhuayuan) is less crowded and beautiful.</span>
+        </div>
+
+        <h3 class="strip-heading">Forbidden City &amp; Tiananmen</h3>
+        <div class="photo-strip" data-credit="Forbidden City &amp; Tiananmen — Wikimedia Commons">
+          <img src="assets/images/forbidden-city-1.jpg" alt="Forbidden City — view from Coal Hill" loading="lazy" />
+          <img src="assets/images/forbidden-city-2.jpg" alt="Forbidden City — historic painting of palace layout" loading="lazy" />
+          <img src="assets/images/forbidden-city-3.jpg" alt="Forbidden City — 1853 engraving" loading="lazy" />
+          <img src="assets/images/forbidden-city-4.jpg" alt="Forbidden City — aerial view from balloon" loading="lazy" />
+          <img src="assets/images/tiananmen-square-1.jpg" alt="Tiananmen Square" loading="lazy" />
+          <img src="assets/images/tiananmen-square-2.jpg" alt="Chairman Mao Memorial Hall, Tiananmen" loading="lazy" />
+          <img src="assets/images/tiananmen-square-3.jpg" alt="Tiananmen Square panoramic" loading="lazy" />
         </div>
       </div>
     </section>
@@ -268,7 +280,7 @@
     <section class="day-section" data-day="4" id="day-4">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/great-wall-mutianyu.jpg" alt="Great Wall at Mutianyu" loading="lazy" />
+          <img src="assets/images/great-wall-mutianyu-1.jpg" alt="Great Wall at Mutianyu" loading="lazy" />
         </div>
         <div class="day-content">
           <div class="stamp" aria-label="Day 4">
@@ -283,10 +295,10 @@
             <li><span class="time">09:30</span> Arrive Mutianyu (1.5h drive)</li>
             <li><span class="time">09:45</span> Cable car ride up to the wall</li>
             <li><span class="time">10:00</span> 1.5km wall walk — watchtower to watchtower</li>
-            <li><span class="time">12:00</span> Lunch at wall-side restaurant</li>
+            <li><span class="time">12:00</span> Lunch: <strong>The Schoolhouse at Mutianyu</strong> — wood-fired pizza &amp; Western menu in a converted schoolhouse near the cable car (very kid-friendly, English service)</li>
             <li><span class="time">13:30</span> Toboggan slide down (kids' favourite!)</li>
             <li><span class="time">14:30</span> Return drive to Beijing</li>
-            <li><span class="time">17:00</span> Back at hotel</li>
+            <li><span class="time">17:00</span> Back at hotel · dinner at hotel restaurant or <strong>Blue Frog Bar &amp; Grill</strong> (American casual, near Marriott)</li>
           </ul>
 
           <div class="stops">
@@ -298,11 +310,26 @@
                 <a href="https://www.google.com/maps/search/?api=1&query=Mutianyu+Great+Wall+Beijing" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
               </div>
             </div>
+            <div class="stop">
+              <div class="stop__icon">🍕</div>
+              <div class="stop__body">
+                <div class="stop__name">The Schoolhouse · Mutianyu</div>
+                <div class="stop__desc">Restored 1950s village school turned café/restaurant · wood-fired pizza, sandwiches, salads, fresh-baked bread · run by an American family for 15+ years · perfect lunch stop after the wall climb</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=The+Schoolhouse+Mutianyu" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+              </div>
+            </div>
           </div>
 
           <div class="tip-box">
             <span class="tip-box__icon">🛝</span>
             <span>The toboggan ride (¥100/person) is a stainless-steel luge-style slide down the mountain — Fares, Youssef, and Yassin will remember this forever. Buy tickets at the bottom, ride cable car up, slide down. Height minimum: 1.2m (accompanied).</span>
+          </div>
+
+          <h3 class="strip-heading">Mutianyu Wall</h3>
+          <div class="photo-strip" data-credit="Great Wall Mutianyu — Wikimedia Commons">
+            <img src="assets/images/great-wall-mutianyu-1.jpg" alt="Great Wall of China — Mutianyu" loading="lazy" />
+            <img src="assets/images/great-wall-mutianyu-2.jpg" alt="Mutianyu Great Wall Tower 13" loading="lazy" />
+            <img src="assets/images/great-wall-mutianyu-3.jpg" alt="Great Wall arch, Mutianyu" loading="lazy" />
           </div>
         </div>
       </div>
@@ -314,7 +341,7 @@
     <section class="day-section" data-day="5" id="day-5">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/summer-palace.jpg" alt="Summer Palace, Beijing" loading="lazy" />
+          <img src="assets/images/summer-palace-1.jpg" alt="Summer Palace, Beijing" loading="lazy" />
         </div>
         <div class="day-content">
           <div class="stamp" aria-label="Day 5">
@@ -326,10 +353,10 @@
 
           <ul class="timeline">
             <li><span class="time">09:00</span> Hutong walk in Nanluogu Xiang — rickshaw + courtyard tour</li>
-            <li><span class="time">11:30</span> Lunch: dumpling house in the alleys</li>
+            <li><span class="time">11:30</span> Lunch: <strong>Wagas</strong> or <strong>Pizza Marzano</strong> (Wudaoying Hutong area — Western chains, AC, clean)</li>
             <li><span class="time">13:30</span> Summer Palace (颐和园) — Kunming Lake + Long Corridor</li>
             <li><span class="time">16:30</span> Temple of Heaven (天坛) — Hall of Prayer for Good Harvests</li>
-            <li><span class="time">19:00</span> Dinner near hotel · early packing for Xi'an</li>
+            <li><span class="time">19:00</span> Dinner: <strong>Hatsune</strong> (modern Western-Japanese, very kid-friendly) — sushi rolls, teriyaki, tempura</li>
             <li><span class="time">21:00</span> Set alarms — train Day 6 leaves 07:39 from Beijing West!</li>
           </ul>
 
@@ -370,6 +397,20 @@
             <span class="tip-box__icon">🚆</span>
             <span>Pack tonight! Tomorrow's HSR G653 leaves Beijing West (北京西) at 07:39 sharp — gates close 5 min before departure. Allow 90 min: hotel → station → security → platform. Pre-book a Didi or hotel limousine for 06:00.</span>
           </div>
+
+          <h3 class="strip-heading">Hutongs · Summer Palace · Temple of Heaven</h3>
+          <div class="photo-strip" data-credit="Beijing Hutongs · Summer Palace · Temple of Heaven — Wikimedia Commons">
+            <img src="assets/images/beijing-hutong-1.jpg" alt="Beijing hutong area" loading="lazy" />
+            <img src="assets/images/beijing-hutong-2.jpg" alt="Beijing hutong street view" loading="lazy" />
+            <img src="assets/images/beijing-hutong-3.jpg" alt="Beijing hutong courtyard" loading="lazy" />
+            <img src="assets/images/summer-palace-1.jpg" alt="Longevity Hill at Summer Palace" loading="lazy" />
+            <img src="assets/images/summer-palace-2.jpg" alt="Summer Palace 1888" loading="lazy" />
+            <img src="assets/images/summer-palace-3.jpg" alt="Summer Palace pavilion" loading="lazy" />
+            <img src="assets/images/summer-palace-4.jpg" alt="Summer Palace stele and Kunming Lake" loading="lazy" />
+            <img src="assets/images/temple-of-heaven-1.jpg" alt="Temple of Heaven — Hall of Prayer" loading="lazy" />
+            <img src="assets/images/temple-of-heaven-2.jpg" alt="Temple of Heaven — Imperial Vault" loading="lazy" />
+            <img src="assets/images/temple-of-heaven-3.jpg" alt="Temple of Heaven complex" loading="lazy" />
+          </div>
         </div>
       </div>
     </section>
@@ -379,7 +420,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="6" id="day-6">
       <div class="day-hero">
-        <img src="assets/images/xian-city-wall.jpg" alt="Xi'an ancient city wall at sunset" loading="lazy" />
+        <img src="assets/images/xian-city-wall-1.jpg" alt="Xi'an ancient city wall" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -399,9 +440,9 @@
           <li><span class="time">07:00</span> Arrive station · security · find platform · breakfast on platform</li>
           <li><span class="time">07:39</span> <strong>G653</strong> departs Beijing West — direct to Xi'an</li>
           <li><span class="time">13:46</span> Arrive Xi'an North (西安北) — 6h 7m, ~1,200 km</li>
-          <li><span class="time">14:30</span> Check-in Xi'an hotel (TBD — Sofitel Legend People's Square / Westin / Marriott)</li>
+          <li><span class="time">14:30</span> Check-in: <strong>Sofitel Legend People's Grand</strong> / Westin / Wyndham Grand — all have full Western dining + buffet</li>
           <li><span class="time">17:30</span> City Wall (古城墙) at sunset — South Gate, walk top of wall</li>
-          <li><span class="time">20:00</span> Dinner: Muslim Quarter (回民街) — yangrou paomo + skewers + biangbiang noodles</li>
+          <li><span class="time">20:00</span> Dinner: <strong>Le Grand</strong> at Sofitel (French) <em>or</em> Westin Italian Trattoria — both clean, full Western menus, kid-friendly</li>
         </ul>
 
         <div class="stops">
@@ -422,11 +463,11 @@
             </div>
           </div>
           <div class="stop">
-            <div class="stop__icon">🍢</div>
+            <div class="stop__icon">🍷</div>
             <div class="stop__body">
-              <div class="stop__name">Muslim Quarter (回民街)</div>
-              <div class="stop__desc">Hui Muslim food street · 1,000+ years old · halal lamb skewers, yangrou paomo (lamb soup with bread), biangbiang noodles, persimmon cakes · perfect for our family — every stall is halal</div>
-              <a href="https://www.google.com/maps/search/?api=1&query=Xian+Muslim+Quarter+Huimin+Street" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+              <div class="stop__name">Le Grand · Sofitel Legend People's Grand</div>
+              <div class="stop__desc">French fine dining inside the iconic Soviet-era heritage hotel · imported steak, seafood, French wine list · the most reliable Western dinner in Xi'an · alternative: Westin Xi'an's Italian trattoria (also excellent)</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Sofitel+Legend+Peoples+Grand+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
         </div>
@@ -439,14 +480,21 @@
           </div>
           <div class="info-card">
             <div class="info-card__label">🏨 Hotel — 3 nights (23-26 Jun)</div>
-            <div class="info-card__title">Xi'an — TBD</div>
-            <div class="info-card__detail">Suggested: Sofitel Legend People's Grand · Westin Xi'an · Shangri-La Xi'an · Marriott Bell Tower — all near city wall · ~US$120-200/night family room</div>
+            <div class="info-card__title">Sofitel Legend / Westin / Wyndham Grand</div>
+            <div class="info-card__detail">Recommended in priority order. All offer full Western buffet breakfast, in-house Italian/French restaurants, and Egyptian/foreigner-friendly service. Family suite ~US$120-220/night.</div>
           </div>
         </div>
 
         <div class="tip-box">
           <span class="tip-box__icon">💡</span>
           <span>Book G653 the moment sales open — Beijing→Xi'an is the most popular HSR route in China and 2nd class sells out in hours. Bring passports — printed/PDF ticket scanned at gate. No food on board, but station has food court. Power outlets at every seat.</span>
+        </div>
+
+        <h3 class="strip-heading">Xi'an City Wall</h3>
+        <div class="photo-strip" data-credit="Xi'an City Wall — Wikimedia Commons">
+          <img src="assets/images/xian-city-wall-1.jpg" alt="Xi'an city wall" loading="lazy" />
+          <img src="assets/images/xian-city-wall-2.jpg" alt="Yongningmen moat, Xi'an" loading="lazy" />
+          <img src="assets/images/xian-city-wall-3.jpg" alt="Xi'an city wall corner tower" loading="lazy" />
         </div>
       </div>
     </section>
@@ -456,7 +504,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="7" id="day-7">
       <div class="day-hero">
-        <img src="assets/images/xian-terracotta.jpg" alt="Terracotta Warriors of Emperor Qin Shi Huang" loading="lazy" />
+        <img src="assets/images/xian-terracotta-1.jpg" alt="Terracotta Warriors of Emperor Qin Shi Huang" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -477,9 +525,9 @@
           <li><span class="time">09:30</span> Pit 1 — the Great Hall · 6,000 warriors in formation</li>
           <li><span class="time">10:30</span> Pit 2 — cavalry, archers · Pit 3 — command HQ</li>
           <li><span class="time">11:30</span> Bronze Chariots Hall — half-size imperial chariots</li>
-          <li><span class="time">13:00</span> Lunch near site · local farmers' restaurant</li>
-          <li><span class="time">14:30</span> Huaqing Palace (华清宫) — Tang imperial hot springs · Long Hen Ge show</li>
-          <li><span class="time">17:30</span> Return to Xi'an · rest · dinner near hotel</li>
+          <li><span class="time">13:00</span> Lunch: <strong>Wei Jia (魏家凉皮)</strong> — clean modern noodle chain · light biangbiang noodles + cold sesame noodles (this is the family's "must-try" Chinese light lunch)</li>
+          <li><span class="time">14:30</span> Huaqing Palace (华清宫) — Tang imperial hot springs</li>
+          <li><span class="time">17:30</span> Return to Xi'an · dinner at hotel restaurant (Western buffet at Westin / Sofitel)</li>
         </ul>
 
         <div class="stops">
@@ -488,7 +536,7 @@
             <div class="stop__body">
               <div class="stop__name">Terracotta Army (兵马俑)</div>
               <div class="stop__desc">8,000 life-sized clay warriors guarding Emperor Qin Shi Huang's tomb (210 BC) · discovered 1974 by farmers digging a well · UNESCO World Heritage · "Eighth Wonder of the World"</div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Terracotta+Army+Museum+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Terracotta+Army+Museum+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
           <div class="stop">
@@ -500,11 +548,11 @@
             </div>
           </div>
           <div class="stop">
-            <div class="stop__icon">🏺</div>
+            <div class="stop__icon">🍜</div>
             <div class="stop__body">
-              <div class="stop__name">Banpo Museum (alternative)</div>
-              <div class="stop__desc">6,000-year-old Neolithic village site · matriarchal Yangshao culture · pottery, tools, ancient burials · less crowded than Terracotta · skip if running tight on time</div>
-              <a href="https://www.google.com/maps/search/?api=1&query=Banpo+Museum+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+              <div class="stop__name">Wei Jia (魏家凉皮) — light Chinese lunch</div>
+              <div class="stop__desc">Clean modern noodle franchise · biangbiang noodles, cold sesame noodles, dumplings · safe, AC, kid-friendly · the "must-try" Xi'an Chinese moment without committing to a heavy banquet</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Wei+Jia+Liang+Pi+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
         </div>
@@ -519,6 +567,14 @@
           <span class="tip-box__icon">💡</span>
           <span>Hire a guide — without one, the Pits look like rows of broken statues. With one, every figure tells a story (officers vs. infantry, hairstyles by rank, original paint traces). Pit 1 is biggest — start there. Bring water; the site is huge and shade is limited.</span>
         </div>
+
+        <h3 class="strip-heading">Terracotta Army</h3>
+        <div class="photo-strip" data-credit="Terracotta Army — Wikimedia Commons">
+          <img src="assets/images/xian-terracotta-1.jpg" alt="Terracotta Army Pit 1" loading="lazy" />
+          <img src="assets/images/xian-terracotta-2.jpg" alt="Mausoleum of Qin Shi Huang" loading="lazy" />
+          <img src="assets/images/xian-terracotta-3.jpg" alt="Terracotta Army formation" loading="lazy" />
+          <img src="assets/images/xian-terracotta-4.jpg" alt="Terracotta Warriors close-up" loading="lazy" />
+        </div>
       </div>
     </section>
 
@@ -528,7 +584,7 @@
     <section class="day-section" data-day="8" id="day-8">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/xian-pagoda.jpg" alt="Big Wild Goose Pagoda Xi'an at twilight" loading="lazy" />
+          <img src="assets/images/xian-pagoda-1.jpg" alt="Big Wild Goose Pagoda Xi'an" loading="lazy" />
         </div>
         <div class="day-content">
           <div class="stamp" aria-label="Day 8">
@@ -536,14 +592,15 @@
             <span class="stamp__zh">第八天</span>
           </div>
           <p class="day-date">Thursday, 25 June 2026</p>
-          <h2 class="day-title">🏯 Pagoda · Tang Paradise · Dumpling Banquet</h2>
+          <h2 class="day-title">🏯 Pagoda · Tang Paradise · Tang Show</h2>
 
           <ul class="timeline">
             <li><span class="time">09:30</span> Big Wild Goose Pagoda (大雁塔) · Da Ci'en Temple grounds</li>
             <li><span class="time">11:30</span> North Square fountain show — Asia's largest musical fountain</li>
-            <li><span class="time">12:30</span> Lunch: First Noodle Under the Sun (biangbiang noodles experience)</li>
+            <li><span class="time">12:30</span> Lunch: <strong>Vinotech</strong> (Western tapas + wine bar near Bell Tower) <em>or</em> Pizza Hut at King Town Plaza for the kids</li>
             <li><span class="time">14:30</span> Tang Paradise (大唐芙蓉园) — recreated Tang imperial garden</li>
-            <li><span class="time">18:00</span> Tang Dynasty Show with Dumpling Banquet · Xi'an Sunshine Grand Theatre</li>
+            <li><span class="time">17:30</span> Light early dinner at hotel buffet (Westin / Sofitel) — skip the dumpling banquet</li>
+            <li><span class="time">19:30</span> <strong>Tang Dynasty Show</strong> only (no banquet) at Xi'an Sunshine Grand Theatre — 90-min music + dance spectacle</li>
             <li><span class="time">21:30</span> Return to hotel · pack — sleeper train tomorrow!</li>
           </ul>
 
@@ -565,24 +622,35 @@
               </div>
             </div>
             <div class="stop">
-              <div class="stop__icon">🥟</div>
+              <div class="stop__icon">🎭</div>
               <div class="stop__body">
-                <div class="stop__name">Tang Dynasty Show + Dumpling Banquet</div>
-                <div class="stop__desc">Classic Xi'an evening · 18 varieties of artistic dumplings (each shaped like its filling — duck, walnut, fish) followed by 90-min Tang Dynasty music + dance show in period costume</div>
+                <div class="stop__name">Tang Dynasty Show — show-only ticket</div>
+                <div class="stop__desc">Skip the heavy dumpling banquet (18 dumpling courses is too much for Western palates). Eat lightly at the hotel beforehand and arrive at 19:30 for the show ticket alone. Same Tang Dynasty music + dance + period costume spectacle, half the food fatigue.</div>
                 <a href="https://www.google.com/maps/search/?api=1&query=Tang+Dynasty+Show+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
               </div>
             </div>
           </div>
 
           <div class="info-card">
-            <div class="info-card__label">🎭 Show</div>
-            <div class="info-card__title">Tang Dynasty Show + Dumpling Banquet</div>
-            <div class="info-card__detail">~US$60/pax · ~US$300 for 5 · book via Klook or hotel concierge · 18:30 dinner / 20:00 show</div>
+            <div class="info-card__label">🎭 Show only — no banquet</div>
+            <div class="info-card__title">Tang Dynasty Show (show ticket only)</div>
+            <div class="info-card__detail">~US$35/pax show only · ~US$175 for 5 (vs. ~US$300 with banquet). Eat at hotel before. Book via Klook / Trip.com / hotel concierge.</div>
           </div>
 
           <div class="tip-box">
             <span class="tip-box__icon">💡</span>
-            <span>Book the dumpling banquet 2-3 days ahead — sells out. Tang Paradise is best at dusk into night when illuminations turn on. Tomorrow we board an overnight sleeper to Shanghai — pack a light overnight bag, leave big luggage with hotel until departure.</span>
+            <span>Tang Paradise is best at dusk into night when illuminations turn on. Tomorrow we board an overnight sleeper to Shanghai — pack a light overnight bag, leave big luggage with hotel until departure.</span>
+          </div>
+
+          <h3 class="strip-heading">Pagoda · Tang Paradise · Bell Tower</h3>
+          <div class="photo-strip" data-credit="Xi'an landmarks — Wikimedia Commons">
+            <img src="assets/images/xian-pagoda-1.jpg" alt="Giant Wild Goose Pagoda" loading="lazy" />
+            <img src="assets/images/xian-pagoda-2.jpg" alt="Statue of Xuanzang at Big Wild Goose Pagoda" loading="lazy" />
+            <img src="assets/images/xian-pagoda-3.jpg" alt="Big Wild Goose Pagoda" loading="lazy" />
+            <img src="assets/images/xian-tang-paradise-1.jpg" alt="Tang Paradise / Qujiang area, Xi'an" loading="lazy" />
+            <img src="assets/images/xian-bell-tower-1.jpg" alt="Bell Tower of Xi'an" loading="lazy" />
+            <img src="assets/images/xian-bell-tower-2.jpg" alt="Xi'an Gateway / Bell Tower" loading="lazy" />
+            <img src="assets/images/xian-bell-tower-3.jpg" alt="Jingyun Bell" loading="lazy" />
           </div>
         </div>
       </div>
@@ -593,7 +661,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="9" id="day-9">
       <div class="day-hero">
-        <img src="assets/images/xian-sleeper-train.jpg" alt="China overnight sleeper train soft sleeper compartment" loading="lazy" />
+        <img src="assets/images/xian-shaanxi-museum-1.jpg" alt="Shaanxi History Museum, Xi'an" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -611,9 +679,10 @@
         <ul class="timeline">
           <li><span class="time">09:00</span> Bike rental on top of City Wall — South Gate (¥45/3hr)</li>
           <li><span class="time">10:30</span> Cycle a full lap of the wall (~14 km, ~90 min easy pace)</li>
-          <li><span class="time">12:30</span> Lunch: yangrou paomo (羊肉泡馍) at Lao Sun Jia (老孙家) — break the bread yourself, drown in lamb soup</li>
+          <li><span class="time">12:30</span> Lunch: <strong>hotel Italian/buffet</strong> (Westin Xi'an Italian Trattoria or Wyndham International Buffet) — clean Western lunch before museum</li>
           <li><span class="time">14:00</span> Shaanxi History Museum (陕西历史博物馆) — 370,000 artefacts spanning 1.2M years</li>
-          <li><span class="time">17:00</span> Hotel: collect luggage · early dinner near Xi'an station</li>
+          <li><span class="time">16:30</span> Quick walk-through of <strong>Muslim Quarter market</strong> as a sightseeing stop (look at the lanterns &amp; produce, no heavy meal)</li>
+          <li><span class="time">17:30</span> Hotel: collect luggage · light early Western dinner near hotel (Pizza Hut / hotel café / Starbucks toasties)</li>
           <li><span class="time">19:30</span> Board sleeper train · find compartment · settle in</li>
           <li><span class="time">20:00</span> 🛏️ Overnight Xi'an → Shanghai · sleep on rails, wake up by the Bund</li>
         </ul>
@@ -628,19 +697,19 @@
             </div>
           </div>
           <div class="stop">
-            <div class="stop__icon">🍜</div>
-            <div class="stop__body">
-              <div class="stop__name">Yangrou Paomo (羊肉泡馍)</div>
-              <div class="stop__desc">Xi'an's signature dish · you tear flat unleavened bread into pea-sized pieces (15 min ritual!) into a bowl, server returns it drowned in lamb broth + glass noodles + lamb · Lao Sun Jia is the legendary halal chain</div>
-              <a href="https://www.google.com/maps/search/?api=1&query=Lao+Sun+Jia+Xian" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
-            </div>
-          </div>
-          <div class="stop">
             <div class="stop__icon">🏺</div>
             <div class="stop__body">
               <div class="stop__name">Shaanxi History Museum</div>
               <div class="stop__desc">One of China's top 4 museums · Tang gold treasures, Han bronzes, Zhou jades · Xi'an was capital of 13 dynasties so the collection is unrivalled · entry FREE but reserve online via WeChat 3+ days ahead</div>
               <a href="https://www.google.com/maps/search/?api=1&query=Shaanxi+History+Museum" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop__icon">🏮</div>
+            <div class="stop__body">
+              <div class="stop__name">Muslim Quarter (回民街) — market walk only</div>
+              <div class="stop__desc">Best as a 30-min sightseeing market walk (lanterns, dried fruit, calligraphy stalls, photo ops) — NOT as a dining destination. The food can be heavy/funky for Western palates. Great for atmosphere, then head back to hotel for clean Western dinner.</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Xian+Muslim+Quarter+Huimin+Street" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
         </div>
@@ -663,8 +732,14 @@
           <span>Soft sleeper (软卧 ruǎnwò) = 4 padded berths in a lockable compartment with door, sheets, pillow, blanket, hot-water dispenser at end of carriage. Bring snacks, water, slippers, eye masks, earplugs. The boys will love it — train rocks gently, you wake up in another city. Skip hard sleeper (open 6-bunk) with kids.</span>
         </div>
 
-        <div style="margin-top:1rem;">
-          <img src="assets/images/xian-muslim-quarter.jpg" alt="Xi'an Muslim Quarter night market" loading="lazy" style="width:100%; max-width:700px; border-radius:6px; box-shadow:0 4px 24px rgba(26,24,20,.12);" />
+        <h3 class="strip-heading">Shaanxi History Museum &amp; Muslim Quarter (market)</h3>
+        <div class="photo-strip" data-credit="Shaanxi History Museum &amp; Muslim Quarter — Wikimedia Commons">
+          <img src="assets/images/xian-shaanxi-museum-1.jpg" alt="Shaanxi History Museum facade" loading="lazy" />
+          <img src="assets/images/xian-shaanxi-museum-2.jpg" alt="Shaanxi History Museum interior" loading="lazy" />
+          <img src="assets/images/xian-shaanxi-museum-3.jpg" alt="Shaanxi History Museum architecture" loading="lazy" />
+          <img src="assets/images/xian-muslim-quarter-1.jpg" alt="Xi'an Muslim Quarter market street" loading="lazy" />
+          <img src="assets/images/xian-muslim-quarter-2.jpg" alt="Muslim Quarter Xi'an China" loading="lazy" />
+          <img src="assets/images/xian-muslim-quarter-3.jpg" alt="Muslim Quarter in Xi'an" loading="lazy" />
         </div>
       </div>
     </section>
@@ -674,7 +749,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="10" id="day-10">
       <div class="day-hero">
-        <img src="assets/images/shanghai-disney-castle.jpg" alt="Shanghai Disneyland Enchanted Storybook Castle" loading="lazy" />
+        <img src="assets/images/shanghai-disney-1.jpg" alt="Shanghai Disneyland Enchanted Storybook Castle" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -690,14 +765,15 @@
         </div>
 
         <ul class="timeline">
-          <li><span class="time">07:30</span> Train arrives Shanghai (上海站) · disembark · grab breakfast</li>
-          <li><span class="time">08:30</span> Didi/taxi to Disney Resort (~45-60 min, ¥150-200)</li>
-          <li><span class="time">09:30</span> Toy Story Hotel — drop bags (early bag drop, room ready ~14:00)</li>
+          <li><span class="time">07:30</span> Train arrives Shanghai (上海站) · disembark</li>
+          <li><span class="time">08:00</span> Breakfast at <strong>Sunnyside Café · Toy Story Hotel</strong> — Western buffet (eggs, bacon, pancakes, fresh fruit)</li>
+          <li><span class="time">09:30</span> Drop bags at Toy Story Hotel (early bag drop, room ready ~14:00)</li>
           <li><span class="time">10:00</span> Resort shuttle to park gates · Disney Day 1 begins!</li>
           <li><span class="time">10:30</span> Rope drop strategy: TRON Lightcycle Power Run first</li>
-          <li><span class="time">12:30</span> Lunch: Pinocchio Village Kitchen (halal options)</li>
+          <li><span class="time">12:30</span> Lunch: <strong>Pinocchio Village Kitchen</strong> (Italian/Western — pizza, pasta, mains)</li>
           <li><span class="time">14:00</span> Pirates of the Caribbean: Battle for the Sunken Treasure</li>
           <li><span class="time">17:00</span> Roaring Rapids · Soaring Over the Horizon (IMAX dome)</li>
+          <li><span class="time">19:30</span> Dinner: <strong>World of Disney Café</strong> or back to <strong>Sunnyside Café</strong> (Western)</li>
           <li><span class="time">20:00</span> Castle illuminations + fireworks finale</li>
           <li><span class="time">22:00</span> Back to Toy Story Hotel · sleep!</li>
         </ul>
@@ -707,7 +783,7 @@
             <div class="stop__icon">🏰</div>
             <div class="stop__body">
               <div class="stop__name">Shanghai Disneyland</div>
-              <div class="stop__desc">Largest Disney resort in Asia · Enchanted Storybook Castle (tallest of any Disney) · TRON Lightcycle, Pirates dark ride, Roaring Rapids · two unique-to-Shanghai zones: Treasure Cove & Gardens of Imagination</div>
+              <div class="stop__desc">Largest Disney resort in Asia · Enchanted Storybook Castle (tallest of any Disney) · TRON Lightcycle, Pirates dark ride, Roaring Rapids · two unique-to-Shanghai zones: Treasure Cove &amp; Gardens of Imagination</div>
               <a href="https://www.google.com/maps/search/?api=1&query=Shanghai+Disneyland" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
@@ -715,8 +791,16 @@
             <div class="stop__icon">🤠</div>
             <div class="stop__body">
               <div class="stop__name">Toy Story Hotel · Shanghai Disneyland Resort</div>
-              <div class="stop__desc">On-resort budget-deluxe option · Woody, Buzz, Jessie themed exteriors · 3 nights (27-30 Jun) · free shuttle every 10 min to park gates · early bag drop morning of arrival</div>
+              <div class="stop__desc">On-resort budget-deluxe option · Woody, Buzz, Jessie themed exteriors · 3 nights (27-30 Jun) · free shuttle every 10 min to park gates · Sunnyside Café Western buffet (eggs, bacon, pancakes, fruit)</div>
               <a href="https://www.google.com/maps/search/?api=1&query=Toy+Story+Hotel+Shanghai+Disneyland" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop__icon">🍕</div>
+            <div class="stop__body">
+              <div class="stop__name">Pinocchio Village Kitchen — Western dining in-park</div>
+              <div class="stop__desc">Italian-themed quick service · pizza, pasta, salads, fries, ice cream · clearly labelled menus · the easiest in-park lunch for kids · also try Aurora (American) and Lumière's Kitchen (French) at Disneyland Hotel for fancier Disney Western dining</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Pinocchio+Village+Kitchen+Shanghai+Disney" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
         </div>
@@ -724,12 +808,19 @@
         <div class="info-card">
           <div class="info-card__label">🎢 Day 1 strategy</div>
           <div class="info-card__title">Beat the queues</div>
-          <div class="info-card__detail">Open the Shanghai Disney Resort app · activate Premier Access for TRON + Pirates if budget allows (~¥120/ride/pax) · use Disney Premier Access only for top 2 rides, walk-in rest · Mickey & Friends meet-greet morning slot</div>
+          <div class="info-card__detail">Open the Shanghai Disney Resort app · activate Premier Access for TRON + Pirates if budget allows (~¥120/ride/pax) · use Disney Premier Access only for top 2 rides, walk-in rest · Mickey &amp; Friends meet-greet morning slot</div>
         </div>
 
         <div class="tip-box">
           <span class="tip-box__icon">🎢</span>
-          <span>Rope-drop TRON Lightcycle the moment park opens — by 11:00 it's a 90-min wait. Bring portable chargers (you'll burn through phones with the app). Halal lunch: Pinocchio Village Kitchen has clearly labelled options. After 18:00 shorter queues, perfect for re-rides.</span>
+          <span>Rope-drop TRON Lightcycle the moment park opens — by 11:00 it's a 90-min wait. Bring portable chargers (you'll burn through phones with the app). Western lunch at Pinocchio Village Kitchen is the safest in-park meal. After 18:00 shorter queues, perfect for re-rides.</span>
+        </div>
+
+        <h3 class="strip-heading">Shanghai Disneyland</h3>
+        <div class="photo-strip" data-credit="Shanghai Disneyland — Wikimedia Commons">
+          <img src="assets/images/shanghai-disney-1.jpg" alt="Shanghai Disneyland castle" loading="lazy" />
+          <img src="assets/images/shanghai-disney-2.jpg" alt="Shanghai Disney Resort aerial view" loading="lazy" />
+          <img src="assets/images/shanghai-disney-3.jpg" alt="Walt Disney and Mickey statue at Shanghai Disneyland" loading="lazy" />
         </div>
       </div>
     </section>
@@ -740,7 +831,7 @@
     <section class="day-section" data-day="11" id="day-11">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/shanghai-disney-castle.jpg" alt="Shanghai Disney castle and parade" loading="lazy" />
+          <img src="assets/images/shanghai-disney-2.jpg" alt="Shanghai Disney Resort" loading="lazy" />
         </div>
         <div class="day-content">
           <div class="stamp" aria-label="Day 11">
@@ -751,14 +842,14 @@
           <h2 class="day-title">🎢 Disney Day 2 — Deep Dive</h2>
 
           <ul class="timeline">
-            <li><span class="time">08:30</span> Hotel breakfast · resort shuttle to park</li>
+            <li><span class="time">08:30</span> Hotel breakfast (Sunnyside Café Western buffet) · resort shuttle to park</li>
             <li><span class="time">09:30</span> Adventure Isle: Roaring Rapids (water ride, bring poncho)</li>
             <li><span class="time">11:00</span> Camp Discovery climbing · Stitch Encounter</li>
-            <li><span class="time">12:30</span> Lunch: Royal Banquet Hall (Mickey + Friends character dining — book ahead!)</li>
+            <li><span class="time">12:30</span> Lunch: <strong>Royal Banquet Hall</strong> — character dining inside the castle (Western/international set menu, Mickey &amp; friends visit table — book 60+ days ahead)</li>
             <li><span class="time">14:30</span> Tomorrowland: Buzz Lightyear · Jet Packs · TRON re-ride</li>
             <li><span class="time">16:00</span> Mickey Avenue parade route (best spot: hub by castle)</li>
             <li><span class="time">17:30</span> Fantasyland: Once Upon a Time Adventure (castle walkthrough) · Seven Dwarfs Mine Train</li>
-            <li><span class="time">19:30</span> Dinner inside park · stake out fireworks spot</li>
+            <li><span class="time">19:30</span> Dinner: <strong>Aurora</strong> at Disneyland Hotel (American steakhouse) <em>or</em> <strong>Lumière's Kitchen</strong> (French)</li>
             <li><span class="time">20:30</span> "Ignite the Dream" castle fireworks</li>
           </ul>
 
@@ -773,15 +864,22 @@
             <div class="stop">
               <div class="stop__icon">🏰</div>
               <div class="stop__body">
-                <div class="stop__name">Royal Banquet Hall</div>
-                <div class="stop__desc">Inside the Enchanted Storybook Castle · character dining with Mickey, Donald, Snow White · pre-fixe menu ~¥350/adult · book 60+ days ahead via Disney app</div>
+                <div class="stop__name">Royal Banquet Hall — character dining</div>
+                <div class="stop__desc">Inside the Enchanted Storybook Castle · Western/international pre-fixe menu (~¥350/adult) · Mickey, Donald, Snow White visit each table · book 60+ days ahead via Disney app</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="stop__icon">🥩</div>
+              <div class="stop__body">
+                <div class="stop__name">Aurora &amp; Lumière's Kitchen — Disneyland Hotel</div>
+                <div class="stop__desc">Aurora = American steakhouse with skyline view · Lumière's Kitchen = classic French at the resort's flagship hotel · both perfect Western dinners after a long park day · open to all guests (not just Disneyland Hotel)</div>
               </div>
             </div>
           </div>
 
           <div class="tip-box">
             <span class="tip-box__icon">🎆</span>
-            <span>Day 2 = pace yourself. Hit the rides Day 1 missed, then take a midday hotel break (resort shuttle is constant). Return for parade + fireworks. Royal Banquet Hall is the experience worth pre-booking.</span>
+            <span>Day 2 = pace yourself. Hit the rides Day 1 missed, then take a midday hotel break (resort shuttle is constant). Return for parade + fireworks. Royal Banquet Hall is the experience worth pre-booking — Western set menu, characters at the table.</span>
           </div>
         </div>
       </div>
@@ -792,7 +890,7 @@
          ══════════════════════════════ -->
     <section class="day-section" data-day="12" id="day-12">
       <div class="day-hero">
-        <img src="assets/images/the-bund-shanghai.jpg" alt="Shanghai Bund and Pudong skyline" loading="lazy" />
+        <img src="assets/images/the-bund-shanghai-1.jpg" alt="Shanghai Bund and Pudong skyline" loading="lazy" />
         <div class="day-hero__overlay"></div>
       </div>
       <div class="day-content" style="max-width:1100px; margin:0 auto;">
@@ -813,7 +911,7 @@
           <li><span class="time">14:00</span> Check out Toy Story Hotel · taxi/Didi to Peninsula Shanghai (~50 min)</li>
           <li><span class="time">15:30</span> Check-in The Peninsula Shanghai · Bund-view rooms</li>
           <li><span class="time">17:00</span> Stroll Nanjing Road East — pedestrian shopping street</li>
-          <li><span class="time">19:00</span> Dinner at M on the Bund or Hakkasan Shanghai (Bund views)</li>
+          <li><span class="time">19:00</span> Dinner: <strong>Mr &amp; Mrs Bund</strong> (Paul Pairet, modern French — book ahead!) <em>or</em> <strong>M on the Bund</strong> (modern European, classic Bund view)</li>
           <li><span class="time">21:00</span> Bund night walk — Pudong skyline lit up across the Huangpu</li>
         </ul>
 
@@ -822,8 +920,16 @@
             <div class="stop__icon">🏨</div>
             <div class="stop__body">
               <div class="stop__name">The Peninsula Shanghai</div>
-              <div class="stop__desc">Iconic Art Deco grandeur on the Bund · Sir Elly's rooftop bar with Pudong views · 2 nights (29 Jun → 1 Jul) · Premier Bund-view family room</div>
+              <div class="stop__desc">Iconic Art Deco grandeur on the Bund · Sir Elly's rooftop bar with Pudong views · 2 nights (29 Jun → 1 Jul) · Premier Bund-view family room · full Western breakfast in The Lobby</div>
               <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Shanghai" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop__icon">🍷</div>
+            <div class="stop__body">
+              <div class="stop__name">Mr &amp; Mrs Bund (Paul Pairet)</div>
+              <div class="stop__desc">By Michelin chef Paul Pairet (also Ultraviolet) · modern French bistro on the Bund · open kitchen, late-night service · book 1-2 weeks ahead · backup: <strong>M on the Bund</strong> (the original modern European on the Bund) · or <strong>8 1/2 Otto e Mezzo Bombana</strong> (Italian, 3 Michelin stars) for a special night</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Mr+and+Mrs+Bund+Shanghai" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
           <div class="stop">
@@ -852,7 +958,18 @@
 
         <div class="tip-box">
           <span class="tip-box__icon">💡</span>
-          <span>The Peninsula's Sir Elly's rooftop bar (14F) is non-negotiable for sunset on the Bund. Fares can take parents-only photos there. Toy Story Hotel checkout 11:00 — ask reception to hold bags if leaving park later.</span>
+          <span>The Peninsula's Sir Elly's rooftop bar (14F) is non-negotiable for sunset on the Bund. Toy Story Hotel checkout 11:00 — ask reception to hold bags if leaving park later. Book Mr &amp; Mrs Bund 1-2 weeks ahead — Friday/weekend slots fill fast.</span>
+        </div>
+
+        <h3 class="strip-heading">The Bund &amp; Nanjing Road</h3>
+        <div class="photo-strip" data-credit="The Bund &amp; Nanjing Road — Wikimedia Commons">
+          <img src="assets/images/the-bund-shanghai-1.jpg" alt="The Bund waterfront" loading="lazy" />
+          <img src="assets/images/the-bund-shanghai-2.jpg" alt="Shanghai Bund 1933" loading="lazy" />
+          <img src="assets/images/the-bund-shanghai-3.jpg" alt="The Bund 1926 from US Consulate" loading="lazy" />
+          <img src="assets/images/the-bund-shanghai-4.jpg" alt="1930s Shanghai city" loading="lazy" />
+          <img src="assets/images/nanjing-road-1.jpg" alt="East Nanjing Road 2020" loading="lazy" />
+          <img src="assets/images/nanjing-road-2.jpg" alt="East Nanjing Road morning 2024" loading="lazy" />
+          <img src="assets/images/nanjing-road-3.jpg" alt="Historic Nanjing Road" loading="lazy" />
         </div>
       </div>
     </section>
@@ -863,7 +980,7 @@
     <section class="day-section" data-day="13" id="day-13">
       <div class="day-split">
         <div class="day-split__image">
-          <img src="assets/images/pudong-skyline.jpg" alt="Pudong Skyline from The Bund, Shanghai" loading="lazy" />
+          <img src="assets/images/pudong-skyline-1.jpg" alt="Pudong Skyline from The Bund, Shanghai" loading="lazy" />
         </div>
         <div class="day-content">
         <div class="stamp" aria-label="Day 13">
@@ -875,11 +992,12 @@
 
         <ul class="timeline">
           <li><span class="time">09:00</span> Yu Garden (豫园) + Old Town Bazaar — Ming dynasty private garden + souvenir alleys</li>
-          <li><span class="time">11:30</span> Lunch: Nanxiang Steamed Bun (xiaolongbao birthplace) at Yu Garden</li>
+          <li><span class="time">11:30</span> Quick must-try Chinese light lunch: <strong>Nanxiang Steamed Bun</strong> at Yu Garden (xiaolongbao birthplace, just 1-2 baskets each — the kids will love the soup-dumpling theatre)</li>
           <li><span class="time">13:30</span> Pudong: Shanghai Tower observation deck (118F, world's 2nd tallest) OR Oriental Pearl</li>
-          <li><span class="time">15:30</span> Tianzifang or Xintiandi — boutique shopping in restored shikumen lanes</li>
+          <li><span class="time">15:30</span> <strong>Baker &amp; Spice</strong> or <strong>Wagas</strong> coffee/cake stop in Xintiandi (Western café break)</li>
+          <li><span class="time">16:00</span> Tianzifang or Xintiandi — boutique shopping in restored shikumen lanes</li>
           <li><span class="time">18:00</span> Last family photo on the Bund at golden hour · final Pudong skyline shot</li>
-          <li><span class="time">19:00</span> Farewell dinner: Hai Di Lao hotpot OR Lost Heaven (Yunnan cuisine on the Bund)</li>
+          <li><span class="time">19:00</span> Farewell dinner: <strong>Lost Heaven on the Bund</strong> (Yunnan-Western fusion, lighter than typical Chinese) <em>or</em> <strong>Jean Georges</strong> (3 on the Bund, modern French, special occasion)</li>
           <li><span class="time">21:30</span> Return to Peninsula · pack · early sleep — flight 00:05!</li>
         </ul>
 
@@ -908,12 +1026,32 @@
               <a href="https://www.google.com/maps/search/?api=1&query=Tianzifang+Shanghai" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
             </div>
           </div>
+          <div class="stop">
+            <div class="stop__icon">🍴</div>
+            <div class="stop__body">
+              <div class="stop__name">Lost Heaven on the Bund / Jean Georges</div>
+              <div class="stop__desc">Lost Heaven = Yunnan cuisine done in a Western-friendly clean style (less heavy than typical Chinese, lots of grilled meats &amp; veg) · Jean Georges = 3-on-the-Bund French fine dining for the farewell night · also: <strong>Cuivre</strong> and <strong>Le Comptoir de Pierre Gagnaire</strong> for French alternatives</div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Lost+Heaven+Bund+Shanghai" target="_blank" rel="noopener" class="btn-maps">📍 Google Maps</a>
+            </div>
+          </div>
         </div>
 
         <div class="tip-box">
           <span class="tip-box__icon">🎑</span>
-          <span>Tomorrow's flight is EK 303 at 00:05 — leave hotel by 21:00 for PVG (T1, Emirates). Online check-in opens 24h before. Pack vacuum-sealed xiaolongbao from Din Tai Fung at PVG to take home. Allow 3h at airport for the midnight flight.</span>
+          <span>Tomorrow's flight is EK 303 at 00:05 — leave hotel by 21:00 for PVG (T1, Emirates). Online check-in opens 24h before. Allow 3h at airport for the midnight flight.</span>
         </div>
+
+        <h3 class="strip-heading">Yu Garden &amp; Pudong</h3>
+        <div class="photo-strip" data-credit="Yu Garden &amp; Pudong — Wikimedia Commons">
+          <img src="assets/images/yu-garden-shanghai-1.jpg" alt="Yu Garden, Shanghai" loading="lazy" />
+          <img src="assets/images/yu-garden-shanghai-2.jpg" alt="Yu Gardens — pavilion" loading="lazy" />
+          <img src="assets/images/yu-garden-shanghai-3.jpg" alt="Yu Gardens — koi pond" loading="lazy" />
+          <img src="assets/images/pudong-skyline-1.jpg" alt="Pudong skyline from the Bund" loading="lazy" />
+          <img src="assets/images/pudong-skyline-2.jpg" alt="Shanghai Stock Exchange" loading="lazy" />
+          <img src="assets/images/pudong-skyline-3.jpg" alt="Lingang New Town, Pudong" loading="lazy" />
+          <img src="assets/images/pudong-skyline-4.jpg" alt="Shanghai Pudong Airport" loading="lazy" />
+        </div>
+
         </div><!-- end day-content -->
       </div><!-- end day-split -->
     </section>
@@ -966,104 +1104,104 @@
               <span>English</span>
               <span class="zh">中文</span>
               <span class="py">Pinyin</span>
-              <span class="ar">عربي</span>
+              <span class="ar" dir="rtl">عربي</span>
             </li>
             <li class="phrase">
               <span>Hello</span>
               <span class="zh">你好</span>
               <span class="py">Nǐ hǎo</span>
-              <span class="ar">مرحبا</span>
+              <span class="ar" dir="rtl">مرحبا</span>
             </li>
             <li class="phrase">
               <span>Thank you</span>
               <span class="zh">谢谢</span>
               <span class="py">Xièxie</span>
-              <span class="ar">شكراً</span>
+              <span class="ar" dir="rtl">شكراً</span>
             </li>
             <li class="phrase">
               <span>How much?</span>
               <span class="zh">多少钱?</span>
               <span class="py">Duōshǎo qián?</span>
-              <span class="ar">بكم؟</span>
+              <span class="ar" dir="rtl">بكم؟</span>
             </li>
             <li class="phrase">
               <span>Where is...?</span>
               <span class="zh">...在哪里?</span>
               <span class="py">...zài nǎlǐ?</span>
-              <span class="ar">فين...؟</span>
+              <span class="ar" dir="rtl">فين...؟</span>
             </li>
             <li class="phrase">
               <span>Halal</span>
               <span class="zh">清真</span>
               <span class="py">Qīngzhēn</span>
-              <span class="ar">حلال</span>
+              <span class="ar" dir="rtl">حلال</span>
             </li>
             <li class="phrase">
               <span>Yes / No</span>
               <span class="zh">是 / 不是</span>
               <span class="py">Shì / Bù shì</span>
-              <span class="ar">نعم / لا</span>
+              <span class="ar" dir="rtl">نعم / لا</span>
             </li>
             <li class="phrase">
               <span>Excuse me</span>
               <span class="zh">不好意思</span>
               <span class="py">Bù hǎo yìsi</span>
-              <span class="ar">آسف</span>
+              <span class="ar" dir="rtl">آسف</span>
             </li>
             <li class="phrase">
               <span>Help!</span>
               <span class="zh">帮助!</span>
               <span class="py">Bāngzhù!</span>
-              <span class="ar">مساعدة!</span>
+              <span class="ar" dir="rtl">مساعدة!</span>
             </li>
             <li class="phrase">
               <span>Restroom</span>
               <span class="zh">洗手间</span>
               <span class="py">Xǐshǒujiān</span>
-              <span class="ar">حمام</span>
+              <span class="ar" dir="rtl">حمام</span>
             </li>
             <li class="phrase">
               <span>Goodbye</span>
               <span class="zh">再见</span>
               <span class="py">Zàijiàn</span>
-              <span class="ar">مع السلامة</span>
+              <span class="ar" dir="rtl">مع السلامة</span>
             </li>
             <li class="phrase">
               <span>One ticket to ___</span>
               <span class="zh">一张到...的票</span>
               <span class="py">Yī zhāng dào ___ de piào</span>
-              <span class="ar">تذكرة واحدة إلى ⁦___⁩</span>
+              <span class="ar" dir="rtl">تذكرة واحدة إلى ⁦___⁩</span>
             </li>
             <li class="phrase">
               <span>What time?</span>
               <span class="zh">几点?</span>
               <span class="py">Jǐ diǎn?</span>
-              <span class="ar">إمتى؟</span>
+              <span class="ar" dir="rtl">إمتى؟</span>
             </li>
             <li class="phrase">
               <span>Soft sleeper</span>
               <span class="zh">软卧</span>
               <span class="py">Ruǎn wò</span>
-              <span class="ar">مقصورة نوم</span>
+              <span class="ar" dir="rtl">مقصورة نوم</span>
             </li>
             <li class="phrase">
               <span>Train station</span>
               <span class="zh">火车站</span>
               <span class="py">Huǒchē zhàn</span>
-              <span class="ar">محطة القطار</span>
+              <span class="ar" dir="rtl">محطة القطار</span>
             </li>
             <li class="phrase">
               <span>Tickets please</span>
               <span class="zh">车票请</span>
               <span class="py">Chēpiào qǐng</span>
-              <span class="ar">التذاكر من فضلك</span>
+              <span class="ar" dir="rtl">التذاكر من فضلك</span>
             </li>
           </ul>
         </div>
 
         <!-- Practical Tips -->
         <div>
-          <h2>Practical Tips · نصائح عملية</h2>
+          <h2>Practical Tips · <span dir="rtl">نصائح عملية</span></h2>
           <ul class="tips-list">
             <li>Currency: <strong>1 EGP ≈ 0.14 CNY</strong> · exchange at airport or bank</li>
             <li>No Google Maps in China — use <strong>Baidu Maps</strong> or download Google offline before landing</li>
@@ -1072,7 +1210,8 @@
             <li>SIM: Get a <strong>China data SIM</strong> at PEK airport on arrival (China Unicom tourist card)</li>
             <li>Voltage: <strong>220V / 50Hz</strong> — bring a Type A/C adapter (Chinese plugs)</li>
             <li>Drinking water: Never drink tap water — stick to bottled</li>
-            <li>Halal food: Look for <strong>清真 (Qīngzhēn)</strong> signs · Muslim-friendly restaurants common in Beijing</li>
+            <li><strong>Western dining first</strong> — most luxury hotels (Marriott, Westin, Sofitel, Peninsula, Disney resorts) have full Western kitchens. We default to those. <strong>Halal awareness</strong>: seafood/fish/vegetarian Western dishes are always safe; clarify "no pork/no alcohol in cooking" politely.</li>
+            <li>Halal labelling: <strong>清真 (Qīngzhēn)</strong> signs mark certified halal restaurants — useful for backup, not the main plan.</li>
             <li>Tipping: Not customary in China · service charge often included at luxury hotels</li>
             <li>Emergency: Dial <strong>110</strong> (police) · <strong>120</strong> (ambulance) · <strong>119</strong> (fire)</li>
           </ul>
@@ -1080,7 +1219,7 @@
 
         <!-- Emergency Contacts -->
         <div>
-          <h2>Emergency Contacts · طوارئ</h2>
+          <h2>Emergency Contacts · <span dir="rtl">طوارئ</span></h2>
           <div class="emergency-block">
             <p><strong>Egyptian Embassy Beijing</strong><br />
               2 Ri Tan Dong Lu, Chaoyang District<br />
@@ -1093,9 +1232,9 @@
               📞 01066695680</p>
             <p><strong>The Imperial Mansion · Marriott (Beijing)</strong><br />
               📞 +86 10-6597-8888</p>
-            <p><strong>Xi'an hotel — TBD</strong><br />
+            <p><strong>Sofitel Legend / Westin / Wyndham Grand Xi'an</strong><br />
               📞 to confirm at booking<br />
-              <em>Suggested: Sofitel Legend / Westin / Marriott Bell Tower</em></p>
+              <em>All have 24/7 English-speaking concierge</em></p>
             <p><strong>Toy Story Hotel · Shanghai Disneyland</strong><br />
               📞 +86 21-2099-1888</p>
             <p><strong>The Peninsula Shanghai</strong><br />
@@ -1106,78 +1245,152 @@
         </div>
 
         <!-- Pre-Departure Checklist -->
-        <div>
-          <h2>Before Leaving Cairo · قبل المغادرة</h2>
-          <ul class="tips-list">
-            <li><strong>China visa</strong> — group L visa, 6 working days · all 5 passports + photos + invitation</li>
-            <li><strong>Print confirmations</strong> — flights, hotels, train tickets, Disney passes (paper backup)</li>
-            <li><strong>Photo all passports</strong> — store in cloud + paper copy in separate bag</li>
-            <li><strong>Travel insurance</strong> — minimum ¥500K medical coverage · keep card photo on phone</li>
-            <li><strong>International driving permit</strong> — useful as secondary photo ID</li>
-            <li><strong>Currency exchange</strong> — get ~¥3,000–5,000 cash before departure (rest via Alipay/WeChat)</li>
-            <li><strong>Notify bank</strong> — flag travel dates to avoid card freeze</li>
-            <li><strong>Set up Alipay TourPass + WeChat Pay</strong> — link Visa/MC (foreigner version since 2024)</li>
-            <li><strong>Install VPN BEFORE arrival</strong> — Astrill or LetsVPN (paid, work in China)</li>
-            <li><strong>Download offline Google Maps</strong> — Beijing, Xi'an, Shanghai full areas</li>
-            <li><strong>Apps</strong> — Baidu Maps, Didi, Trip.com, Pleco — install in Cairo (some need Chinese App Store tricks)</li>
-            <li><strong>eSIM</strong> — buy China Unicom tourist eSIM via Airalo / pick up at PEK on arrival</li>
-            <li><strong>Universal adapter</strong> — Type A + Type C plugs (Chinese sockets accept both)</li>
-            <li><strong>Power bank ≤ 100Wh</strong> — airline rule, must be in carry-on</li>
-            <li><strong>Medications</strong> — Imodium, allergy meds, kids' fever reducer, motion sickness for sleeper train</li>
-            <li><strong>Halal food strategy</strong> — HalalTrip app · save Muslim Quarter Xi'an + Niujie Mosque Beijing</li>
-            <li><strong>Disney</strong> — pre-buy 3-day tickets via Klook (cheaper than gate) + download Shanghai Disney Resort app</li>
-            <li><strong>Boarding passes</strong> — print Day 1 if Emirates online check-in unavailable</li>
-            <li>📋 ⁦<strong>Final pack night:</strong>⁩ light overnight bag for Day 9 sleeper train · big luggage stays at Xi'an hotel until departure</li>
+        <div class="checklist-card">
+          <h2>Before Leaving Cairo · <span dir="rtl">قبل المغادرة</span></h2>
+          <p class="checklist-hint">✅ Tap each item to mark it done — your progress is saved on this device.</p>
+          <ul class="checklist" id="predeparture">
+            <li><label><input type="checkbox" data-key="visa" /> <strong>China visa</strong> — group L visa, 6 working days · all 5 passports + photos + invitation</label></li>
+            <li><label><input type="checkbox" data-key="print" /> <strong>Print confirmations</strong> — flights, hotels, train tickets, Disney passes (paper backup)</label></li>
+            <li><label><input type="checkbox" data-key="passport-photos" /> <strong>Photo all passports</strong> — store in cloud + paper copy in separate bag</label></li>
+            <li><label><input type="checkbox" data-key="insurance" /> <strong>Travel insurance</strong> — minimum ¥500K medical coverage · keep card photo on phone</label></li>
+            <li><label><input type="checkbox" data-key="idp" /> <strong>International driving permit</strong> — useful as secondary photo ID</label></li>
+            <li><label><input type="checkbox" data-key="cash" /> <strong>Currency exchange</strong> — get ~¥3,000–5,000 cash before departure (rest via Alipay/WeChat)</label></li>
+            <li><label><input type="checkbox" data-key="bank" /> <strong>Notify bank</strong> — flag travel dates to avoid card freeze</label></li>
+            <li><label><input type="checkbox" data-key="alipay" /> <strong>Set up Alipay TourPass + WeChat Pay</strong> — link Visa/MC (foreigner version since 2024)</label></li>
+            <li><label><input type="checkbox" data-key="vpn" /> <strong>Install VPN BEFORE arrival</strong> — Astrill or LetsVPN (paid, work in China)</label></li>
+            <li><label><input type="checkbox" data-key="maps" /> <strong>Download offline Google Maps</strong> — Beijing, Xi'an, Shanghai full areas</label></li>
+            <li><label><input type="checkbox" data-key="apps" /> <strong>Apps</strong> — Baidu Maps, Didi, Trip.com, Pleco — install in Cairo</label></li>
+            <li><label><input type="checkbox" data-key="esim" /> <strong>eSIM</strong> — buy China Unicom tourist eSIM via Airalo / pick up at PEK on arrival</label></li>
+            <li><label><input type="checkbox" data-key="adapter" /> <strong>Universal adapter</strong> — Type A + Type C plugs (Chinese sockets accept both)</label></li>
+            <li><label><input type="checkbox" data-key="powerbank" /> <strong>Power bank ≤ 100Wh</strong> — airline rule, must be in carry-on</label></li>
+            <li><label><input type="checkbox" data-key="meds" /> <strong>Medications</strong> — Imodium, allergy meds, kids' fever reducer, motion sickness for sleeper train</label></li>
+            <li><label><input type="checkbox" data-key="halal" /> <strong>Halal awareness</strong> — HalalTrip app + know hotels have Western options · clarify "no pork/alcohol in cooking" politely</label></li>
+            <li><label><input type="checkbox" data-key="disney" /> <strong>Disney</strong> — pre-buy 3-day tickets via Klook (cheaper than gate) + download Shanghai Disney Resort app</label></li>
+            <li><label><input type="checkbox" data-key="bp" /> <strong>Boarding passes</strong> — print Day 1 if Emirates online check-in unavailable</label></li>
+            <li><label><input type="checkbox" data-key="pack" /> 📋 <strong>Final pack night:</strong> light overnight bag for Day 9 sleeper train · big luggage stays at Xi'an hotel until departure</label></li>
           </ul>
+          <button type="button" class="btn-reset" id="resetChecklist">Reset checklist</button>
         </div>
 
-        <!-- Estimated Costs -->
-        <div>
-          <h2>Estimated Costs · التكلفة التقديرية</h2>
-          <ul class="tips-list">
-            <li>✈️ Flights Cairo↔Shanghai via Dubai (5 pax) · <strong>$5,000–7,000</strong></li>
-            <li>🏨 Beijing hotels — 4 nights, family suite/2 rooms · <strong>$800–1,400</strong></li>
-            <li>🚄 Beijing → Xi'an HSR G653 2nd class × 5 · <strong>$377</strong></li>
-            <li>🏨 Xi'an hotels — 3 nights · <strong>$360–600</strong></li>
-            <li>🛏️ Xi'an → Shanghai overnight soft sleeper × 5 · <strong>$650–900</strong></li>
-            <li>🤠 Toy Story Hotel — 3 nights, family room · <strong>$750–1,050</strong></li>
-            <li>🌃 Peninsula / Bund hotel — 1–2 nights · <strong>$400–1,400</strong> (optional upgrade)</li>
-            <li>🏰 Disney 3-day tickets × 5 · <strong>~$2,100</strong> (or 2-day ~$1,050)</li>
-            <li>🗿 Terracotta Warriors tour × 5 · <strong>$200</strong></li>
-            <li>🎭 Tang Dynasty Show + Dumpling Banquet × 5 · <strong>$300</strong></li>
-            <li>🍜 Daily food (5 × 14 × $80/day) · <strong>~$1,120</strong></li>
-            <li>🚕 Local transport · Didi · metro · <strong>~$300</strong></li>
-            <li>🛍️ Souvenirs / shopping buffer · <strong>$500–1,500</strong></li>
-            <li>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</li>
-            <li>💰 <strong>TOTAL ≈ $13,000–18,000</strong> (incl. flights · less if flights pre-booked)</li>
-          </ul>
+        <!-- Estimated Costs (TABLE) -->
+        <div class="costs-card">
+          <h2>Estimated Costs · <span dir="rtl">التكلفة التقديرية</span></h2>
+          <div class="costs-table-wrap">
+          <table class="costs-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th class="num">Low</th>
+                <th class="num">High</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>✈️ Flights Cairo↔Shanghai via Dubai (5 pax)</td><td class="num">$5,000</td><td class="num">$7,000</td></tr>
+              <tr><td>🏨 Beijing hotels — 4 nights, family suite/2 rooms</td><td class="num">$800</td><td class="num">$1,400</td></tr>
+              <tr><td>🚄 Beijing → Xi'an HSR G653 2nd class × 5</td><td class="num">$377</td><td class="num">$377</td></tr>
+              <tr><td>🏨 Xi'an hotels — 3 nights</td><td class="num">$360</td><td class="num">$600</td></tr>
+              <tr><td>🛏️ Xi'an → Shanghai overnight soft sleeper × 5</td><td class="num">$650</td><td class="num">$900</td></tr>
+              <tr><td>🤠 Toy Story Hotel — 3 nights, family room</td><td class="num">$750</td><td class="num">$1,050</td></tr>
+              <tr><td>🌃 Peninsula / Bund hotel — 2 nights</td><td class="num">$400</td><td class="num">$1,400</td></tr>
+              <tr><td>🏰 Disney 3-day tickets × 5</td><td class="num">$1,050</td><td class="num">$2,100</td></tr>
+              <tr><td>🗿 Terracotta Warriors tour × 5</td><td class="num">$200</td><td class="num">$200</td></tr>
+              <tr><td>🎭 Tang Dynasty Show × 5 (show only)</td><td class="num">$175</td><td class="num">$175</td></tr>
+              <tr><td>🍽️ Daily food — Western fine dining bias (5 × 14 × $90)</td><td class="num">$1,260</td><td class="num">$1,400</td></tr>
+              <tr><td>🚕 Local transport · Didi · metro</td><td class="num">$300</td><td class="num">$300</td></tr>
+              <tr><td>🛍️ Souvenirs / shopping buffer</td><td class="num">$500</td><td class="num">$1,500</td></tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>💰 TOTAL ESTIMATE</th>
+                <th class="num">$11,800</th>
+                <th class="num">$18,400</th>
+              </tr>
+            </tfoot>
+          </table>
+          </div>
+          <p class="costs-note">Includes all flights. Drop ~$5,000–7,000 if Emirates fares pre-booked separately.</p>
         </div>
 
-        <!-- Essential Apps -->
-        <div>
-          <h2>Apps to Install · التطبيقات الضرورية</h2>
-          <ul class="tips-list">
-            <li><strong>Alipay (foreigner)</strong> — payments everywhere · <em>install before</em> ⚠️</li>
-            <li><strong>WeChat (微信)</strong> — messaging · payments · everything · <em>install before</em> ⚠️</li>
-            <li><strong>Astrill / LetsVPN</strong> — bypass Great Firewall · <strong>PAID, install before</strong> ⚠️</li>
-            <li><strong>Trip.com</strong> — train + hotel English booking · <em>install before</em></li>
-            <li><strong>12306 (English)</strong> — official China rail site · <em>install before</em></li>
-            <li><strong>Didi (English mode)</strong> — Chinese Uber, taxis · <em>install before</em> ⚠️</li>
-            <li><strong>Baidu Maps</strong> — primary navigation in China · <em>install before</em></li>
-            <li><strong>Google Maps</strong> — offline downloaded for 3 cities · <em>install before</em></li>
-            <li><strong>Pleco</strong> — Chinese dictionary + camera OCR translate · <em>install before</em> ⭐</li>
-            <li><strong>Google Translate</strong> — Chinese offline pack · <em>install before</em></li>
-            <li><strong>Shanghai Disney Resort</strong> — wait times + Premier Access · <em>install before</em> ⭐</li>
-            <li><strong>Klook</strong> — pre-buy attractions + tours · <em>install before</em></li>
-            <li><strong>HalalTrip</strong> — find halal restaurants · <em>install before</em></li>
-            <li><strong>WhatsApp</strong> — needs VPN in China · <em>install before</em></li>
-            <li><strong>Apple Wallet / Google Pay</strong> — backup payment · <em>install before</em></li>
-          </ul>
+        <!-- Essential Apps (GRID with favicons) -->
+        <div class="apps-card">
+          <h2>Apps to Install · <span dir="rtl">التطبيقات الضرورية</span></h2>
+          <div class="apps-grid">
+            <a class="app-tile" href="https://intl.alipay.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=alipay.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Alipay (foreigner)</div>
+              <div class="app-tile__desc">Payments everywhere · install before</div>
+            </a>
+            <a class="app-tile" href="https://www.wechat.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=wechat.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">WeChat (微信)</div>
+              <div class="app-tile__desc">Messaging · payments · install before ⚠️</div>
+            </a>
+            <a class="app-tile" href="https://www.astrill.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=astrill.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Astrill / LetsVPN</div>
+              <div class="app-tile__desc">Bypass Great Firewall · PAID, install before ⚠️</div>
+            </a>
+            <a class="app-tile" href="https://www.trip.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=trip.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Trip.com</div>
+              <div class="app-tile__desc">Train + hotel English booking</div>
+            </a>
+            <a class="app-tile" href="https://www.12306.cn/en/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=12306.cn&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">12306 (English)</div>
+              <div class="app-tile__desc">Official China rail site</div>
+            </a>
+            <a class="app-tile" href="https://www.didiglobal.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=didiglobal.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Didi (English)</div>
+              <div class="app-tile__desc">Chinese Uber, taxis ⚠️</div>
+            </a>
+            <a class="app-tile" href="https://map.baidu.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Baidu Maps</div>
+              <div class="app-tile__desc">Primary navigation in China</div>
+            </a>
+            <a class="app-tile" href="https://www.google.com/maps" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Google Maps</div>
+              <div class="app-tile__desc">Offline downloaded for 3 cities</div>
+            </a>
+            <a class="app-tile" href="https://www.pleco.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=pleco.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Pleco ⭐</div>
+              <div class="app-tile__desc">Chinese dictionary + camera OCR</div>
+            </a>
+            <a class="app-tile" href="https://translate.google.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=translate.google.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Google Translate</div>
+              <div class="app-tile__desc">Chinese offline pack</div>
+            </a>
+            <a class="app-tile" href="https://www.shanghaidisneyresort.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=shanghaidisneyresort.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Shanghai Disney ⭐</div>
+              <div class="app-tile__desc">Wait times + Premier Access</div>
+            </a>
+            <a class="app-tile" href="https://www.klook.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=klook.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">Klook</div>
+              <div class="app-tile__desc">Pre-buy attractions + tours</div>
+            </a>
+            <a class="app-tile" href="https://www.halaltrip.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=halaltrip.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">HalalTrip</div>
+              <div class="app-tile__desc">Find halal restaurants (backup)</div>
+            </a>
+            <a class="app-tile" href="https://www.whatsapp.com/" target="_blank" rel="noopener">
+              <img src="https://www.google.com/s2/favicons?domain=whatsapp.com&sz=64" alt="" loading="lazy" />
+              <div class="app-tile__name">WhatsApp</div>
+              <div class="app-tile__desc">Needs VPN in China</div>
+            </a>
+          </div>
         </div>
 
         <!-- Transportation Cheat Sheet -->
         <div>
-          <h2>Getting Around · المواصلات</h2>
+          <h2>Getting Around · <span dir="rtl">المواصلات</span></h2>
           <ul class="tips-list">
             <li><strong>Beijing</strong> — Metro is best (¥3–9/ride · English signage). Didi for night/airport. Avoid hailing taxis on the street unless metered.</li>
             <li><strong>Xi'an</strong> — Compact center · Metro Line 2 connects city wall + bell tower. Didi cheap (¥15–30 most rides). Bike rental on city wall ¥45/3hr.</li>
@@ -1191,20 +1404,26 @@
 
         <!-- Plan B Backups -->
         <div>
-          <h2>Plan B · بدائل</h2>
+          <h2>Plan B · <span dir="rtl">بدائل</span></h2>
           <ul class="tips-list">
             <li><strong>If G653 sold out</strong> — backup HSR Beijing→Xi'an: G89 (08:55→13:53), G655 (08:35→14:32), G801 (10:48→17:14). Book minute-1 of sales.</li>
             <li><strong>If sleeper Xi'an→Shanghai sold out</strong> — daytime HSR G1972 / any G-class ~6h · depart evening 26 → arrive Shanghai late night → hotel near station → transfer to Disney morning of 27th.</li>
             <li><strong>If Toy Story Hotel sold out</strong> — Shanghai Disneyland Hotel (more upscale ~$400+) · Wyndham / Holiday Inn Express adjacent to resort.</li>
             <li><strong>If visa rejected</strong> — Hong Kong + Macau (Egyptian passport allowed visa-free with onward ticket — verify at consulate) as fallback Asia trip.</li>
             <li><strong>If kids get sick</strong> — International SOS clinics: Beijing United Family Hospital · Shanghai United Family Hospital. Have insurance card photo on phone.</li>
-            <li><strong>Halal food backup</strong> — Xi'an Muslim Quarter is huge (no issue). Beijing → Niujie Mosque district. Shanghai → Xiaotaoyuan Mosque area + Pinocchio Village Kitchen at Disney.</li>
+            <li><strong>Western dining backup</strong> — every 5-star hotel restaurant on this itinerary has full Western kitchens. When in doubt, eat at the hotel. Beijing Marriott, Westin Xi'an, Sofitel Xi'an, Toy Story Hotel, Peninsula Shanghai — all reliably Western.</li>
+            <li><strong>Halal-aware fallback</strong> — Pinocchio Village Kitchen at Disney + Sunnyside Café · Niujie Mosque district in Beijing if you want certified halal · Muslim Quarter Xi'an for an atmospheric market walk (sightseeing only, not main meals).</li>
             <li><strong>If Beijing pollution spikes</strong> — N95 masks · indoor day at Capital Museum or Universal Beijing Resort.</li>
             <li><strong>If a flight is delayed</strong> — Trip.com chat support is 24/7 English · Emirates Cairo/Dubai office numbers in Emergency Contacts.</li>
           </ul>
         </div>
 
       </div>
+
+      <p class="extras__weather-strip" id="weatherStrip" aria-live="polite">
+        <strong>June weather:</strong>
+        Beijing 22–30°C, occasional showers · Xi'an 21–31°C, hot afternoons · Shanghai 23–29°C, humid, frequent rain — pack light layers + a thin rain jacket.
+      </p>
     </div>
   </section>
 
@@ -1212,6 +1431,7 @@
   <footer>
     <p class="footer__love">Designed with love for the Elzayat family adventure ✈️</p>
     <p class="footer__ref">Booking Ref: 1653713358976673 &nbsp;·&nbsp; Emergency: Counselor El-Saeed 01066695680</p>
+    <p class="footer__attribution">Photos: <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikipedia / Wikimedia Commons</a> contributors (CC-BY-SA). Favicons via Google s2 service.</p>
     <button class="btn-print" id="printBtn" onclick="window.print()">🖨️ Print / Save PDF</button>
     <br />
     <p>Last updated: <span id="lastUpdated"></span></p>
