@@ -5,7 +5,14 @@ Interactive itinerary for the Elzayat family trip to China.
 **Dates:** 18 June – 1 July 2026 (14 days)
 **Travellers:** MFZ + Dina + Fares (16) + Youssef (12) + Yassin (12)
 **Route:** Cairo → Dubai → Beijing → Xi'an → Shanghai → Dubai → Cairo
-**Booking Ref:** 1653713358976673
+**Flight Booking Ref:** 1653713358976673
+
+## Confirmed bookings
+
+- **Flights** ✅ Emirates EK 924/306 + EK 303/927 — Booking ref 1653713358976673
+- **Beijing hotel** ✅ The Imperial Mansion · Marriott Executive Apartments (4 nights, Days 2–5)
+- **Xi'an hotel** ✅ Crowne Plaza Xi'an by IHG — 23–26 Jun, 2 rooms, breakfast incl., EGP 38,602 — **Confirmation 5489.642.171, PIN 1418** (free cancel until 20 Jun 23:59)
+- **Disney resort hotel, Disney 3-day tickets, HSR G653, Xi'an→Shanghai sleeper, Peninsula Shanghai** — 🟡 still to book
 
 ## Cities
 
