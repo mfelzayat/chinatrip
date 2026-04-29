@@ -487,12 +487,12 @@
     // ===== TIMELINE ITEMS — full Arabic for all 14 days =====
     const TIMELINE_AR = {
       1: [
-        ['20:05', 'EK 924 يقلع من القاهرة (CAI) — Emirates A380'],
-        ['23:05', 'وصلنا دبي (DXB) — ترانزيت ليلي'],
+        ['20:05', 'EK 924 يقلع من القاهرة (CAI · Terminal 2) — Emirates A380'],
+        ['00:40', 'وصلنا دبي (DXB · Terminal 3) — ترانزيت ~3 ساعات و10 دقايق'],
         ['~',     'ريلاكس في صالة Emirates'],
       ],
       2: [
-        ['03:50', 'EK 306 يقلع من دبي (DXB) — Emirates'],
+        ['03:50', 'EK 306 يقلع من دبي (DXB · Terminal 3) — Boeing 777-300ER'],
         ['15:25', 'هبوط في بكين (PEK)'],
         ['17:00', 'الـ Check-in في فندق <strong>The Imperial Mansion · Marriott</strong>'],
         ['19:30', 'العشا في <strong>Capital M</strong> — أوروبي مودرن، بلكونة بإطلالة على Tiananmen'],
@@ -608,8 +608,9 @@
         ['21:30', 'الرجوع للفندق · pack · نوم بدري — رحلة 00:05!'],
       ],
       14: [
-        ['00:05', 'EK 303 يقلع من Shanghai PVG → Dubai DXB · A380'],
-        ['08:15', 'EK 927 من Dubai DXB → Cairo CAI · A380'],
+        ['00:05', 'EK 303 يقلع من Shanghai PVG (T2) → Dubai DXB (T3) · A380-800 · 8س 40د'],
+        ['04:45', 'هبوط في دبي · ترانزيت ~3س 30د'],
+        ['08:15', 'EK 927 من Dubai DXB (T3) → Cairo CAI (T2) · A380-800 · 3س 50د'],
         ['11:05', 'هبوط في القاهرة — ولا أحلى! 🎉'],
       ],
     };
@@ -724,8 +725,8 @@
 
     // ===== INFO CARDS — translate label/title/detail =====
     const INFO_AR = {
-      1: [{ label: '✈ الطيران', title: 'EK 924 · القاهرة → دبي', detail: 'إيرباص A380 · 3 ساعات · مرجع الحجز 1653713358976673' }],
-      2: [{ label: '✈ الطيران', title: 'EK 306 · دبي → بكين PEK', detail: 'إقلاع 03:50 · هبوط 15:25 · ~9 ساعات' }],
+      1: [{ label: '✈ الطيران', title: 'EK 924 · القاهرة → دبي', detail: 'إيرباص A380-800 · 3س 35د · ترانزيت في دبي ~3 ساعات قبل EK 306 · مرجع الحجز <strong>8GCRQP</strong> (Emirates PNR: L62SIF) · Economy class · 2 شنط لكل راكب · وكيل: Asfar El Marwan Travel، القاهرة، 0663240456' }],
+      2: [{ label: '✈ الطيران', title: 'EK 306 · دبي → بكين PEK', detail: 'Boeing 777-300ER · إقلاع 03:50 · هبوط 15:25 · 7س 35د (مش A380 الرحلة دي) · هبوط T3' }],
       3: [{ label: '🍽️ الأكل — غربي', title: 'الغدا: Element Fresh · العشا: Mio (Four Seasons)', detail: 'Element Fresh = أحسن سلسلة أكل صحي غربي في بكين. Mio = إيطالي فاخر داخل Four Seasons — باستا تتعمل قدامك، بيتزا فرن خشب، مناسب للأولاد. لو حابب صيني خفيف: Jing Yaa Tang في The Opposite House.' }],
       6: [
         { label: '🎫 التذاكر — احجز يوم 9 يونيو!', title: 'G653 · درجة 2 × 5', detail: '~CNY 537/شخص ($75) · ~$377 المجموع · المبيعات تفتح 08:00 بتوقيت بكين قبل 15 يوم بالظبط · بدائل: G89 (08:55→13:53), G655 (08:35→14:32), G801 (10:48→17:14)' },
@@ -739,7 +740,7 @@
       ],
       10: [{ label: '🎢 استراتيجية يوم 1', title: 'تجاوز الطوابير', detail: 'افتح تطبيق Shanghai Disney Resort · فعّل Premier Access لـ TRON + Pirates لو الميزانية بتسمح (~¥120/ركوبة/شخص) · استخدم Premier فقط لأهم 2 ركوبات · Mickey & Friends meet-greet صباحاً' }],
       12: [{ label: '🤔 نقطة قرار', title: 'ديزني يوم 3 أو يوم شنغهاي كامل؟', detail: 'لو الأولاد لسه متحمسين → ديزني الصبح + النقلة لـ Peninsula العصر. لو متشبعين → checkout 11:00، عصر كامل في الـ Bund + Yu Garden + Tianzifang. Peninsula ثابت.' }],
-      14: [{ label: '✈ الطيران', title: 'EK 303 + EK 927 · شنغهاي → القاهرة عبر دبي', detail: 'الرحلتين على إيرباص A380 · إجمالي السفر ~11 ساعة · مرجع الحجز 1653713358976673' }],
+      14: [{ label: '✈ الطيران', title: 'EK 303 + EK 927 · شنغهاي → القاهرة عبر دبي', detail: 'الرحلتين على إيرباص A380-800 · إجمالي السفر ~16 ساعة (شامل ترانزيت دبي) · مرجع الحجز <strong>8GCRQP</strong> · Emirates PNR L62SIF · Economy (Q) · 2 شنط لكل راكب' }],
     };
     Object.entries(INFO_AR).forEach(([day, list]) => {
       const sec = document.querySelector(`.day-section[data-day="${day}"]`);
