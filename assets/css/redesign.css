@@ -1,0 +1,399 @@
+/* ============================================================
+   China Trip 2026 — REDESIGN v6.0
+   Mobile-first proper UI/UX. Loaded LAST.
+   - Bottom tab bar nav on mobile (replaces horizontal slider)
+   - Compact day cards with progressive disclosure
+   - Tabbed extras section
+   - Hardened tips-list (no overflow ever)
+   - Real typography contrast
+   ============================================================ */
+
+:root {
+  --rd-ink:        #15120e;
+  --rd-ink-2:      #1f1c17;
+  --rd-paper:      #faf6ec;
+  --rd-paper-soft: #fffaf0;
+  --rd-line:       rgba(21,18,14,.10);
+  --rd-line-d:     rgba(255,255,255,.10);
+  --rd-beijing:    #c1543e;
+  --rd-xian:       #b08648;
+  --rd-shanghai:   #4a7c5e;
+  --rd-disney:     #6b46c1;
+  --rd-tab-h:      62px;
+  --ease-soft:     cubic-bezier(.22,.61,.36,1);
+  --ease-snap:     cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ────────────────────────────────────────────────────────────
+   TIPS LIST — BULLETPROOF (no flex weirdness, never overflows)
+   ──────────────────────────────────────────────────────────── */
+.tips-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.tips-list li {
+  display: block !important;        /* kill flex */
+  position: relative;
+  padding: .65rem 0 .65rem 1.4rem !important;
+  border-bottom: 1px solid var(--rd-line-d) !important;
+  font-size: .85rem !important;
+  line-height: 1.55 !important;
+  color: rgba(251,246,236,.85) !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.tips-list li::before {
+  content: '▸' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: .68rem !important;
+  color: var(--rd-beijing) !important;
+  font-weight: 700;
+  flex: none !important;
+  width: auto !important;
+}
+.tips-list li strong {
+  color: #fff !important;
+  font-weight: 700 !important;
+  display: inline !important;
+  white-space: normal !important;
+}
+.tips-list li:last-child { border-bottom: none !important; }
+
+/* Light-bg version (when tips-list lives in a paper section) */
+.events-section .tips-list li,
+section[class*="paper"] .tips-list li {
+  color: #2a2520 !important;
+  border-bottom-color: var(--rd-line) !important;
+}
+.events-section .tips-list li strong { color: var(--rd-ink) !important; }
+
+/* ────────────────────────────────────────────────────────────
+   MOBILE BOTTOM TAB BAR — replaces horizontal day-nav slider
+   ──────────────────────────────────────────────────────────── */
+.mobile-tabs {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(21,18,14,.96);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-top: 1px solid var(--rd-line-d);
+  height: var(--rd-tab-h);
+  padding: 6px 8px calc(env(safe-area-inset-bottom, 0px) + 6px);
+}
+
+.mobile-tabs__inner {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mobile-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  color: rgba(251,246,236,.62);
+  cursor: pointer;
+  border-radius: 12px;
+  font-family: var(--ff-ui, system-ui, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  transition: all .25s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+  padding: 4px;
+  position: relative;
+}
+.mobile-tab__icon {
+  font-size: 19px;
+  line-height: 1;
+  transition: transform .3s var(--ease-snap);
+}
+.mobile-tab__label {
+  font-size: 10px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.mobile-tab:active { transform: scale(.94); }
+.mobile-tab.active {
+  color: #fff;
+  background: rgba(251,246,236,.06);
+}
+.mobile-tab.active .mobile-tab__icon { transform: scale(1.18); }
+.mobile-tab[data-target="beijing"].active  { color: #ffb39c; }
+.mobile-tab[data-target="xian"].active     { color: #f0d99e; }
+.mobile-tab[data-target="shanghai"].active { color: #9bd0b1; }
+.mobile-tab[data-target="extras"].active   { color: #d6c2ff; }
+
+@media (max-width: 900px) {
+  .mobile-tabs { display: block; }
+  body { padding-bottom: var(--rd-tab-h); } /* prevent footer cover */
+  .day-nav { display: none !important; } /* kill the horizontal slider */
+  .visa-banner { display: none !important; } /* save space, info in hero */
+  .progress-bar {
+    bottom: var(--rd-tab-h) !important;
+    top: auto !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   DAY CARD COMPACT — collapsed details, "Read more" toggle
+   ──────────────────────────────────────────────────────────── */
+.day-section {
+  scroll-margin-top: 80px;
+}
+@media (max-width: 900px) {
+  .day-section { scroll-margin-top: 16px; }
+}
+
+/* Reset the alternating bg from style.css (caused jarring stripes) */
+.day-section:nth-child(even) .day-content { background: transparent !important; }
+
+/* ────────────────────────────────────────────────────────────
+   EXTRAS — TAB SWITCHER instead of stacked grid dump
+   ──────────────────────────────────────────────────────────── */
+.extras-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin-bottom: 1.6rem;
+  padding-bottom: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--rd-ink-2);
+  padding-top: 6px;
+  margin-top: -6px;
+}
+.extras-tabs::-webkit-scrollbar { display: none; }
+
+.extras-tab {
+  flex-shrink: 0;
+  padding: .55rem 1rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  color: rgba(251,246,236,.7);
+  border: 1px solid var(--rd-line-d);
+  font-family: inherit;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+.extras-tab:hover { color: #fff; background: rgba(255,255,255,.1); }
+.extras-tab.active {
+  color: var(--rd-ink);
+  background: var(--gold-light, #e3c99a);
+  border-color: transparent;
+}
+
+.extras-panel {
+  display: none;
+  animation: panelIn .35s var(--ease-soft) both;
+}
+.extras-panel.active { display: block; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* When tabs active, the original grid layout becomes single-panel */
+.extras--tabbed .extras__grid {
+  display: block !important;
+}
+.extras--tabbed .extras__grid > div {
+  display: none;
+}
+
+/* ────────────────────────────────────────────────────────────
+   COSTS TABLE — proper mobile layout (cards on phone)
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .costs-table thead { display: none; }
+  .costs-table, .costs-table tbody, .costs-table tr, .costs-table td, .costs-table tfoot {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .costs-table tr {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--rd-line-d);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    padding: 12px 14px;
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 6px 12px;
+  }
+  .costs-table td {
+    padding: 0 !important;
+    border: none !important;
+    font-size: .82rem !important;
+    color: rgba(251,246,236,.85) !important;
+  }
+  .costs-table td:first-child {
+    grid-column: 1 / -1;
+    font-weight: 600;
+    color: #fff !important;
+    margin-bottom: 4px;
+  }
+  .costs-table td:nth-child(2)::before { content: 'Low: '; opacity: .6; font-size: .7rem; }
+  .costs-table td:nth-child(3)::before { content: 'High: '; opacity: .6; font-size: .7rem; }
+  .costs-table tfoot tr {
+    background: linear-gradient(135deg, var(--rd-beijing), var(--rd-xian));
+    border: none;
+  }
+  .costs-table tfoot th {
+    display: block !important;
+    padding: 0 !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: .9rem !important;
+    text-align: left !important;
+  }
+  .costs-table tfoot th:first-child {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   APP TILES — proper grid mobile, no cramping
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .apps-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+  .app-tile {
+    padding: 10px 8px !important;
+    align-items: center;
+    text-align: center;
+  }
+  .app-tile img {
+    width: 28px !important;
+    height: 28px !important;
+    margin: 0 auto 4px !important;
+  }
+  .app-tile__name {
+    font-size: .7rem !important;
+    line-height: 1.2;
+  }
+  .app-tile__desc { display: none; } /* save space, name is enough */
+}
+
+/* ────────────────────────────────────────────────────────────
+   PHRASEBOOK — readable on mobile (4-col → 2-col)
+   ──────────────────────────────────────────────────────────── */
+.phrases { padding: 0; list-style: none; }
+.phrase {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--rd-line-d);
+  font-size: .82rem;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .phrase {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+  }
+  .phrase span:nth-child(1) { font-weight: 600; color: #fff; }
+  .phrase span:nth-child(3) { color: rgba(251,246,236,.55); font-size: .75rem; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   HERO — mobile-readable
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .site-header__content {
+    padding: 1rem !important;
+  }
+  .hero-stats { padding: .6rem !important; gap: .5rem !important; }
+  .hero-stat__num { font-size: 1.2rem !important; }
+  .hero-stat__label { font-size: .52rem !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   STAT STRIP — fix the cramped phone layout
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .stat-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stat-cell {
+    padding: 1rem .8rem !important;
+    border-right: 1px solid var(--rd-line-d) !important;
+    border-bottom: 1px solid var(--rd-line-d) !important;
+  }
+  .stat-cell:nth-child(2n) { border-right: none !important; }
+  .stat-cell__num { font-size: 1.3rem !important; }
+  .stat-cell__label { font-size: .55rem !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   DAY HERO — capped sizes everywhere
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .day-hero {
+    height: 200px !important;
+    min-height: 180px !important;
+    max-height: 220px !important;
+  }
+  .day-split__image { max-height: 200px !important; }
+  .day-content { padding: 1.2rem 1rem !important; }
+  .timeline { padding: .9rem .9rem .9rem 2rem !important; font-size: .82rem; }
+  .timeline li { font-size: .82rem !important; padding-left: .4rem; }
+  .stop { padding: .7rem .85rem !important; }
+  .info-card { padding: .8rem .9rem !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   FOOTER — better on mobile
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  footer { padding: 1.5rem 1rem 1rem !important; }
+  .btn-print { width: auto !important; padding: .5rem 1rem !important; font-size: .75rem !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   Misc fixes
+   ──────────────────────────────────────────────────────────── */
+* { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img { max-width: 100%; height: auto; }
+
+/* Remove the alternating bg on day-content (visual noise) */
+.day-section .day-content { background: transparent !important; }
+
+/* Ensure text never overflows on any flex layout */
+.day-content, .extras, .events-section, .cities-section { min-width: 0; overflow-wrap: anywhere; }
+
+/* SVG inside route-map shouldn't overflow on small screens */
+.route-map svg { max-width: 100%; height: auto; }
+
+/* Print-friendly tabs */
+@media print {
+  .mobile-tabs { display: none !important; }
+  .extras-tabs { display: none !important; }
+  .extras-panel { display: block !important; }
+  .extras--tabbed .extras__grid > div { display: block !important; }
+}
