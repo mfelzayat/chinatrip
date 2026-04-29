@@ -723,3 +723,97 @@ body,
   .quest-inline__title { font-size: 0.85rem; }
   .quest-inline__meta { font-size: 0.7rem; }
 }
+
+/* ──────────────────────────────────────────
+   QUEST-DAY (grouped by day with header)
+   ────────────────────────────────────────── */
+.quest-day {
+  margin-bottom: 2.4rem;
+  position: relative;
+}
+.quest-day__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.2rem;
+  padding: 14px 18px;
+  background: rgba(20,18,28,0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.14) inset, 0 8px 24px rgba(0,0,0,0.3);
+}
+.quest-day__num {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--q-gold);
+  color: #1a0e00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  font-weight: 400;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 22px rgba(245,185,74,0.4);
+}
+.quest-day--bonus .quest-day__num {
+  background: linear-gradient(135deg, #b48bff, #d4b3ff);
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 8px 22px rgba(180,139,255,0.4);
+}
+.quest-day__info { flex: 1; min-width: 0; }
+.quest-day__label {
+  font-family: var(--ar-display) !important;
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 700;
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+.quest-day__sub {
+  font-family: var(--ar-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  font-weight: 500;
+}
+.quest-day__progress {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  color: var(--q-mfz);
+  font-size: 1.15rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Quest card — when chip */
+.quest-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.quest-card__when {
+  font-family: var(--ar-body);
+  font-size: 0.68rem;
+  color: var(--q-mfz);
+  background: rgba(245,185,74,0.10);
+  border: 1px solid rgba(245,185,74,0.3);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .quest-day__head { padding: 11px 14px; gap: 12px; }
+  .quest-day__num { width: 40px; height: 40px; font-size: 1.4rem; border-radius: 12px; }
+  .quest-day__label { font-size: 1rem; }
+  .quest-day__sub { font-size: 0.75rem; }
+  .quest-day__progress { font-size: 0.95rem; }
+}

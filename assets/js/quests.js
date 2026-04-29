@@ -481,6 +481,168 @@
       const lbl = document.querySelector(`.mobile-tab[data-target="${target}"] .mobile-tab__label`);
       if (lbl) lbl.textContent = txt;
     });
+
+    // ===== TIMELINE ITEMS — full Arabic for all 14 days =====
+    const TIMELINE_AR = {
+      1: [
+        ['20:05', 'EK 924 يقلع من القاهرة (CAI) — Emirates A380'],
+        ['23:05', 'وصلنا دبي (DXB) — ترانزيت ليلي'],
+        ['~',     'ريلاكس في صالة Emirates'],
+      ],
+      2: [
+        ['03:50', 'EK 306 يقلع من دبي (DXB) — Emirates'],
+        ['15:25', 'هبوط في بكين (PEK)'],
+        ['17:00', 'الـ Check-in في فندق <strong>The Imperial Mansion · Marriott</strong>'],
+        ['19:30', 'العشا في <strong>Capital M</strong> — أوروبي مودرن، بلكونة بإطلالة على Tiananmen'],
+      ],
+      3: [
+        ['09:00', 'القصر الإمبراطوري (Forbidden City) — دخول من بوابة Meridian'],
+        ['12:00', 'لفّة في ميدان Tiananmen'],
+        ['13:00', 'الغدا: <strong>Element Fresh</strong> — سلطات وسندويتشات وباستا'],
+        ['14:00', 'حديقة Jingshan — منظر بانورامي للأسطح الذهبية'],
+        ['16:30', 'ريلاكس في الفندق'],
+        ['19:00', 'العشا: <strong>Mio</strong> — مطعم إيطالي فاخر في Four Seasons'],
+        ['21:00', 'لفّة اختيارية في شارع Wangfujing'],
+      ],
+      4: [
+        ['08:00', 'خروج من الفندق — عربية خاصة'],
+        ['09:30', 'وصول Mutianyu (1.5 ساعة طريق)'],
+        ['09:45', 'تلفريك لفوق السور'],
+        ['10:00', 'مشي 1.5 كيلو على السور — من برج لبرج'],
+        ['12:00', 'الغدا: <strong>The Schoolhouse</strong> — pizza on wood-fired oven وقايمة غربية'],
+        ['13:30', 'الـ Toboggan لتحت (مغامرة الأولاد!)'],
+        ['14:30', 'الرجوع لبكين'],
+        ['17:00', 'العشا في الفندق أو <strong>Blue Frog Bar & Grill</strong>'],
+      ],
+      5: [
+        ['09:00', 'لفة في حواري Hutong + ركوب pedicab'],
+        ['11:30', 'الغدا: <strong>Wagas</strong> أو <strong>Pizza Marzano</strong> — أكل غربي مكيف'],
+        ['13:30', 'القصر الصيفي (颐和园) — بحيرة Kunming'],
+        ['16:30', 'هيكل السماء (天坛 Temple of Heaven)'],
+        ['19:00', 'العشا: <strong>Hatsune</strong> — ياباني-غربي للأولاد'],
+        ['21:00', '⏰ ضبط منبه — قطار يوم 6 الساعة 7:39!'],
+      ],
+      6: [
+        ['06:00', 'الـ Check-out · عربية لمحطة Beijing West'],
+        ['07:00', 'الوصول للمحطة · security · فطار في المحطة'],
+        ['07:39', '<strong>قطار G653</strong> يقلع من Beijing West — direct لـ Xi\'an'],
+        ['13:46', 'الوصول لـ Xi\'an North · مترو Line 2 لمحطة Provincial Stadium'],
+        ['14:30', 'الـ Check-in في <strong>Crowne Plaza Xi\'an by IHG</strong> ✅'],
+        ['17:30', 'سور المدينة القديم وقت غروب — البوابة الجنوبية'],
+        ['20:00', 'العشا: <strong>Le Grand</strong> في Sofitel أو مطعم الفندق'],
+      ],
+      7: [
+        ['08:00', 'الخروج من الفندق — عربية لـ Lintong (40 كم شرق)'],
+        ['09:00', 'الوصول لمقبرة الإمبراطور Qin Shi Huang'],
+        ['09:30', 'الحفرة الأولى — 6000 جندي في تشكيل عسكري'],
+        ['10:30', 'الحفرة 2: cavalry · الحفرة 3: مركز قيادة'],
+        ['11:30', 'قاعة العربات البرونزية'],
+        ['13:00', 'الغدا: <strong>Wei Jia</strong> — biangbiang نودلز خفيفة'],
+        ['14:30', 'قصر Huaqing — الينابيع الساخنة الإمبراطورية'],
+        ['17:30', 'الرجوع لشيآن · العشا في الفندق (غربي)'],
+      ],
+      8: [
+        ['09:30', 'باجودا الإوزة الكبيرة (大雁塔) — معبد Da Ci\'en'],
+        ['11:30', 'عرض النوافير — أكبر نوافير موسيقية في آسيا'],
+        ['12:30', 'الغدا: <strong>Vinotech</strong> أو Pizza Hut للأولاد'],
+        ['14:30', 'Tang Paradise — حديقة إمبراطورية مُعاد بناؤها'],
+        ['17:30', 'عشا خفيف في الفندق (Crowne Plaza)'],
+        ['19:30', '<strong>عرض Tang Dynasty</strong> فقط (بدون عشا) — 90 دقيقة'],
+        ['21:30', 'الرجوع للفندق · pack — قطار النوم بكره!'],
+      ],
+      9: [
+        ['08:00', 'فطار في الـ Crowne Plaza · pack نهائي'],
+        ['09:00', 'إيجار عجلة على السور — البوابة الجنوبية (¥45/3 ساعات)'],
+        ['10:30', 'لفة كاملة على السور (~14 كم، 90 دقيقة easy)'],
+        ['11:45', '⚠️ الـ <strong>Check-out قبل 12:00</strong> — اترك الشنط في bell desk'],
+        ['12:30', 'الغدا: مطعم الفندق أو Vinotech'],
+        ['14:00', 'متحف Shaanxi History — 370 ألف قطعة أثرية'],
+        ['16:30', 'لفة سريعة في سوق Muslim Quarter (للجو، مش للأكل)'],
+        ['17:30', 'استلام الشنط · عشا غربي خفيف'],
+        ['19:30', 'الركوب في قطار النوم · مقصورتك'],
+        ['20:00', '🛏️ <strong>قطار النوم Xi\'an → Shanghai</strong> · بكره الصبح في Bund'],
+      ],
+      10: [
+        ['07:30', 'وصلنا Shanghai · ننزل من القطار'],
+        ['08:00', 'فطار: <strong>Sunnyside Café · Toy Story Hotel</strong> — بوفيه غربي'],
+        ['09:30', 'إيداع الشنط في الفندق (early bag drop)'],
+        ['10:00', 'shuttle لباب الـ park · يوم ديزني الأول!'],
+        ['10:30', 'استراتيجية الـ rope drop: TRON Lightcycle Power Run الأول'],
+        ['12:30', 'الغدا: <strong>Pinocchio Village Kitchen</strong> — pizza, pasta'],
+        ['14:00', 'Pirates of the Caribbean: Battle for the Sunken Treasure'],
+        ['17:00', 'Roaring Rapids · Soaring Over the Horizon'],
+        ['19:30', 'العشا: <strong>World of Disney Café</strong> أو Sunnyside Café'],
+        ['20:00', 'إضاءات القلعة + ألعاب نارية'],
+        ['22:00', 'الرجوع للفندق · نوم!'],
+      ],
+      11: [
+        ['08:30', 'فطار في الـ Sunnyside Café'],
+        ['09:30', 'Adventure Isle: Roaring Rapids (هتتبل، هات poncho)'],
+        ['11:00', 'Camp Discovery climbing · Stitch Encounter'],
+        ['12:30', 'الغدا: <strong>Royal Banquet Hall</strong> — character dining داخل القلعة'],
+        ['14:30', 'Tomorrowland: Buzz · Jet Packs · TRON re-ride'],
+        ['16:00', 'Mickey Avenue Parade route'],
+        ['17:30', 'Fantasyland: Once Upon a Time · Seven Dwarfs Mine Train'],
+        ['19:30', 'العشا: <strong>Aurora</strong> أو <strong>Lumière\'s Kitchen</strong>'],
+        ['20:30', '"Ignite the Dream" ألعاب نارية'],
+      ],
+      12: [
+        ['09:00', 'يوم ديزني الأخير — TRON تاني، Soaring تاني، أي حاجة فاتت'],
+        ['12:00', 'غدا في الـ park · صور أخيرة · souvenirs من Avenue M'],
+        ['14:00', 'الـ Check-out من Toy Story Hotel · taxi لـ Peninsula'],
+        ['15:30', 'الـ Check-in في <strong>Peninsula Shanghai</strong> · Bund-view'],
+        ['17:00', 'لفّة في شارع Nanjing East'],
+        ['19:00', 'العشا: <strong>Mr & Mrs Bund</strong> (Paul Pairet, فرنسي مودرن)'],
+        ['21:00', 'لفة ليلية على الـ Bund — Pudong منوّر بالضو'],
+      ],
+      13: [
+        ['09:00', 'حديقة Yu Garden + سوق المدينة القديمة — 450 سنة'],
+        ['11:30', 'غدا خفيف: <strong>Nanxiang Steamed Bun</strong> — xiaolongbao'],
+        ['13:30', 'Pudong: Shanghai Tower (118 طابق)'],
+        ['15:30', 'Coffee في <strong>Baker & Spice</strong> أو Wagas في Xintiandi'],
+        ['16:00', 'Tianzifang أو Xintiandi — boutique shopping'],
+        ['18:00', 'صورة عائلة أخيرة على الـ Bund وقت غروب'],
+        ['19:00', 'العشا الوداع: <strong>Lost Heaven</strong> أو <strong>Jean Georges</strong>'],
+        ['21:30', 'الرجوع للفندق · pack · نوم بدري — رحلة 00:05!'],
+      ],
+      14: [
+        ['00:05', 'EK 303 يقلع من Shanghai PVG → Dubai DXB · A380'],
+        ['08:15', 'EK 927 من Dubai DXB → Cairo CAI · A380'],
+        ['11:05', 'هبوط في القاهرة — ولا أحلى! 🎉'],
+      ],
+    };
+    Object.entries(TIMELINE_AR).forEach(([day, items]) => {
+      const tl = document.querySelector(`.day-section[data-day="${day}"] .timeline`);
+      if (!tl) return;
+      tl.innerHTML = items.map(([time, text]) =>
+        `<li><span class="time">${time}</span>${text}</li>`
+      ).join('');
+      tl.setAttribute('dir', 'rtl');
+      tl.setAttribute('lang', 'ar');
+    });
+
+    // Extras section headings
+    document.querySelectorAll('.extras h2').forEach(h => {
+      const txt = h.textContent.split('·')[0].trim();
+      const map = {
+        'Confirmed Bookings': 'الحجوزات المؤكدة',
+        'Mandarin Phrasebook': 'كلمات صيني تعرفها',
+        'Practical Tips': 'نصايح عملية',
+        'Emergency Contacts': 'أرقام الطوارئ',
+        'Before Leaving Cairo': 'قبل ما تطلع من القاهرة',
+        'Estimated Costs': 'التكلفة التقديرية',
+        'Apps to Install': 'تطبيقات لازم تنزلها',
+        'Getting Around': 'كيف تتنقّل',
+        'Plan B': 'خطة بديلة',
+      };
+      Object.keys(map).forEach(k => {
+        if (txt.indexOf(k) === 0) {
+          h.textContent = map[k];
+          h.setAttribute('dir', 'rtl');
+          h.setAttribute('lang', 'ar');
+        }
+      });
+    });
   }
 
   /* ─────────────────────────────────────────────
