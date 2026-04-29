@@ -263,6 +263,8 @@
 
     const root = document.getElementById('quests');
     if (root) root.innerHTML = html;
+    // Re-render the inline per-day quest cards too (so checked state syncs)
+    if (typeof injectInlineQuestsPerDay === 'function') injectInlineQuestsPerDay();
   }
 
   function ownerLabel(o) {
@@ -643,6 +645,140 @@
         }
       });
     });
+
+    // ===== STOPS — translate by day =====
+    const STOPS_AR = {
+      2: [
+        { name: 'فندق Imperial Mansion · Marriott Beijing', desc: 'شقة فاخرة 2 غرفة نوم · حي Dongcheng · 4 ليالي (19→23 يونيو) · حجز #6845.657.812 · CNY 13,183 (EGP 101,529 شامل بريكفاست بوفيه غربي يومي)' },
+        { name: 'مطعم Capital M (أوروبي حديث)', desc: 'بلكونة شهيرة فوق Qianmen · المنيو أسترالي-أوروبي · سي فود، لحم خروف، باستا، بط · إطلالة Tiananmen في الغروب · مناسب جداً للأولاد' },
+      ],
+      3: [
+        { name: 'القصر الإمبراطوري (Forbidden City)', desc: 'أكبر مجمع قصور في العالم · 9999 غرفة · من عصري Ming و Qing · 600 سنة تاريخ إمبراطوري' },
+        { name: 'ميدان Tiananmen', desc: 'أكبر ميدان عام في العالم · بوابة السلام السماوي · صورة Mao الشهيرة' },
+        { name: 'حديقة Jingshan', desc: 'تل الفحم — أحسن منظر مرتفع للقصر الذهبي · مثالي للصور' },
+      ],
+      4: [
+        { name: 'سور الصين العظيم — Mutianyu', desc: 'أحسن جزء مرمم من السور · أهدأ من Badaling · مناظر جبلية ساحرة · فيه توبوغان للنزول' },
+        { name: 'مطعم The Schoolhouse · Mutianyu', desc: 'مدرسة قرية قديمة من الخمسينات اتحولت لمطعم · بيتزا فرن خشب، ساندوتشات، سلطات، خبز طازج · بتديرها عيلة أمريكية من 15+ سنة' },
+      ],
+      5: [
+        { name: 'حواري Nanluogu Xiang (Hutongs)', desc: 'حواري عمرها 800 سنة · روح بكين القديمة · بيوت شاي، محلات حرفيين، بارات مخفية · اركب pedicab في المتاهة' },
+        { name: 'القصر الصيفي (颐和园)', desc: 'منتجع إمبراطوري · 290 هكتار من بحيرة Kunming + تل العمر الطويل · الممر الطويل (728 متر معرض رسم) · القارب الرخامي · تراث UNESCO' },
+        { name: 'معبد السماء (天坛)', desc: 'مذبح من عصر Ming كان الأباطرة بيدعوا فيه للحصاد · قاعة الصلاة الدائرية الشهيرة · الناس بتلعب تاي تشي عند الفجر · موقع UNESCO' },
+      ],
+      6: [
+        { name: 'قطار G653 · بكين West → شيآن North', desc: 'قطار سريع مباشر · 07:39 → 13:46 (6س 7د) · درجة 2 ~$75 للشخص = ~$377 للخمسة · التذاكر بتفتح 8 صباحاً قبل 15 يوم على Trip.com أو 12306' },
+        { name: 'سور شيآن (古城墙)', desc: 'أحسن سور قديم محفوظ في الصين · 14 كم محيط · 12 متر ارتفاع · بُني في عصر Ming 1370 · امشي أو استأجر عجلة (¥45 / 3 ساعات) · الغروب من البوابة الجنوبية لا يُنسى' },
+        { name: 'مطعم Le Grand · Sofitel Legend', desc: 'فرنسي فاخر داخل فندق التراث السوفيتي · ستيك، سي فود، نبيذ · أوثق عشا غربي في شيآن · بديل: Westin Italian Trattoria' },
+      ],
+      7: [
+        { name: 'جيش التراكوتا (兵马俑)', desc: '8000 جندي طين بحجم طبيعي بيحرسوا مقبرة الإمبراطور Qin Shi Huang (210 ق.م) · اكتشفوهم 1974 فلاحين بيحفروا بير · تراث UNESCO · "العجيبة الثامنة"' },
+        { name: 'قصر Huaqing (华清宫)', desc: 'منتجع حمامات ساخنة عمره 2800 سنة · بستان حب الإمبراطور Xuanzong مع المحظية Yang Guifei · مساءً عرض "أغنية الحزن الأبدي" التانغي على جبل Li' },
+        { name: 'Wei Jia (魏家凉皮) — غدا صيني خفيف', desc: 'سلسلة نودلز عصرية نظيفة · biangbiang، نودلز سمسم باردة، dumplings · آمنة، مكيفة، مناسبة للأولاد · "must-try" شيآني خفيف' },
+      ],
+      8: [
+        { name: 'باجودا الإوزة الكبيرة (大雁塔)', desc: 'باجودا تانغية 7 طوابق طوب، 64 متر · بُنيت 652 ميلادي لتخزين السوترا البوذية · اطلع لفوق علشان منظر شيآن' },
+        { name: 'Tang Paradise (大唐芙蓉园)', desc: '66 هكتار حديقة معاد بناءها كحديقة إمبراطورية تانغية · بافيليون، بحيرات، عروض ضوئية مسائية · "مشية تانغ" 20:30' },
+        { name: 'عرض Tang Dynasty — تذكرة العرض فقط', desc: 'تخطي وليمة الـ dumplings الثقيلة (18 طبق كتير على الذوق الغربي). كول خفيف في الفندق وتعالى 19:30 لتذكرة العرض. نفس الموسيقى والرقص بنصف الضغط على المعدة.' },
+      ],
+      9: [
+        { name: 'العجلة على السور', desc: 'لفّة 14 كم فوق سور Ming · تجربة شيآن المميزة · عجلة فردية ¥45/3س أو ثنائية ¥90/3س · بسرعة هادية ووقفات على الأبراج · أفق المدينة من الباجودا والـ Drum Tower' },
+        { name: 'متحف شينشي للتاريخ', desc: 'من أهم 4 متاحف في الصين · كنوز ذهب تانغية، برونزيات هانية، يَشَب زو · شيآن كانت عاصمة 13 سلالة فالمجموعة لا تضاهى · مجاني بس احجز أونلاين على WeChat قبل 3 أيام' },
+        { name: 'Muslim Quarter — مشي سوق فقط', desc: 'أحسن كـ مشية 30 دقيقة (فوانيس، فواكه مجففة، خطاطين، صور) — مش وجهة عشا. الأكل قد يكون ثقيل/غريب. عظيم للجو، بعدها ارجع للفندق لعشا غربي.' },
+      ],
+      10: [
+        { name: 'ديزني لاند شنغهاي', desc: 'أكبر منتجع Disney في آسيا · القلعة المسحورة (الأطول في أي ديزني) · TRON Lightcycle، Pirates، Roaring Rapids · منطقتين فريدتين: Treasure Cove و Gardens of Imagination' },
+        { name: 'Toy Story Hotel · Shanghai Disney Resort', desc: 'فندق ميزانية فاخر داخل المنتجع · واجهات Woody, Buzz, Jessie · 3 ليالي (27-30 يونيو) · باص مجاني كل 10 دقايق · Sunnyside Café بوفيه غربي' },
+        { name: 'Pinocchio Village Kitchen — أكل غربي داخل الباركة', desc: 'خدمة سريعة بطابع إيطالي · بيتزا، باستا، سلطات، شيبس، آيس كريم · المنيو واضح · أسهل غدا داخل الباركة · جرب Aurora (أمريكي) و Lumière\'s Kitchen (فرنسي) في Disneyland Hotel' },
+      ],
+      11: [
+        { name: 'Adventure Isle', desc: 'فريد لشنغهاي · Roaring Rapids ركوبة نهر (هتتبلل) · Camp Discovery حبال + تسلق · Soaring Over the Horizon (قبة IMAX — رقم 1 في الصين)' },
+        { name: 'Royal Banquet Hall — أكل شخصيات', desc: 'داخل القلعة المسحورة · منيو غربي/دولي محدد (~¥350/كبير) · Mickey, Donald, Snow White بيزوروا كل ترابيزة · احجز قبل 60+ يوم على تطبيق Disney' },
+        { name: 'Aurora & Lumière\'s Kitchen', desc: 'Aurora = ستيك أمريكي بمنظر أفق · Lumière\'s = فرنسي كلاسيكي في فندق المنتجع · الاتنين عشا غربي ممتاز · مفتوح لكل الضيوف' },
+      ],
+      12: [
+        { name: 'The Peninsula Shanghai', desc: 'فخامة آرت ديكو شهيرة على الـ Bund · بار Sir Elly\'s السطح بإطلالة Pudong · 2 ليالي (29 يونيو → 1 يوليو) · غرفة عيلة بإطلالة · فطار غربي في The Lobby' },
+        { name: 'Mr & Mrs Bund (Paul Pairet)', desc: 'الشيف ميشلان Paul Pairet · بيسترو فرنسي حديث على الـ Bund · مطبخ مفتوح، خدمة ليلية · احجز قبل 1-2 أسبوع · بدائل: M on the Bund · 8½ Otto e Mezzo Bombana (إيطالي 3 نجوم)' },
+        { name: 'Nanjing Road East', desc: 'شارع تسوق مشاة 5.5 كم · لافتات نيون، مولات، أكشاك سناكس · مشي مباشر من Peninsula لـ People\'s Square' },
+        { name: 'الـ Bund (外滩)', desc: 'كورنيش 1930 · 52 مبنى آرت ديكو يواجهوا ناطحات Pudong · أحسن وقت 19:00-21:00 لما الجانبين يضيئوا' },
+      ],
+      13: [
+        { name: 'Yu Garden (豫园)', desc: 'حديقة خاصة عمرها 450 سنة من عصر Ming في المدينة القديمة · صخور، بحيرات koi، حواجز التنين · السوق المجاور = يَشَب، حرير، خط للسوفنير' },
+        { name: 'Shanghai Tower', desc: '632 متر · تاني أعلى مبنى في العالم · الدور 118 منظر · أسرع مصعد في العالم (74 كم/س، 55 ثانية) · ¥180/كبير' },
+        { name: 'Tianzifang / Xintiandi', desc: 'بيوت shikumen 1920 مرممة · كافيهات indie، بوتيك مصممين، جاليريهات · Tianzifang أصلي · Xintiandi مصقول وغالي' },
+        { name: 'Lost Heaven / Jean Georges', desc: 'Lost Heaven = Yunnan بطريقة غربية نظيفة (أخف من الصيني العادي) · Jean Georges = فرنسي فاخر 3 على الـ Bund لليلة وداع · بدائل: Cuivre · Le Comptoir de Pierre Gagnaire' },
+      ],
+    };
+    Object.entries(STOPS_AR).forEach(([day, stops]) => {
+      const sec = document.querySelector(`.day-section[data-day="${day}"]`);
+      if (!sec) return;
+      const elStops = sec.querySelectorAll('.stop');
+      stops.forEach((s, i) => {
+        if (!elStops[i]) return;
+        const n = elStops[i].querySelector('.stop__name');
+        const d = elStops[i].querySelector('.stop__desc');
+        if (n) n.textContent = s.name;
+        if (d) d.textContent = s.desc;
+      });
+    });
+
+    // ===== INFO CARDS — translate label/title/detail =====
+    const INFO_AR = {
+      1: [{ label: '✈ الطيران', title: 'EK 924 · القاهرة → دبي', detail: 'إيرباص A380 · 3 ساعات · مرجع الحجز 1653713358976673' }],
+      2: [{ label: '✈ الطيران', title: 'EK 306 · دبي → بكين PEK', detail: 'إقلاع 03:50 · هبوط 15:25 · ~9 ساعات' }],
+      3: [{ label: '🍽️ الأكل — غربي', title: 'الغدا: Element Fresh · العشا: Mio (Four Seasons)', detail: 'Element Fresh = أحسن سلسلة أكل صحي غربي في بكين. Mio = إيطالي فاخر داخل Four Seasons — باستا تتعمل قدامك، بيتزا فرن خشب، مناسب للأولاد. لو حابب صيني خفيف: Jing Yaa Tang في The Opposite House.' }],
+      6: [
+        { label: '🎫 التذاكر — احجز يوم 9 يونيو!', title: 'G653 · درجة 2 × 5', detail: '~CNY 537/شخص ($75) · ~$377 المجموع · المبيعات تفتح 08:00 بتوقيت بكين قبل 15 يوم بالظبط · بدائل: G89 (08:55→13:53), G655 (08:35→14:32), G801 (10:48→17:14)' },
+        { label: '🏨 الفندق — 3 ليالي (23-26 يونيو) · ✅ مؤكد', title: 'Crowne Plaza Xi\'an by IHG', detail: 'No.1 Zhu Que Zhong Road, Beilin · 📞 +86 29 8866 8888 · مترو Line 2 → Provincial Stadium · حجز 5489.642.171 · PIN 1418 · 2 غرف (Twin + King) · فطار شامل · check-in 14:00 — القطار يصل 13:46' },
+      ],
+      7: [{ label: '🎫 الجولة', title: 'جولة نص يوم للتراكوتا مع مرشد إنجليزي', detail: 'Klook / Trip.com: ~$30-50/شخص · شامل توصيل ذهاب وعودة + تذكرة + مرشد · احجز قبل · ~$150-250 للخمسة' }],
+      8: [{ label: '🎭 العرض فقط — بدون وليمة', title: 'عرض Tang Dynasty (تذكرة عرض فقط)', detail: '~$35/شخص عرض فقط · ~$175 للخمسة (بدلاً من ~$300 مع الوليمة). كول في الفندق قبل. احجز Klook / Trip.com / كونسيرج الفندق.' }],
+      9: [
+        { label: '🛏️ القطار (الليلي)', title: 'شيآن → شنغهاي · Soft Sleeper', detail: 'D310 درجة D ~19:30→07:30 · أو Z درجة عادية ~16 ساعة · Soft sleeper 4 أسرة ¥900-1200/سرير · المجموع ~¥4500-6000 (~$650-900) لعيلة 5 · التذاكر قبل 15 يوم على Trip.com / 12306' },
+        { label: '🛌 استراتيجية الحجز', title: 'عيلة 5 — احجز مقصورة كاملة + سرير', detail: 'احجز مقصورة 4 أسرة كاملة (باب يقفل) + سرير في المقصورة المجاورة. أو لو متاح: 2× deluxe 2 سرير (خاص + حمام)' },
+      ],
+      10: [{ label: '🎢 استراتيجية يوم 1', title: 'تجاوز الطوابير', detail: 'افتح تطبيق Shanghai Disney Resort · فعّل Premier Access لـ TRON + Pirates لو الميزانية بتسمح (~¥120/ركوبة/شخص) · استخدم Premier فقط لأهم 2 ركوبات · Mickey & Friends meet-greet صباحاً' }],
+      12: [{ label: '🤔 نقطة قرار', title: 'ديزني يوم 3 أو يوم شنغهاي كامل؟', detail: 'لو الأولاد لسه متحمسين → ديزني الصبح + النقلة لـ Peninsula العصر. لو متشبعين → checkout 11:00، عصر كامل في الـ Bund + Yu Garden + Tianzifang. Peninsula ثابت.' }],
+      14: [{ label: '✈ الطيران', title: 'EK 303 + EK 927 · شنغهاي → القاهرة عبر دبي', detail: 'الرحلتين على إيرباص A380 · إجمالي السفر ~11 ساعة · مرجع الحجز 1653713358976673' }],
+    };
+    Object.entries(INFO_AR).forEach(([day, list]) => {
+      const sec = document.querySelector(`.day-section[data-day="${day}"]`);
+      if (!sec) return;
+      const cards = sec.querySelectorAll('.info-card');
+      list.forEach((info, i) => {
+        if (!cards[i]) return;
+        const lbl = cards[i].querySelector('.info-card__label');
+        const t = cards[i].querySelector('.info-card__title');
+        const d = cards[i].querySelector('.info-card__detail');
+        if (lbl) lbl.textContent = info.label;
+        if (t) t.textContent = info.title;
+        if (d) d.innerHTML = info.detail;
+      });
+    });
+
+    // ===== TIP BOXES =====
+    const TIPS_AR = {
+      1: 'كراسي A380 الدور الفوقاني هادية أكتر في الرحلات الليلية. عيلة 5 — احجز كراسي 62A–62E (لو متاحة) صف كامل. لاونج دبي T3 (Concourse A/B) شغال 24 ساعة.',
+      2: 'الجوازات في PEK ممكن تاخد 45-90 دقيقة. لو فيه fast-track استخدمه. Capital M بياخد حجز عبر OpenTable — احجز قبل واطلب البلكونة.',
+      3: 'احجز تذاكر الـ Forbidden City أونلاين قبل — الـ walk-ins محدودة. روح بدري تتفادى الزحام. الحديقة الإمبراطورية الخلفية (Yuhuayuan) أهدا وأجمل.',
+      4: 'الـ Toboggan (¥100/شخص) سلايد فولاذي بينزل من فوق الجبل — فارس ويوسف وياسين هيتذكروها للأبد. اشتري التذاكر من تحت، اطلع تلفريك، انزل سلايد. الحد الأدنى للطول: 1.2م.',
+      5: 'حضّر الشنطة الليلة! قطار G653 بكره 07:39 من بكين West — البوابات بتقفل قبل 5 دقايق. خد 90 دقيقة: فندق → محطة → security → رصيف. احجز Didi أو ليموزين الفندق 06:00.',
+      6: 'احجز G653 لحظة فتح التذاكر — بكين→شيآن أكتر خط HSR شعبية في الصين والدرجة 2 بتنفد في ساعات. خد الجوازات — التذاكر المطبوعة/PDF بتتقرأ على البوابة. مفيش أكل في القطار، بس المحطة فيها مطاعم. مأخذ كهربا في كل كرسي.',
+      7: 'استأجر مرشد — من غيره الـ Pits بتبان مجرد تماثيل مكسورة. مع المرشد كل تمثال له قصة (ضباط vs مشاة، تسريحات الشعر حسب الرتبة، آثار الطلاء الأصلي). Pit 1 الأكبر — ابدأ منه. خد ميه؛ الموقع ضخم والظل محدود.',
+      8: 'Tang Paradise أحسن في وقت الغروب لمساء الليل لما الإضاءة تشتغل. بكره قطار نوم لشنغهاي — حضّر شنطة سفر صغيرة، الشنط الكبيرة تفضل في الفندق لحد الرحيل.',
+      9: 'Soft sleeper (软卧) = 4 أسرة مبطنة في مقصورة بباب يقفل، شراشف، مخدة، بطانية، موزع ميه ساخنة آخر العربية. خد سناكس، ميه، شبشب، قناع نوم، سدادات أذن. الأولاد هيحبوها — القطار بيهز برفق، تصحى في مدينة تانية.',
+      10: 'اركب TRON لحظة فتح الباركة — بحلول 11:00 الانتظار 90 دقيقة. خد شواحن متنقلة (هتستهلك البطارية مع التطبيق). الغدا في Pinocchio أأمن أكل داخل الباركة. بعد 18:00 الطوابير أقصر.',
+      11: 'يوم 2 = نظّم سرعتك. اعمل الركوبات اللي يوم 1 فاتت، بعدها ارتاح في الفندق ظهراً. ارجع للمسير + الفايرووركس. Royal Banquet Hall = التجربة اللي تستحق الحجز المسبق — منيو غربي محدد، شخصيات على الترابيزة.',
+      12: 'بار Sir Elly\'s السطح في Peninsula (الدور 14) لا يفوت لغروب على الـ Bund. Toy Story Hotel checkout 11:00 — اطلب الـ reception يحفظ الشنط. احجز Mr & Mrs Bund قبل 1-2 أسبوع — الجمعة/الأسبوع بتنفد بسرعة.',
+      13: 'بكرة طيارة EK 303 الساعة 00:05 — اخرج من الفندق 21:00 لمطار PVG (T1، Emirates). Online check-in بيفتح قبل 24 ساعة. خد 3 ساعات في المطار للطيران منتصف الليل.',
+      14: 'صرّح بأي مقتنيات ثقافية أو حاجات قيمتها فوق ¥5000 في جمارك PVG. Emirates بتسمح بـ 30 كجم لكل واحد (Economy) / 40-50 كجم (Business/First). إجمالي السماح للعيلة = طاقة كبيرة للسوفنير.',
+    };
+    Object.entries(TIPS_AR).forEach(([day, txt]) => {
+      const sec = document.querySelector(`.day-section[data-day="${day}"]`);
+      if (!sec) return;
+      const tipSpan = sec.querySelector('.tip-box span:not(.tip-box__icon)');
+      if (tipSpan) tipSpan.innerHTML = txt;
+    });
   }
 
   /* ─────────────────────────────────────────────
@@ -663,11 +799,73 @@
   }
 
   /* ─────────────────────────────────────────────
+     INLINE QUEST CARDS — embed inside each day section
+     ───────────────────────────────────────────── */
+  function renderInlineQuest(q) {
+    const isDone = !!state.done[q.id];
+    const claimedBy = state.claimedBy[q.id];
+    const claimedName = claimedBy ? PLAYERS.find(p => p.key === claimedBy)?.name : '';
+    return `
+      <div class="quest-inline ${isDone ? 'done' : ''}" data-quest-inline="${q.id}">
+        <div class="quest-inline__icon">${q.icon}</div>
+        <div class="quest-inline__body">
+          <div class="quest-inline__title">${q.title}</div>
+          <div class="quest-inline__meta">
+            <span class="quest-inline__when">${q.when || ''}</span>
+            <span class="quest-inline__points">${q.points} نقطة</span>
+            <span class="quest-inline__prize">${q.prize}</span>
+          </div>
+        </div>
+        <button class="quest-inline__btn" data-action="complete" data-id="${q.id}">
+          ${isDone ? `${claimedName || 'خلصت'} ✓` : 'خلصته!'}
+        </button>
+      </div>
+    `;
+  }
+  function injectInlineQuestsPerDay() {
+    document.querySelectorAll('.day-quests').forEach(el => el.remove());
+    const byDay = {};
+    QUESTS.forEach(group => {
+      group.list.forEach(q => {
+        if (q.day == null) return;
+        if (!byDay[q.day]) byDay[q.day] = [];
+        byDay[q.day].push(q);
+      });
+    });
+    Object.entries(byDay).forEach(([day, list]) => {
+      const sec = document.querySelector(`.day-section[data-day="${day}"]`);
+      if (!sec) return;
+      const content = sec.querySelector('.day-content');
+      if (!content) return;
+      const timeline = content.querySelector('.timeline');
+      const wrap = document.createElement('div');
+      wrap.className = 'day-quests';
+      wrap.setAttribute('dir', 'rtl');
+      wrap.innerHTML = `
+        <div class="day-quests__head">تحديات اليوم · ${list.length} لعبة</div>
+        <div class="day-quests__list">
+          ${list.map(q => renderInlineQuest(q)).join('')}
+        </div>
+      `;
+      if (timeline && timeline.parentNode) {
+        if (timeline.nextSibling) {
+          timeline.parentNode.insertBefore(wrap, timeline.nextSibling);
+        } else {
+          timeline.parentNode.appendChild(wrap);
+        }
+      } else {
+        content.appendChild(wrap);
+      }
+    });
+  }
+
+  /* ─────────────────────────────────────────────
      INIT
      ───────────────────────────────────────────── */
   function init() {
     injectQuestsSection();
     arabicizeUI();
+    injectInlineQuestsPerDay();
   }
 
   if (document.readyState === 'loading') {
