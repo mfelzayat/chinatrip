@@ -6,10 +6,36 @@
   <title>China Trip June 2026 — Elzayat Family</title>
   <meta name="description" content="Interactive itinerary for the Elzayat family China adventure: Beijing · Xi'an · Shanghai · Disneyland — 18 Jun to 1 Jul 2026." />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/motion.css?v=5.0" />
   <link rel="preload" as="image" href="assets/images/great-wall-mutianyu-1.jpg" />
-  <!-- v3.1 — Crowne Plaza Xi'an confirmed booking integrated · 2026-04-28 -->
+  <link rel="preload" as="image" href="assets/images/forbidden-city-1.jpg" />
+  <link rel="preload" as="image" href="assets/images/xian-terracotta-1.jpg" />
+  <!-- v5.0 — Motion redesign with route map · concurrent events · journey rail · 2026-04-29 -->
 </head>
 <body>
+
+  <!-- ══ Scroll Progress Bar (top) ══ -->
+  <div class="progress-bar" aria-hidden="true">
+    <div class="progress-bar__fill" id="progressFill"></div>
+  </div>
+
+  <!-- ══ Journey Rail (sticky left, desktop only) ══ -->
+  <nav class="journey-rail" aria-label="Quick day navigation">
+    <button class="rail-dot" data-day="1"  data-city="transit"  data-label="Day 1 · Cairo → Dubai"></button>
+    <button class="rail-dot" data-day="2"  data-city="beijing"  data-label="Day 2 · Beijing arrival"></button>
+    <button class="rail-dot" data-day="3"  data-city="beijing"  data-label="Day 3 · Forbidden City"></button>
+    <button class="rail-dot" data-day="4"  data-city="beijing"  data-label="Day 4 · Great Wall"></button>
+    <button class="rail-dot" data-day="5"  data-city="beijing"  data-label="Day 5 · Hutongs"></button>
+    <button class="rail-dot" data-day="6"  data-city="xian"     data-label="Day 6 · → Xi'an"></button>
+    <button class="rail-dot" data-day="7"  data-city="xian"     data-label="Day 7 · Terracotta"></button>
+    <button class="rail-dot" data-day="8"  data-city="xian"     data-label="Day 8 · Pagoda"></button>
+    <button class="rail-dot" data-day="9"  data-city="xian"     data-label="Day 9 · Sleeper train"></button>
+    <button class="rail-dot" data-day="10" data-city="shanghai" data-label="Day 10 · Disney 1"></button>
+    <button class="rail-dot" data-day="11" data-city="shanghai" data-label="Day 11 · Disney 2"></button>
+    <button class="rail-dot" data-day="12" data-city="shanghai" data-label="Day 12 · Disney 3"></button>
+    <button class="rail-dot" data-day="13" data-city="shanghai" data-label="Day 13 · The Bund"></button>
+    <button class="rail-dot" data-day="14" data-city="transit"  data-label="Day 14 · Return"></button>
+  </nav>
 
   <!-- ══ Visa Banner + Countdown ══ -->
   <div class="visa-banner" role="alert">
@@ -89,12 +115,327 @@
       <h1 class="site-header__title">China Family Adventure</h1>
       <p class="site-header__sub">Elzayat Family · 5 Travellers · 14 Days</p>
       <p class="site-header__sub">18 June – 1 July 2026</p>
-      <p class="site-header__sub">Beijing · Xi'an · Shanghai · Disneyland</p>
+      <p class="site-header__sub"><strong>Beijing · Xi'an · Shanghai · Disneyland</strong></p>
+
+      <!-- Hero stats row -->
+      <div class="hero-stats" data-reveal>
+        <div class="hero-stat">
+          <span class="hero-stat__num">5</span>
+          <span class="hero-stat__label">Travellers</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">14</span>
+          <span class="hero-stat__label">Days</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">3</span>
+          <span class="hero-stat__label">Cities</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">3</span>
+          <span class="hero-stat__label">Disney Days</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">8,124</span>
+          <span class="hero-stat__label">km Each Way</span>
+        </div>
+      </div>
+
       <p class="site-header__ref">Booking Ref: 1653713358976673</p>
       <p class="site-header__weather" id="weatherWidget" aria-live="polite"></p>
     </div>
     <div class="site-header__scroll" aria-hidden="true">↓</div>
   </header>
+
+  <!-- ══════════════════════════════════════════
+       STATS STRIP — animated counters
+       ══════════════════════════════════════════ -->
+  <section class="stat-strip" aria-label="Trip at a glance">
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="14">0</span>
+      <span class="stat-cell__label">Days</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="3">0</span>
+      <span class="stat-cell__label">Cities</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="105">0</span>
+      <span class="stat-cell__label">Disney Rides</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="6">0</span>
+      <span class="stat-cell__label">Bookings ✓</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="2">0</span>
+      <span class="stat-cell__label">Train Rides</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-cell__num" data-target="4">0</span>
+      <span class="stat-cell__label">Flights</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       ROUTE MAP — animated SVG path
+       ══════════════════════════════════════════ -->
+  <section class="route-map" aria-label="Trip route map">
+    <div class="route-map__inner">
+      <p class="route-map__subtitle">The Journey · 旅程</p>
+      <h2 class="route-map__title">8,124 km · One Family · Three Cities</h2>
+
+      <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cairo to Dubai to Beijing to Xi'an to Shanghai route">
+        <!-- Subtle latitude lines -->
+        <line x1="0" y1="120" x2="900" y2="120" stroke="rgba(255,255,255,.04)" stroke-width="1" />
+        <line x1="0" y1="200" x2="900" y2="200" stroke="rgba(255,255,255,.04)" stroke-width="1" />
+        <line x1="0" y1="280" x2="900" y2="280" stroke="rgba(255,255,255,.04)" stroke-width="1" />
+
+        <!-- Solid full route for plane to glide -->
+        <path id="routeFullPath" class="route-path"
+          d="M 90 230 Q 150 215 220 215 T 360 195 Q 480 145 600 130 Q 660 145 690 165 Q 760 175 820 200" />
+
+        <!-- Dashed flight legs -->
+        <path class="route-path" d="M 90 230 Q 150 215 220 215" />
+        <path class="route-path" d="M 220 215 Q 300 210 360 195" />
+
+        <!-- HSR Beijing → Xi'an (solid line) -->
+        <path class="route-path route-path--solid" d="M 600 130 Q 660 145 690 165" />
+        <!-- Sleeper Xi'an → Shanghai (solid) -->
+        <path class="route-path route-path--solid" d="M 690 165 Q 760 175 820 200" />
+        <!-- Return flights -->
+        <path class="route-path" d="M 820 200 Q 690 145 540 145 Q 380 175 220 215 Q 150 220 90 230" stroke-opacity=".4" />
+
+        <!-- Markers -->
+        <g>
+          <circle cx="90"  cy="230" r="7" class="route-marker route-marker--cairo" />
+          <text x="90"  y="252" class="route-label" text-anchor="middle">Cairo</text>
+          <text x="90"  y="266" class="route-label route-label--zh" text-anchor="middle">开罗</text>
+
+          <circle cx="220" cy="215" r="6" class="route-marker route-marker--dubai" />
+          <text x="220" y="237" class="route-label" text-anchor="middle">Dubai</text>
+          <text x="220" y="251" class="route-label route-label--zh" text-anchor="middle">迪拜</text>
+
+          <circle cx="600" cy="130" r="9" class="route-marker route-marker--major" />
+          <text x="600" y="115" class="route-label" text-anchor="middle">Beijing</text>
+          <text x="600" y="100" class="route-label route-label--zh" text-anchor="middle">北京</text>
+
+          <circle cx="690" cy="165" r="8" class="route-marker route-marker--xian" />
+          <text x="690" y="184" class="route-label" text-anchor="middle">Xi'an</text>
+          <text x="690" y="198" class="route-label route-label--zh" text-anchor="middle">西安</text>
+
+          <circle cx="820" cy="200" r="8" class="route-marker route-marker--shanghai" />
+          <text x="820" y="219" class="route-label" text-anchor="middle">Shanghai</text>
+          <text x="820" y="233" class="route-label route-label--zh" text-anchor="middle">上海</text>
+        </g>
+
+        <!-- Plane icon (gets repositioned by JS along the path) -->
+        <g id="routePlane">
+          <path d="M -8,-3 L 6,0 L -8,3 L -4,0 Z" class="route-plane" />
+        </g>
+
+        <!-- Legend -->
+        <g transform="translate(20, 320)">
+          <line x1="0" y1="0" x2="22" y2="0" class="route-path" />
+          <text x="30" y="4" class="route-label">Flight (Emirates A380)</text>
+          <line x1="200" y1="0" x2="222" y2="0" class="route-path route-path--solid" />
+          <text x="230" y="4" class="route-label">Train (HSR + sleeper)</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CITIES OVERVIEW — 3 anchor cards
+       ══════════════════════════════════════════ -->
+  <section class="cities-section" aria-label="Cities overview">
+    <div class="cities-section__inner">
+      <h2 class="cities-section__title" data-reveal>Three cities, three personalities</h2>
+      <p class="cities-section__sub" data-reveal data-delay="1">Click a city to jump straight to its days · 点击城市跳转</p>
+
+      <div class="cities-grid">
+        <article class="city-card" data-city="beijing" data-reveal>
+          <div class="city-card__body">
+            <div class="city-card__zh">北京 · Imperial</div>
+            <h3 class="city-card__name">Beijing</h3>
+            <div class="city-card__dates">19 → 23 June · 4 nights</div>
+            <div class="city-card__highlights">
+              <span class="city-pill">Forbidden City</span>
+              <span class="city-pill">Great Wall</span>
+              <span class="city-pill">Hutongs</span>
+              <span class="city-pill">Marriott</span>
+            </div>
+            <span class="city-card__cta">See itinerary</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="xian" data-reveal data-delay="1">
+          <div class="city-card__body">
+            <div class="city-card__zh">西安 · Ancient Capital</div>
+            <h3 class="city-card__name">Xi'an</h3>
+            <div class="city-card__dates">23 → 26 June · 3 nights</div>
+            <div class="city-card__highlights">
+              <span class="city-pill">Terracotta Army</span>
+              <span class="city-pill">City Wall</span>
+              <span class="city-pill">Crowne Plaza</span>
+              <span class="city-pill">Sleeper train</span>
+            </div>
+            <span class="city-card__cta">See itinerary</span>
+          </div>
+        </article>
+
+        <article class="city-card" data-city="shanghai" data-reveal data-delay="2">
+          <div class="city-card__body">
+            <div class="city-card__zh">上海 · Modern Metropolis</div>
+            <h3 class="city-card__name">Shanghai</h3>
+            <div class="city-card__dates">27 June → 1 July · 4 nights</div>
+            <div class="city-card__highlights">
+              <span class="city-pill">Disneyland × 3</span>
+              <span class="city-pill">The Bund</span>
+              <span class="city-pill">Toy Story Hotel</span>
+              <span class="city-pill">Pudong skyline</span>
+            </div>
+            <span class="city-card__cta">See itinerary</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CONCURRENT EVENTS — happening near you
+       ══════════════════════════════════════════ -->
+  <section class="events-section" aria-label="Events happening during the trip">
+    <div class="events-section__inner">
+      <p class="events-section__eyebrow" data-reveal>Happening while you're there</p>
+      <h2 class="events-section__title" data-reveal data-delay="1">The world is in motion · 同时发生</h2>
+      <p class="events-section__sub" data-reveal data-delay="2">Festivals, sports, shows and exhibitions overlapping your dates — opportunities to make this trip unforgettable.</p>
+
+      <div class="events-grid">
+
+        <article class="event-card" data-tag="festival" data-reveal>
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date" data-event-date="2026-06-19">19 June 2026 · Beijing</div>
+            <h3 class="event-card__title">🐉 Dragon Boat Festival · 端午节</h3>
+            <div class="event-card__location">Houhai Lake, Beijing · public holiday nationwide</div>
+            <p class="event-card__desc">You arrive in Beijing exactly on Duanwu — China's biggest summer festival. Dragon boat races on Houhai Lake from 09:00, zongzi (sticky rice parcels) sold everywhere, fragrant sachets handed out for luck. Streets are alive but landmarks may be packed; expect crowds at the Forbidden City the next day.</p>
+            <div class="event-card__meta">
+              <span class="event-tag event-tag--hot">Coincides Day 2</span>
+              <span class="event-tag">Public holiday</span>
+              <span class="event-tag">Free</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="sport" data-reveal data-delay="1">
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date" data-event-date="2026-06-11">11 Jun → 19 Jul 2026 · Live worldwide</div>
+            <h3 class="event-card__title">⚽ FIFA World Cup 2026</h3>
+            <div class="event-card__location">USA · Canada · Mexico (broadcast in China)</div>
+            <p class="event-card__desc">Group stage and round-of-16 run during your entire trip. Hotel sports bars in Beijing (Marriott Stadium Bar), Xi'an (Crowne Plaza lobby bar) and Disneytown (Wolfgang Puck) will broadcast key matches. CGTN + iQIYI carry full Chinese coverage; Emirates lounge has it on Day 1.</p>
+            <div class="event-card__meta">
+              <span class="event-tag event-tag--hot">Whole trip</span>
+              <span class="event-tag">Sports bars</span>
+              <span class="event-tag">VPN for ESPN</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="seasonal" data-reveal data-delay="2">
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">All 2026 · Shanghai</div>
+            <h3 class="event-card__title">🏰 Disney Resort 10th Anniversary</h3>
+            <div class="event-card__location">Shanghai Disneyland · Days 10–12</div>
+            <p class="event-card__desc">Shanghai Disney Resort celebrates its 10th birthday throughout 2026 with the exclusive show <em>"Magic Together: A Special 10th Birthday Celebration"</em>, anniversary-only merchandise, themed treats, and a souvenir Mickey-pin set. Photo passes and event-only character costumes are available — collectors only get this in 2026.</p>
+            <div class="event-card__meta">
+              <span class="event-tag event-tag--hot">Days 10–12</span>
+              <span class="event-tag">Limited 2026</span>
+              <span class="event-tag">Souvenir pins</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="show" data-reveal>
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">Nightly · Xi'an</div>
+            <h3 class="event-card__title">🏯 City Wall Light & Sound Show</h3>
+            <div class="event-card__location">Yongning Gate (South Gate), Xi'an</div>
+            <p class="event-card__desc">Free 30-minute projection mapping show on the South Gate of the ancient city wall — Tang dynasty poetry, dancers in silhouette, fireworks. Runs nightly at 20:30 in summer (weather permitting). Perfect after dinner on Day 6 when you arrive.</p>
+            <div class="event-card__meta">
+              <span class="event-tag">Day 6 night</span>
+              <span class="event-tag">Free</span>
+              <span class="event-tag">20:30</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="show" data-reveal data-delay="1">
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">Nightly · Shanghai</div>
+            <h3 class="event-card__title">🌃 Bund Light Show</h3>
+            <div class="event-card__location">Pudong skyline from the Bund</div>
+            <p class="event-card__desc">The full Pudong skyline (Pearl Tower, Shanghai Tower, Jin Mao) lights up in synchronised colour every night 19:00–22:00, with extended fireworks on weekends. Best viewing: Bund promenade or rooftop bars at Hyatt on the Bund / Peninsula. Walk the Bund after dinner on Day 13.</p>
+            <div class="event-card__meta">
+              <span class="event-tag">Day 13 night</span>
+              <span class="event-tag">Free</span>
+              <span class="event-tag">Rooftop bars</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="exhibit" data-reveal data-delay="2">
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">Year-round · Beijing</div>
+            <h3 class="event-card__title">🎨 798 Art District Exhibitions</h3>
+            <div class="event-card__location">798 Art Zone, Chaoyang, Beijing</div>
+            <p class="event-card__desc">Beijing's flagship contemporary-art district hosts dozens of rotating gallery shows — UCCA Center for Contemporary Art typically has a major summer 2026 exhibition (check ucca.org.cn close to dates). Cool industrial-loft setting, cafés, and unique design-store shopping. A great half-day for Day 5 morning before packing for Xi'an.</p>
+            <div class="event-card__meta">
+              <span class="event-tag">Day 5 option</span>
+              <span class="event-tag">Free entry</span>
+              <span class="event-tag">Coffee + art</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="show" data-reveal>
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">Nightly · Beijing</div>
+            <h3 class="event-card__title">🎭 Acrobatics at Chaoyang Theatre</h3>
+            <div class="event-card__location">Chaoyang Theatre (朝阳剧场), Beijing</div>
+            <p class="event-card__desc">Nightly 90-minute Beijing Acrobatic Troupe performance — kids 12-16 will love it. Tickets ¥180-380 via Klook or hotel concierge. Daily 17:15 + 19:30 shows. A solid alternative or addition to a Beijing dinner on Day 3 or 4.</p>
+            <div class="event-card__meta">
+              <span class="event-tag">Family fav</span>
+              <span class="event-tag">¥180+</span>
+              <span class="event-tag">Klook</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="event-card" data-tag="seasonal" data-reveal data-delay="1">
+          <div class="event-card__band"></div>
+          <div class="event-card__body">
+            <div class="event-card__date">June 2026 · all 3 cities</div>
+            <h3 class="event-card__title">🌧️ Plum Rain Season · 梅雨</h3>
+            <div class="event-card__location">Yangtze region — Shanghai especially</div>
+            <p class="event-card__desc">Late June is China's <em>meiyu</em> rainy season, especially in Shanghai. Daily highs 28-32°C, sticky humidity 75-85%, afternoon thunderstorms common. Pack collapsible umbrellas, ponchos, and quick-dry layers — refillable bottles and a fan are essential. Beijing & Xi'an drier; Shanghai-Disney days will need rain plans.</p>
+            <div class="event-card__meta">
+              <span class="event-tag">Pack accordingly</span>
+              <span class="event-tag">Ponchos</span>
+              <span class="event-tag">28–32°C</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
 
   <main>
 
@@ -1192,10 +1533,16 @@
             <div class="info-card__detail">Days 2–5 (4 nights) · early check-out 06:00 on Day 6 for Beijing West station · 📞 +86 10-6597-8888</div>
           </div>
 
-          <div class="info-card">
-            <div class="info-card__label">🤠 Disney Hotel · 🟡 TBD</div>
-            <div class="info-card__title">Toy Story Hotel × 3 nights</div>
-            <div class="info-card__detail">Days 10–12 (27–29 Jun · check-out 30 Jun) · book via <strong>shanghaidisneyresort.com</strong> or <strong>Klook</strong> · early bag drop available before 15:00 check-in · closest hotel to Toy Story Land entrance · Sunnyside Café Western buffet</div>
+          <div class="info-card info-card--confirmed">
+            <div class="info-card__label">🤠 Disney Hotel · ✅ Confirmed</div>
+            <div class="info-card__title">Toy Story Hotel · Garden View Room</div>
+            <div class="info-card__detail">27 → 30 Jun · 3 nights · 2 double beds · breakfast Jun 28/29/30 · <strong>Confirmation 1653713358997515C · PIN 3252</strong> · paid online <strong>$810.21</strong>, due at hotel <strong>$262.36</strong> (CNY 1,794 child fees) · <strong>Total $1,072.57</strong> · ✓ Early Park Entry pass ✓ free shuttle to Disneytown · 📞 +86-21-2099-8003 · free cancel until 24 Jun 20:00 (after: $291.33 fee)</div>
+          </div>
+
+          <div class="info-card info-card--alert" style="grid-column: 1 / -1;">
+            <div class="info-card__label">⚠️ Action needed · Toy Story booking</div>
+            <div class="info-card__title">Booking covers only 4 of 5 — Fares (16) is not in the room</div>
+            <div class="info-card__detail">The Garden View Room is booked for <strong>2 adults + 2 children (12, 12)</strong> with 2 double beds. <strong>Fares (16) is missing.</strong> Three options before <strong>24 Jun 20:00</strong> (free-cancel deadline): <strong>(A)</strong> book a 2nd Toy Story room — cleanest, ~$300/night; <strong>(B)</strong> call +86-21-2099-8003 to add an extra bed + guest if hotel allows; <strong>(C)</strong> upgrade to a Shanghai Disneyland Hotel Family Suite (sleeps 5+, ~$450-550/night).</div>
           </div>
 
           <div class="info-card">
@@ -1585,5 +1932,6 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js?v=5.0"></script>
 </body>
 </html>
