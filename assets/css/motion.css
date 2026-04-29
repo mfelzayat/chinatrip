@@ -890,6 +890,285 @@ footer p { margin-bottom: .6rem; font-size: .85rem; }
 }
 
 /* ============================================================
+   18. POLISH PASS v5.1 — fix density, kill redundancy, add delight
+   ============================================================ */
+
+/* Smooth anchor scroll past sticky bars */
+html { scroll-padding-top: 110px; }
+
+/* CRITICAL FIX: don't hide day sections by default — IO sometimes never fires
+   on full-page renders or fast scrolls, leaving content invisible. */
+.day-section {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.day-section .stamp,
+.day-section .day-title,
+.day-section .timeline,
+.day-section .stops,
+.day-section .info-card,
+.day-section .photo-strip,
+.day-section .tip-box {
+  /* preserve subtle in-view animation but keep content visible */
+}
+/* Soft fade-in only when in view, no hide */
+.day-section.in-view .stamp { animation: stampIn .55s cubic-bezier(.2,.7,.2,1) both; }
+
+/* Kill the giant fade-in [data-day] number — looked accidental */
+.day-section[data-day]::before { display: none !important; }
+
+/* Hero refinement — cleaner, less crowded */
+.site-header__zh { letter-spacing: .35em; }
+.site-header__sub:nth-of-type(2) {
+  /* dates line — make it the star */
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  letter-spacing: .04em;
+  color: var(--gold-light);
+  margin-top: .4rem;
+}
+/* Tighter header subtitles */
+.site-header__sub { margin-bottom: .28rem; }
+/* Hide the duplicate hero-stats inside hero — keep stat-strip only */
+.site-header__content .hero-stats { display: none !important; }
+/* Hide weather widget that almost never has content */
+.site-header__weather:empty { display: none; }
+
+/* Day hero shrinks to a 16:9 cinematic banner instead of 70vh */
+.day-hero {
+  height: 32vh !important;
+  min-height: 240px !important;
+  max-height: 380px;
+  border-radius: 0;
+  position: relative;
+}
+.day-hero img {
+  filter: saturate(.92) contrast(1.04);
+}
+.day-hero::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px; height: 50%;
+  background: linear-gradient(to bottom, transparent 0%, var(--paper) 95%);
+  pointer-events: none;
+}
+
+/* Day-split image — cap its size on desktop */
+@media (min-width: 768px) {
+  .day-split { grid-template-columns: 44% 56% !important; }
+  .day-split__image { max-height: 480px !important; }
+}
+.day-split__image img { transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.day-split__image:hover img { transform: scale(1.05); }
+
+/* Tighter day section spacing */
+.day-section { padding: 0 0 2.2rem !important; }
+.day-content { padding: 1.6rem 1.4rem 1.4rem !important; }
+@media (min-width: 768px) { .day-content { padding: 2rem 2.5rem 1.8rem !important; } }
+
+/* Section dividers */
+.day-section + .day-section {
+  border-top: none !important;
+  position: relative;
+}
+.day-section + .day-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: clamp(120px, 30%, 360px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: .55;
+}
+
+/* Stamp gets a subtle pulse on view */
+.day-section.in-view .stamp {
+  animation: stampIn .7s cubic-bezier(.2,.7,.2,1) both, stampGlow 4s 1s ease-in-out infinite;
+}
+@keyframes stampGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(193,84,62,.0); }
+  50%      { box-shadow: 0 0 0 8px rgba(193,84,62,.06); }
+}
+
+/* Timeline upgrade — visual punch */
+.timeline {
+  background: rgba(255,255,255,.65);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1rem 1rem 2.4rem !important;
+  backdrop-filter: blur(4px);
+}
+.timeline::before {
+  background: linear-gradient(to bottom, var(--terracotta) 0%, var(--gold) 50%, var(--jade) 100%) !important;
+  width: 2px !important;
+  left: 1.4rem !important;
+}
+.timeline li::before {
+  background: var(--paper) !important;
+  border: 2px solid var(--terracotta) !important;
+  box-shadow: 0 0 0 3px rgba(193,84,62,.10) !important;
+  width: 10px !important; height: 10px !important;
+  left: -1.05rem !important;
+  transition: transform .25s, background .25s;
+}
+.timeline li:hover::before { transform: scale(1.3); background: var(--terracotta) !important; }
+.timeline .time {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: .95rem !important;
+  font-weight: 600 !important;
+  display: inline-block;
+  min-width: 3.4em;
+  color: var(--terracotta);
+}
+
+/* Stops as elegant cards */
+.stop {
+  background: var(--white);
+  border-radius: 10px;
+  padding: .9rem 1rem;
+  margin-bottom: .65rem;
+  border: 1px solid var(--line);
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s;
+}
+.stop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(26,24,20,.18);
+}
+.stop__icon {
+  background: linear-gradient(135deg, var(--jade-light), var(--jade)) !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 1rem !important;
+  box-shadow: 0 4px 10px -3px rgba(74,124,94,.45);
+}
+
+/* Photo strip — tighter, more curated */
+.photo-strip {
+  padding: 6px 0 12px !important;
+  margin-bottom: 0 !important;
+}
+.photo-strip img {
+  width: 240px !important;
+  height: 168px !important;
+  border-radius: 10px !important;
+}
+@media (min-width: 768px) {
+  .photo-strip img { width: 260px !important; height: 180px !important; }
+}
+.strip-heading {
+  font-family: var(--ff-display) !important;
+  font-style: italic !important;
+  font-size: 1rem !important;
+  letter-spacing: .01em;
+  color: var(--ink) !important;
+  border: none !important;
+  margin: 1.2rem 0 .35rem !important;
+  padding-left: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.strip-heading::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--terracotta);
+  display: inline-block;
+}
+
+/* Tip box - more visual */
+.tip-box {
+  background: linear-gradient(135deg, #fef9ee, #fbeed5);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: .85rem 1rem !important;
+  font-size: .82rem;
+  line-height: 1.55;
+  position: relative;
+}
+
+/* Cities section — denser, better images */
+.cities-section { padding: 3rem 1rem 2.5rem; }
+.city-card { height: 320px !important; }
+.city-card[data-city="beijing"]::before  {
+  background-image: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)), url('../images/forbidden-city-1.jpg') !important;
+}
+.city-card[data-city="xian"]::before     {
+  background-image: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)), url('../images/xian-terracotta-1.jpg') !important;
+}
+.city-card[data-city="shanghai"]::before {
+  background-image: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)), url('../images/the-bund-shanghai-1.jpg') !important;
+}
+
+/* Events section refinement */
+.events-section { padding: 3rem 1rem 2.5rem; }
+.events-grid { gap: 1rem; }
+.event-card { box-shadow: 0 4px 18px -8px rgba(26,24,20,.14); border-radius: 12px; }
+.event-card__title { font-style: italic; font-size: 1.1rem; }
+
+/* Stat strip — visible padding */
+.stat-strip { padding: 0; }
+.stat-cell { padding: 1.6rem 1rem; }
+
+/* Route map — tighter */
+.route-map { padding: 3rem 1rem 2rem; }
+
+/* Day nav refinements — tighter spacing, better active state */
+.day-nav__btn { padding: .35rem .65rem !important; }
+.day-nav__btn .nav-num { font-size: .9rem !important; }
+.day-nav__btn span:nth-child(2) { font-size: .65rem; opacity: .85; }
+
+/* Journey rail — bigger hit targets, better tooltip */
+@media (min-width: 1200px) {
+  .rail-dot { width: 11px !important; height: 11px !important; }
+  .rail-dot.active { width: 11px !important; height: 11px !important; transform: scale(1.7); }
+  .rail-dot::after {
+    background: var(--ink) !important;
+    color: var(--paper) !important;
+    font-weight: 600;
+    font-size: 11px;
+    box-shadow: 0 8px 22px -6px rgba(26,24,20,.35);
+  }
+}
+
+/* Hero - keep it cinematic but no redundant stats */
+.site-header__content { max-width: 760px; }
+
+/* Day-transit (Day 1, Day 14) — looked too sparse */
+.day-transit {
+  max-width: 720px !important;
+  background: rgba(255,255,255,.5);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  padding: 2.2rem !important;
+  margin: 2.5rem auto !important;
+  box-shadow: 0 6px 24px -10px rgba(26,24,20,.12);
+}
+
+/* Footer print button */
+.btn-print {
+  background: var(--terracotta) !important;
+  color: var(--paper) !important;
+}
+.btn-print:hover { background: var(--ink) !important; }
+
+/* Hover sparkle on confirmed bookings */
+.info-card[class*="--confirmed"]:hover,
+.info-card:hover { transform: translateX(3px) translateY(-2px); }
+
+/* Reveal — softer y-shift */
+[data-reveal] { transform: translateY(14px); }
+
+/* Tiny bounce on the scroll arrow */
+.site-header__scroll {
+  animation: bounce 1.3s ease-in-out infinite alternate;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+/* ============================================================
    17. PRINT — cleaner output
    ============================================================ */
 @media print {
@@ -905,4 +1184,141 @@ footer p { margin-bottom: .6rem; font-size: .85rem; }
   .day-section { page-break-inside: avoid; padding: 1rem 0 1.5rem; }
   .photo-strip { display: none; }
   body { background: white; color: black; }
+}
+
+/* ============================================================
+   19. MOBILE PASS v5.2 — bigger taps, real responsiveness
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Hide visa banner on mobile (saves vertical space, info is in checklist) */
+  .visa-banner {
+    font-size: .68rem;
+    padding: .35rem .6rem;
+    flex-wrap: wrap;
+    text-align: center;
+    line-height: 1.35;
+  }
+  .visa-banner .countdown {
+    font-size: .65rem;
+    padding: .1rem .45rem;
+  }
+
+  /* Day-nav: bigger taps, scroll-snap, no fade clipping */
+  .day-nav {
+    height: auto !important;
+    padding: .35rem 0;
+  }
+  .day-nav__inner {
+    gap: .15rem !important;
+    padding: 0 .6rem !important;
+    scroll-snap-type: x mandatory;
+  }
+  .day-nav__btn {
+    min-width: 56px;
+    min-height: 48px;
+    padding: .35rem .55rem !important;
+    scroll-snap-align: center;
+  }
+  .day-nav__btn .nav-num { font-size: .95rem !important; }
+  .day-nav__btn span:nth-child(2) { font-size: .58rem !important; }
+
+  /* Hero — shorter on mobile */
+  .site-header {
+    height: auto !important;
+    min-height: 70vh !important;
+    padding: 2.5rem 1rem 3rem;
+  }
+  .site-header__title {
+    font-size: clamp(2rem, 9vw, 3rem) !important;
+    line-height: .98;
+  }
+  .site-header__sub { font-size: .82rem !important; }
+  .hero-stats {
+    gap: .8rem !important;
+    padding: .8rem !important;
+    margin: 1.2rem 0 .5rem !important;
+  }
+  .hero-stat__num { font-size: 1.35rem !important; }
+  .hero-stat__label { font-size: .55rem !important; letter-spacing: .12em !important; }
+
+  /* Stat strip — 3 columns mobile */
+  .stat-strip { grid-template-columns: repeat(3, 1fr) !important; }
+  .stat-cell { padding: 1rem .4rem !important; border-bottom: 1px solid rgba(255,255,255,.08); border-right: 1px solid rgba(255,255,255,.08) !important; }
+  .stat-cell__num { font-size: 1.4rem !important; }
+  .stat-cell__label { font-size: .55rem !important; letter-spacing: .12em !important; }
+
+  /* Route map smaller padding */
+  .route-map { padding: 2rem .8rem 1.6rem !important; }
+  .route-map svg { aspect-ratio: 16/9; }
+
+  /* Cities — stack and shorter */
+  .cities-section { padding: 2rem .8rem 1.5rem !important; }
+  .cities-grid { gap: .9rem !important; }
+  .city-card { height: 240px !important; }
+  .city-card__name { font-size: 1.7rem !important; }
+  .city-card__highlights { gap: .25rem !important; }
+  .city-pill { font-size: .6rem !important; padding: .2rem .55rem !important; }
+
+  /* Events — stack */
+  .events-section { padding: 2rem .8rem 1.5rem !important; }
+  .events-grid { grid-template-columns: 1fr !important; gap: .8rem !important; }
+
+  /* Day sections tighter */
+  .day-section { padding: 0 0 1.5rem !important; }
+  .day-content { padding: 1.2rem 1rem 1rem !important; }
+  .day-hero { height: 28vh !important; min-height: 200px !important; max-height: 280px !important; }
+  .day-title { font-size: 1.35rem !important; }
+  .day-date { font-size: .65rem !important; letter-spacing: .15em !important; }
+
+  /* Day-split: stack on mobile */
+  .day-split { grid-template-columns: 1fr !important; }
+  .day-split__image { max-height: 240px !important; }
+
+  /* Timeline tighter */
+  .timeline { padding: .8rem .8rem .8rem 2rem !important; }
+  .timeline li { font-size: .82rem !important; line-height: 1.45; }
+  .timeline .time { font-size: .85rem !important; min-width: 3em !important; }
+
+  /* Stops more compact */
+  .stop { padding: .7rem .8rem !important; }
+  .stop__icon { width: 32px !important; height: 32px !important; font-size: .85rem !important; }
+  .stop__name { font-size: .85rem !important; }
+  .stop__desc { font-size: .76rem !important; }
+  .btn-maps { font-size: .65rem !important; padding: .2rem .55rem !important; }
+
+  /* Tip box smaller */
+  .tip-box { font-size: .76rem !important; padding: .65rem .85rem !important; }
+
+  /* Photo strip - tighter */
+  .photo-strip img { width: 200px !important; height: 140px !important; }
+
+  /* Extras */
+  .extras { padding: 2.5rem .9rem !important; }
+  .extras h2 { font-size: 1.2rem !important; }
+  .extras__grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .apps-grid { grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)) !important; }
+  .app-tile { padding: .75rem !important; }
+
+  /* Costs table scroll horizontally on tiny screens */
+  .costs-table-wrap { overflow-x: auto; }
+  .costs-table { font-size: .78rem; min-width: 520px; }
+
+  /* Footer */
+  footer { padding: 2rem 1rem !important; }
+}
+
+@media (max-width: 480px) {
+  .day-nav__btn { padding: .35rem .45rem !important; min-width: 50px; }
+  .day-nav__btn span:nth-child(2) { font-size: .54rem !important; }
+  .hero-stats { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: .55rem !important; }
+  .hero-stat:nth-child(n+4) { display: none; }
+  .stat-strip { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Touch device — disable hover-only effects */
+@media (hover: none) {
+  .city-card:hover { transform: none; }
+  .stop:hover { transform: none; }
+  .info-card:hover { transform: none; }
+  .photo-strip img:hover { transform: none; }
 }

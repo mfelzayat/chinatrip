@@ -36,21 +36,31 @@
   /* ── Active nav highlight + fade-in animations ── */
   const navBtns = document.querySelectorAll('.day-nav__btn');
   const sections = document.querySelectorAll('.day-section[data-day]');
+  const dayNav = document.querySelector('.day-nav');
+
+  // Keep horizontal scroll of day-nav pinned to active button WITHOUT triggering page-level smooth-scroll.
+  // (The previous scrollIntoView caused jumpy whole-page motion on mobile.)
+  function centerActiveBtnInNav(btn) {
+    if (!dayNav || !btn) return;
+    const navRect = dayNav.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const targetLeft = dayNav.scrollLeft + (btnRect.left - navRect.left) - (navRect.width / 2) + (btnRect.width / 2);
+    dayNav.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+  }
 
   if ('IntersectionObserver' in window && sections.length) {
-    // active nav highlight
     const navObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const day = entry.target.dataset.day;
+            let activeBtn = null;
             navBtns.forEach((btn) => {
-              btn.classList.toggle('active', btn.dataset.day === day);
+              const isActive = btn.dataset.day === day;
+              btn.classList.toggle('active', isActive);
+              if (isActive) activeBtn = btn;
             });
-            const activeBtn = document.querySelector(`.day-nav__btn[data-day="${day}"]`);
-            if (activeBtn) {
-              activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
+            if (activeBtn) centerActiveBtnInNav(activeBtn);
           }
         });
       },

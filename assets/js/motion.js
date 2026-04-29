@@ -51,19 +51,48 @@
       { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
     );
     sections.forEach((s) => railObserver.observe(s));
-
-    railDots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const day = dot.dataset.day;
-        const target = document.querySelector(`.day-section[data-day="${day}"]`);
-        if (target) {
-          const navH = (document.querySelector('.day-nav')?.offsetHeight || 56) + 12;
-          const y = target.getBoundingClientRect().top + window.scrollY - navH;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      });
-    });
   }
+
+  /* ── 2b. UNIFIED CLICK-TO-JUMP — handles both rail dots, day-nav buttons,
+       AND any [data-jump="N"] / <a href="#day-N">. Uses computed offset that
+       accounts for visa banner + sticky day-nav, and forces a synchronous
+       window.scrollTo regardless of html { scroll-behavior } so it ALWAYS
+       moves. ── */
+  function jumpToDay(day) {
+    const target = document.querySelector(`.day-section[data-day="${day}"]`);
+    if (!target) return false;
+    // Stop any in-progress smooth scroll first
+    const navEl = document.querySelector('.day-nav');
+    const navH = navEl ? navEl.offsetHeight : 56;
+    // Visa banner is in flow at the very top — only counts if still visible
+    const banner = document.querySelector('.visa-banner');
+    const bannerH = (banner && banner.getBoundingClientRect().bottom > 0)
+      ? banner.offsetHeight : 0;
+    const offset = navH + bannerH + 16;
+    const targetY = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+    return true;
+  }
+
+  // Single delegated handler (defeats any earlier rogue handlers)
+  document.addEventListener('click', (e) => {
+    let day = null;
+    let el = e.target.closest('.rail-dot, .day-nav__btn, [data-jump]');
+    if (el) {
+      day = el.dataset.day || el.dataset.jump;
+    } else {
+      // Anchor link form (#day-3)
+      const a = e.target.closest('a[href^="#day-"]');
+      if (a) {
+        const m = a.getAttribute('href').match(/^#day-(\d+)$/);
+        if (m) day = m[1];
+      }
+    }
+    if (day && jumpToDay(day)) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true); // capture-phase to beat older listeners
 
   /* ── 3. SVG route — animate dasharray flow ── */
   const routePaths = document.querySelectorAll('.route-path');
