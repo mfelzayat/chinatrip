@@ -33,14 +33,14 @@
       groupTitle: 'تحديات بكين 🏯',
       groupIcon: '🏯',
       list: [
-        { id: 'b1', icon: '🏯', title: 'عدّ التنانين في القصر الإمبراطوري', desc: 'لازم تلاقي على الأقل 9 تنانين منحوتة في الـ Forbidden City — صوّر كل واحد!', owner: 'all', points: 10, prize: '🍦 اختار طعم الآيس كريم بعد العشا' },
-        { id: 'b2', icon: '🧱', title: 'اطلع 1000 درجة على سور الصين', desc: 'كل اللي يكمّل من البرج 1 لحد البرج 5 من غير ما يقعد ياخد نَفَس يكسب', owner: 'all', points: 50, prize: '¥50 cash bonus + وسام البطل' },
-        { id: 'b3', icon: '🛷', title: 'انزل بالـ Toboggan لحد تحت', desc: 'الاسلايد الفولاذي من فوق سور الصين — مين بدون فرامل لحد آخر النزلة؟', owner: 'all', points: 20, prize: '🎬 تختار فيلم العائلة الليلة' },
-        { id: 'b4', icon: '🥢', title: 'اتعلّم تأكل بالعيدان (Chopsticks)', desc: 'كل اللي يكمّل وجبة كاملة من غير ملعقة ولا شوكة — official Chopsticks Master', owner: 'all', points: 15, prize: '🍰 dessert إضافي' },
-        { id: 'b5', icon: '🗣️', title: 'احفظ 5 كلمات صيني', desc: 'نِي هاو · شيي شيي · جايجيين · بو هاو · واي تشي يي', owner: 'all', points: 10, prize: '¥30 bonus' },
-        { id: 'b6', icon: '📸', title: 'صورة العيلة كاملة على سور الصين', desc: 'خمسة، مع الجبال ورا — اللي يحدد الـ angle المثالي يكسب', owner: 'mfz', points: 10, prize: 'اختيار الـ playlist في العربية' },
-        { id: 'b7', icon: '🍵', title: 'دينا تشتري شاي صيني أصلي من Hutong', desc: 'تختار نوع، تساوم على السعر بالإشارة، وتاخدها بكاكتها الأصلية', owner: 'dina', points: 20, prize: 'يوم spa في Peninsula Shanghai' },
-        { id: 'b8', icon: '🌅', title: 'صحى بدري للـ Tiananmen flag raising', desc: 'علم الصين بيتعلى وقت طلوع الشمس — كل واحد يصحى يكسب', owner: 'all', points: 25, prize: '¥40 + بريكفاست بوفيه استثنائي' },
+        { id: 'b5', day: 2, when: 'بعد الوصول · ~17:00', icon: '🗣️', title: 'احفظ 5 كلمات صيني', desc: 'نِي هاو · شيي شيي · جايجيين · بو هاو · واي تشي يي', owner: 'all', points: 10, prize: '¥30 bonus' },
+        { id: 'b4', day: 2, when: 'العشا · 19:30', icon: '🥢', title: 'اتعلّم تأكل بالعيدان', desc: 'كل اللي يكمّل وجبة كاملة من غير ملعقة ولا شوكة', owner: 'all', points: 15, prize: '🍰 dessert إضافي' },
+        { id: 'b8', day: 3, when: 'الفجر · 04:30', icon: '🌅', title: 'صحى بدري للـ Tiananmen flag raising', desc: 'علم الصين بيتعلى وقت طلوع الشمس — كل واحد يصحى يكسب', owner: 'all', points: 25, prize: '¥40 + بريكفاست استثنائي' },
+        { id: 'b1', day: 3, when: 'الـ Forbidden City · 09:00', icon: '🏯', title: 'عدّ التنانين في القصر الإمبراطوري', desc: 'لازم تلاقي على الأقل 9 تنانين منحوتة — صوّر كل واحد!', owner: 'all', points: 10, prize: '🍦 اختار طعم الآيس كريم بعد العشا' },
+        { id: 'b2', day: 4, when: 'سور الصين · 10:00', icon: '🧱', title: 'اطلع 1000 درجة على سور الصين', desc: 'كل اللي يكمّل من البرج 1 لحد البرج 5 من غير ما يقعد ياخد نَفَس', owner: 'all', points: 50, prize: '¥50 + وسام البطل' },
+        { id: 'b6', day: 4, when: 'سور الصين · 11:00', icon: '📸', title: 'صورة العيلة كاملة على سور الصين', desc: 'خمسة، مع الجبال ورا — اللي يحدد الـ angle المثالي يكسب', owner: 'mfz', points: 10, prize: 'اختيار الـ playlist في العربية' },
+        { id: 'b3', day: 4, when: 'النزول · 13:30', icon: '🛷', title: 'انزل بالـ Toboggan لحد تحت', desc: 'الاسلايد الفولاذي من فوق سور الصين — مين بدون فرامل؟', owner: 'all', points: 20, prize: '🎬 تختار فيلم العائلة الليلة' },
+        { id: 'b7', day: 5, when: 'الـ Hutongs · 09:00', icon: '🍵', title: 'دينا تشتري شاي صيني أصلي', desc: 'تختار نوع، تساوم بالإشارة، وتاخدها بكاكتها الأصلية', owner: 'dina', points: 20, prize: 'يوم spa في Peninsula Shanghai' },
       ],
     },
 
@@ -50,14 +50,14 @@
       groupTitle: 'تحديات شيآن 🗿',
       groupIcon: '🗿',
       list: [
-        { id: 'x1', icon: '🗿', title: 'عدّ 100 جندي طين على الأقل', desc: 'الـ Terracotta Warriors فيها 6000 — مين يقدر يميز 100 وش مختلف؟', owner: 'all', points: 30, prize: '¥50 + اختيار مطعم بكره' },
-        { id: 'x2', icon: '🚲', title: 'لفّة كاملة على سور شيآن بالعجلة', desc: '14 كيلو متر فوق السور القديم — مين أول واحد يخلص اللفة؟', owner: 'all', points: 50, prize: '¥80 cash + وسام Champion' },
-        { id: 'x3', icon: '🍜', title: 'كول طبق biangbiang noodles كامل', desc: 'النودلز الصينية الخاصة بشيآن — خد المغامرة وكول كله', owner: 'all', points: 15, prize: 'تختار breakfast بكره' },
-        { id: 'x4', icon: '👑', title: 'احفظ اسم Emperor Qin Shi Huang', desc: 'المؤسس اللي بنا التراكوتا — قول الاسم 3 مرات قدام بابا', owner: 'all', points: 10, prize: '¥20' },
-        { id: 'x5', icon: '🚆', title: 'ركبت قطار النوم Soft Sleeper', desc: 'قطار الـ Xi\'an → Shanghai الليلي — أول يوم لك في حياتك تنام في قطار', owner: 'all', points: 40, prize: '¥40 + جايزة خاصة في Shanghai' },
-        { id: 'x6', icon: '🏯', title: 'اطلع لفوق الـ Big Wild Goose Pagoda', desc: '7 طبقات فوق بعض — كل اللي يطلع لفوق فوق يكسب', owner: 'all', points: 20, prize: '🍰 dessert إضافي' },
-        { id: 'x7', icon: '💃', title: 'حفظت رقصة من Tang Dynasty Show', desc: 'بعد ما تشوف العرض — أول واحد يقلد حركة من الراقصين على الستيج', owner: 'all', points: 25, prize: 'ساعة سهر زيادة الليلة' },
-        { id: 'x8', icon: '🏮', title: 'صورة في الـ Muslim Quarter بالليل', desc: 'الفوانيس والنور والجو — أحلى صورة عيلة', owner: 'mfz', points: 10, prize: 'تختار dessert بعد العشا' },
+        { id: 'x3', day: 7, when: 'الغدا · 13:00', icon: '🍜', title: 'كول طبق biangbiang noodles كامل', desc: 'النودلز الصينية الخاصة بشيآن — خد المغامرة وكول كله', owner: 'all', points: 15, prize: 'تختار breakfast بكره' },
+        { id: 'x1', day: 7, when: 'التراكوتا · 09:30', icon: '🗿', title: 'عدّ 100 جندي طين على الأقل', desc: 'الـ Terracotta Warriors فيها 6000 — مين يقدر يميز 100 وش مختلف؟', owner: 'all', points: 30, prize: '¥50 + اختيار مطعم بكره' },
+        { id: 'x4', day: 7, when: 'الموقع · 11:00', icon: '👑', title: 'احفظ اسم Emperor Qin Shi Huang', desc: 'المؤسس اللي بنا التراكوتا — قول الاسم 3 مرات قدام بابا', owner: 'all', points: 10, prize: '¥20' },
+        { id: 'x6', day: 8, when: 'الباجودا · 09:30', icon: '🏯', title: 'اطلع لفوق الـ Big Wild Goose Pagoda', desc: '7 طبقات فوق بعض — كل اللي يطلع لفوق فوق يكسب', owner: 'all', points: 20, prize: '🍰 dessert إضافي' },
+        { id: 'x7', day: 8, when: 'Tang Show · 19:30', icon: '💃', title: 'حفظت رقصة من Tang Dynasty Show', desc: 'أول واحد يقلد حركة من الراقصين بعد العرض', owner: 'all', points: 25, prize: 'ساعة سهر زيادة الليلة' },
+        { id: 'x2', day: 9, when: 'السور · 10:00', icon: '🚲', title: 'لفّة كاملة على سور شيآن بالعجلة', desc: '14 كيلو متر فوق السور القديم — مين أول واحد يخلص اللفة؟', owner: 'all', points: 50, prize: '¥80 + وسام Champion' },
+        { id: 'x8', day: 9, when: 'Muslim Quarter · 16:30', icon: '🏮', title: 'صورة في الـ Muslim Quarter بالليل', desc: 'الفوانيس والنور والجو — أحلى صورة عيلة', owner: 'mfz', points: 10, prize: 'تختار dessert بعد العشا' },
+        { id: 'x5', day: 9, when: 'القطار · 19:30', icon: '🚆', title: 'ركبت قطار النوم Soft Sleeper', desc: 'قطار الـ شيآن → شنغهاي الليلي — أول مرة تنام في قطار', owner: 'all', points: 40, prize: '¥40 + جايزة خاصة في شنغهاي' },
       ],
     },
 
@@ -67,16 +67,16 @@
       groupTitle: 'تحديات شنغهاي وديزني 🏰',
       groupIcon: '🏰',
       list: [
-        { id: 's1', icon: '🚀', title: 'اركب TRON Lightcycle 3 مرات', desc: 'أحسن لعبة في ديزني شنغهاي — التحدي: 3 مرات في يوم واحد', owner: 'all', points: 50, prize: '¥100 cash bonus + وسام TRON Champion' },
-        { id: 's2', icon: '🐻', title: 'لقيت LinaBell وصورت معاها', desc: 'صديقة Duffy الجديدة — الطابور 2 ساعة، اللي يستحمل يكسب', owner: 'all', points: 35, prize: 'بدج خاص + اختيار العشا' },
-        { id: 's3', icon: '🏴‍☠️', title: 'اركب Pirates of the Caribbean مرتين', desc: 'أحسن Pirates ride في العالم — متستحملش تركب مرة واحدة', owner: 'all', points: 25, prize: '¥40' },
-        { id: 's4', icon: '🎆', title: 'شفت ILLUMINATE fireworks لآخره', desc: 'العرض الليلي على القلعة — لازم تعدي السنة بدون نوم 🎆', owner: 'all', points: 20, prize: 'ساعة سهر زيادة + popcorn' },
-        { id: 's5', icon: '📸', title: 'صور مع 5 شخصيات Disney', desc: 'Mickey, Minnie, Donald, Spider-Man, Snow White — أو أي 5', owner: 'all', points: 30, prize: '🛍️ اختار الـ souvenir الكبير' },
-        { id: 's6', icon: '🌊', title: 'ركبت Roaring Rapids واتبللت', desc: 'الـ water ride — لازم تطلع منها مبلولة عشان التحدي', owner: 'all', points: 20, prize: '¥30 + change of clothes' },
-        { id: 's7', icon: '🦊', title: 'لعبت في Zootopia: Hot Pursuit', desc: 'اللعبة الجديدة 2024 — Shanghai exclusive، مفيش في أي ديزني تاني', owner: 'all', points: 25, prize: '¥40' },
-        { id: 's8', icon: '🌉', title: 'مشيت على الـ Bund وصورت Pudong', desc: 'الـ skyline من أحسن منظر في شنغهاي', owner: 'all', points: 15, prize: 'تختار restaurant آخر يوم' },
-        { id: 's9', icon: '🥟', title: 'دينا تأكل xiaolongbao في Yu Garden', desc: 'الـ soup dumplings — التحدي: من غير ما تحرق نفسك بالحساء الجوّاني', owner: 'dina', points: 20, prize: 'spa session في Peninsula' },
-        { id: 's10', icon: '🏰', title: 'صورة العيلة قدام ديزني castle', desc: 'القلعة الأكبر في أي ديزني في العالم — كلكم لابسين ميكي ears', owner: 'mfz', points: 30, prize: 'وسام Family of the Year' },
+        { id: 's1', day: 10, when: 'TRON · 10:30', icon: '🚀', title: 'اركب TRON Lightcycle 3 مرات', desc: 'أحسن لعبة في ديزني شنغهاي — التحدي: 3 مرات في يوم واحد', owner: 'all', points: 50, prize: '¥100 + وسام TRON Champion' },
+        { id: 's3', day: 10, when: 'Pirates · 14:00', icon: '🏴‍☠️', title: 'اركب Pirates of the Caribbean مرتين', desc: 'أحسن Pirates ride في العالم — متستحملش تركب مرة واحدة', owner: 'all', points: 25, prize: '¥40' },
+        { id: 's6', day: 10, when: 'Adventure Isle · 17:00', icon: '🌊', title: 'ركبت Roaring Rapids واتبللت', desc: 'الـ water ride — لازم تطلع منها مبلولة عشان التحدي', owner: 'all', points: 20, prize: '¥30 + change of clothes' },
+        { id: 's2', day: 11, when: 'Adventure Isle · 09:30', icon: '🐻', title: 'لقيت LinaBell وصورت معاها', desc: 'صديقة Duffy الجديدة — الطابور 2 ساعة، اللي يستحمل يكسب', owner: 'all', points: 35, prize: 'بدج خاص + اختيار العشا' },
+        { id: 's4', day: 11, when: 'الفايرووركس · 20:30', icon: '🎆', title: 'شفت ILLUMINATE fireworks لآخره', desc: 'العرض الليلي على القلعة — لازم تعدي السنة بدون نوم 🎆', owner: 'all', points: 20, prize: 'ساعة سهر زيادة + popcorn' },
+        { id: 's5', day: 11, when: 'طول اليوم', icon: '📸', title: 'صور مع 5 شخصيات Disney', desc: 'Mickey, Minnie, Donald, Spider-Man, Snow White — أو أي 5', owner: 'all', points: 30, prize: '🛍️ اختار الـ souvenir الكبير' },
+        { id: 's7', day: 12, when: 'Zootopia · 14:30', icon: '🦊', title: 'لعبت في Zootopia: Hot Pursuit', desc: 'اللعبة الجديدة 2024 — Shanghai exclusive، مفيش في أي ديزني تاني', owner: 'all', points: 25, prize: '¥40' },
+        { id: 's10', day: 12, when: 'القلعة · 12:00', icon: '🏰', title: 'صورة العيلة قدام ديزني castle', desc: 'القلعة الأكبر في أي ديزني في العالم — كلكم لابسين ميكي ears', owner: 'mfz', points: 30, prize: 'وسام Family of the Year' },
+        { id: 's8', day: 12, when: 'الـ Bund · 19:00', icon: '🌉', title: 'مشيت على الـ Bund وصورت Pudong', desc: 'الـ skyline من أحسن منظر في شنغهاي', owner: 'all', points: 15, prize: 'تختار restaurant آخر يوم' },
+        { id: 's9', day: 13, when: 'Yu Garden · 11:30', icon: '🥟', title: 'دينا تأكل xiaolongbao في Yu Garden', desc: 'الـ soup dumplings — من غير ما تحرق نفسك بالحساء الجوّاني', owner: 'dina', points: 20, prize: 'spa session في Peninsula' },
       ],
     },
 
@@ -86,12 +86,12 @@
       groupTitle: 'تحديات الكنز 💎 (في أي وقت)',
       groupIcon: '💎',
       list: [
-        { id: 'g1', icon: '📵', title: 'بابا بدون موبايل لـ 6 ساعات', desc: 'يوم واحد بس — في Beijing أو Xi\'an — مفيش screen، مفيش social', owner: 'mfz', points: 50, prize: 'بابا يفوز ¥200 شخصياً 😂' },
-        { id: 'g2', icon: '🤝', title: 'اعمل صداقة مع طفل صيني', desc: 'سلام، بدّل صورة، اتفقوا تتراسلوا — international friendship', owner: 'all', points: 30, prize: '¥50 + هدية لصاحبه الجديد' },
-        { id: 'g3', icon: '🍱', title: 'جربت 5 أكلات صينية مختلفة', desc: 'مش كل واحدة لازم تعجبك — بس لازم تجرب', owner: 'all', points: 20, prize: 'تختار restaurant غربي بكره' },
-        { id: 'g4', icon: '✍️', title: 'اكتب اسمك بالحروف الصينية', desc: 'في خطاط شارع — pictograph صيني أصلي', owner: 'all', points: 15, prize: 'كرت بريدي للأصدقاء في مصر' },
-        { id: 'g5', icon: '🐼', title: 'صورة مع تمثال باندا', desc: 'في أي مدينة — الباندا رمز الصين', owner: 'all', points: 5, prize: '¥10' },
-        { id: 'g6', icon: '🎤', title: 'غنيت في Karaoke مع العيلة', desc: 'الصينيين عندهم KTV في كل مكان — أغنية واحدة كفاية', owner: 'all', points: 25, prize: 'سهرة karaoke لـ ساعتين كاملة' },
+        { id: 'g1', day: null, when: 'أي يوم', icon: '📵', title: 'بابا بدون موبايل لـ 6 ساعات', desc: 'يوم واحد بس — مفيش screen، مفيش social', owner: 'mfz', points: 50, prize: 'بابا يفوز ¥200 شخصياً 😂' },
+        { id: 'g2', day: null, when: 'أي وقت', icon: '🤝', title: 'اعمل صداقة مع طفل صيني', desc: 'سلام، بدّل صورة، اتفقوا تتراسلوا — international friendship', owner: 'all', points: 30, prize: '¥50 + هدية لصاحبه الجديد' },
+        { id: 'g3', day: null, when: 'طول الرحلة', icon: '🍱', title: 'جربت 5 أكلات صينية مختلفة', desc: 'مش كل واحدة لازم تعجبك — بس لازم تجرب', owner: 'all', points: 20, prize: 'تختار restaurant غربي بكره' },
+        { id: 'g4', day: null, when: 'في أي شارع خطاطين', icon: '✍️', title: 'اكتب اسمك بالحروف الصينية', desc: 'في خطاط شارع — pictograph صيني أصلي', owner: 'all', points: 15, prize: 'كرت بريدي للأصدقاء في مصر' },
+        { id: 'g5', day: null, when: 'في أي مدينة', icon: '🐼', title: 'صورة مع تمثال باندا', desc: 'الباندا رمز الصين', owner: 'all', points: 5, prize: '¥10' },
+        { id: 'g6', day: null, when: 'بالليل', icon: '🎤', title: 'غنيت في Karaoke مع العيلة', desc: 'الصينيين عندهم KTV في كل مكان — أغنية واحدة كفاية', owner: 'all', points: 25, prize: 'سهرة karaoke لـ ساعتين' },
       ],
     },
   ];
@@ -130,16 +130,114 @@
   /* ─────────────────────────────────────────────
      RENDER
      ───────────────────────────────────────────── */
+  // Day metadata (label + sub) — for rendering day groups
+  const DAY_META = {
+    1:  { label: 'اليوم 1 · الخميس 18 يونيو',  sub: '✈️ من القاهرة لدبي' },
+    2:  { label: 'اليوم 2 · الجمعة 19 يونيو',  sub: '🏙️ وصلنا بكين' },
+    3:  { label: 'اليوم 3 · السبت 20 يونيو',   sub: '🏯 يوم الأباطرة في الـ Forbidden City' },
+    4:  { label: 'اليوم 4 · الأحد 21 يونيو',   sub: '🧱 سور الصين العظيم — Mutianyu' },
+    5:  { label: 'اليوم 5 · الاتنين 22 يونيو', sub: '🏘️ الـ Hutongs والقصر الصيفي' },
+    6:  { label: 'اليوم 6 · التلات 23 يونيو',  sub: '🚄 من بكين لشيآن بقطار 350 كم/س' },
+    7:  { label: 'اليوم 7 · الأربع 24 يونيو',  sub: '🗿 جنود الطين 6000 — التراكوتا' },
+    8:  { label: 'اليوم 8 · الخميس 25 يونيو',  sub: '🏯 الباجودا والـ Tang Dynasty Show' },
+    9:  { label: 'اليوم 9 · الجمعة 26 يونيو',  sub: '🛏️ السور + قطار النوم لشنغهاي' },
+    10: { label: 'اليوم 10 · السبت 27 يونيو',  sub: '🏰 وصلنا ديزني — يوم TRON' },
+    11: { label: 'اليوم 11 · الأحد 28 يونيو',  sub: '🎢 ديزني 2 — Pirates + Adventure Isle' },
+    12: { label: 'اليوم 12 · الاتنين 29 يونيو',sub: '🎆 ديزني 3 + النقلة لـ Bund' },
+    13: { label: 'اليوم 13 · التلات 30 يونيو', sub: '🌃 شنغهاي الأخير — Bund + Pudong' },
+    14: { label: 'اليوم 14 · الأربع 1 يوليو',  sub: '🏠 رجوع البيت' },
+  };
+
+  function questsByDay() {
+    const map = {};
+    const bonus = [];
+    QUESTS.forEach(g => g.list.forEach(q => {
+      if (q.day == null || q.day === 'bonus') {
+        bonus.push(q);
+      } else {
+        if (!map[q.day]) map[q.day] = [];
+        map[q.day].push(q);
+      }
+    }));
+    return { byDay: map, bonus };
+  }
+
+  function renderQuestCard(q) {
+    return `
+      <div class="quest-card ${state.done[q.id] ? 'done' : ''}" data-quest="${q.id}" data-owner="${q.owner}">
+        <div class="quest-card__head">
+          <div class="quest-card__icon">${q.icon}</div>
+          <div class="quest-card__meta">
+            ${q.when ? `<span class="quest-card__when">⏰ ${q.when}</span>` : ''}
+            <span class="quest-card__owner">${ownerLabel(q.owner)} · ${q.points}pt</span>
+          </div>
+        </div>
+        <h4 class="quest-card__title">${q.title}</h4>
+        <p class="quest-card__desc">${q.desc}</p>
+        <div class="quest-card__prize">${q.prize}</div>
+        <button class="quest-btn" data-action="complete" data-id="${q.id}">
+          ${state.done[q.id] ? `خلصت! (${PLAYERS.find(p=>p.key===state.claimedBy[q.id])?.name || ''})` : 'خلصته! اكسب الجايزة'}
+        </button>
+      </div>
+    `;
+  }
+
   function render() {
     const totals = calcPoints();
     const maxPts = Math.max(...Object.values(totals), 1);
+    const { byDay, bonus } = questsByDay();
+
+    // Build day-grouped HTML
+    let daysHtml = '';
+    for (let n = 1; n <= 14; n++) {
+      const list = byDay[n];
+      if (!list || !list.length) continue;
+      const meta = DAY_META[n] || { label: `اليوم ${n}`, sub: '' };
+      const totalPts = list.reduce((s, q) => s + q.points, 0);
+      const earnedPts = list.reduce((s, q) => s + (state.done[q.id] ? q.points : 0), 0);
+      daysHtml += `
+        <div class="quest-day" data-day="${n}">
+          <div class="quest-day__head">
+            <div class="quest-day__num">${n}</div>
+            <div class="quest-day__info">
+              <h3 class="quest-day__label">${meta.label}</h3>
+              <p class="quest-day__sub">${meta.sub}</p>
+            </div>
+            <span class="quest-day__progress">${earnedPts}/${totalPts}</span>
+          </div>
+          <div class="quest-grid">
+            ${list.map(renderQuestCard).join('')}
+          </div>
+        </div>
+      `;
+    }
+    // Bonus
+    if (bonus.length) {
+      const totalPts = bonus.reduce((s, q) => s + q.points, 0);
+      const earnedPts = bonus.reduce((s, q) => s + (state.done[q.id] ? q.points : 0), 0);
+      daysHtml += `
+        <div class="quest-day quest-day--bonus">
+          <div class="quest-day__head">
+            <div class="quest-day__num">★</div>
+            <div class="quest-day__info">
+              <h3 class="quest-day__label">تحديات الكنز · في أي وقت</h3>
+              <p class="quest-day__sub">💎 جوايز إضافية، أعمل أي واحدة في أي يوم</p>
+            </div>
+            <span class="quest-day__progress">${earnedPts}/${totalPts}</span>
+          </div>
+          <div class="quest-grid">
+            ${bonus.map(renderQuestCard).join('')}
+          </div>
+        </div>
+      `;
+    }
 
     let html = `
       <div class="quests__inner">
         <div class="quests__head">
           <span class="quests__eyebrow">🎮 وضع العائلة · Family Quest Mode</span>
           <h2 class="quests__title">المسابقة الكبيرة!</h2>
-          <p class="quests__sub">كل واحد عنده تحديات. تكمّل تحدي تكسب جايزة فورية. الفايز في كل مدينة بياخد لقب البطل!</p>
+          <p class="quests__sub">التحديات منظمة بالأيام، كل تحدي ليه وقته. خلّص تحدي تكسب جايزة فورية!</p>
         </div>
 
         <div class="leaderboard">
@@ -157,34 +255,7 @@
           </div>
         </div>
 
-        ${QUESTS.map(group => {
-          const totalPts = group.list.reduce((s, q) => s + q.points, 0);
-          const earnedPts = group.list.reduce((s, q) => s + (state.done[q.id] ? q.points : 0), 0);
-          return `
-          <div class="quest-group">
-            <div class="quest-group__head">
-              <span class="quest-group__icon">${group.groupIcon}</span>
-              <h3 class="quest-group__title">${group.groupTitle}</h3>
-              <span class="quest-group__progress">${earnedPts} / ${totalPts}</span>
-            </div>
-            <div class="quest-grid">
-              ${group.list.map(q => `
-                <div class="quest-card ${state.done[q.id] ? 'done' : ''}" data-quest="${q.id}" data-owner="${q.owner}">
-                  <div class="quest-card__head">
-                    <div class="quest-card__icon">${q.icon}</div>
-                    <span class="quest-card__owner">${ownerLabel(q.owner)} · ${q.points}pt</span>
-                  </div>
-                  <h4 class="quest-card__title">${q.title}</h4>
-                  <p class="quest-card__desc">${q.desc}</p>
-                  <div class="quest-card__prize">${q.prize}</div>
-                  <button class="quest-btn" data-action="complete" data-id="${q.id}">
-                    ${state.done[q.id] ? `خلصت! (${PLAYERS.find(p=>p.key===state.claimedBy[q.id])?.name || ''})` : 'خلصته! اكسب الجايزة'}
-                  </button>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;}).join('')}
+        ${daysHtml}
 
         <button class="quests__reset">إعادة كل التحديات (Reset)</button>
       </div>
