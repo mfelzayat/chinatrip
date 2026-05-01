@@ -1,0 +1,290 @@
+/* ============================================================
+   China Trip 2026 — PRACTICAL GUIDE v10.0
+   Loaded LAST. Reuses .info-card / .glass tokens.
+   ============================================================ */
+
+.practical-guide {
+  position: relative;
+  z-index: 2;
+  padding: 4.5rem 1.2rem 4rem;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,94,58,0.10) 0%, transparent 45%),
+    radial-gradient(circle at 82% 88%, rgba(78,199,143,0.10) 0%, transparent 45%),
+    linear-gradient(180deg, #0c0a10 0%, #11101a 100%);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+}
+
+.practical-guide__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.practical-guide__head {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.practical-guide__zh {
+  font-family: var(--lg-zh);
+  color: var(--accent-xian);
+  font-size: 1rem;
+  letter-spacing: .25em;
+  display: block;
+  margin-bottom: .45rem;
+}
+.practical-guide__title {
+  font-family: var(--lg-display);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  font-weight: 400;
+  margin: 0 0 .55rem;
+  color: #fff;
+  letter-spacing: -.01em;
+}
+.practical-guide__sub {
+  color: var(--text-soft);
+  font-size: .95rem;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* ── Quick city anchors (top of section) ── */
+.pg-anchors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  margin: 1.6rem auto 2.2rem;
+}
+.pg-anchor {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .55rem 1.1rem;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-stroke);
+  color: var(--text);
+  font-size: .82rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: all .25s var(--ease);
+}
+.pg-anchor:hover {
+  background: rgba(255,255,255,0.10);
+  transform: translateY(-1px);
+  border-color: var(--glass-stroke-2);
+  color: #fff !important;
+}
+.pg-anchor[data-city="beijing"]::before  { content: '🏯'; }
+.pg-anchor[data-city="xian"]::before     { content: '🗿'; }
+.pg-anchor[data-city="shanghai"]::before { content: '🌃'; }
+.pg-anchor[data-city="disney"]::before   { content: '🤠'; }
+
+/* ── City group ── */
+.city-guide {
+  margin-top: 3.2rem;
+  scroll-margin-top: 80px;
+}
+.city-guide__head {
+  display: flex;
+  align-items: baseline;
+  gap: .9rem;
+  flex-wrap: wrap;
+  padding-bottom: .9rem;
+  margin-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  font-family: var(--lg-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+  color: #fff;
+}
+.city-guide__zh {
+  font-family: var(--lg-zh);
+  font-style: normal;
+  letter-spacing: .12em;
+  font-size: .9em;
+  font-weight: 700;
+}
+.city-guide__sub {
+  font-family: var(--lg-system);
+  font-style: normal;
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  margin-left: auto;
+}
+
+.city-guide[data-city="beijing"]  .city-guide__zh { color: var(--accent-beijing); }
+.city-guide[data-city="xian"]     .city-guide__zh { color: var(--accent-xian); }
+.city-guide[data-city="shanghai"] .city-guide__zh { color: var(--accent-shanghai); }
+.city-guide[data-city="disney"]   .city-guide__zh { color: var(--accent-disney); }
+
+.city-guide[data-city="beijing"]  .city-guide__head { border-bottom-color: rgba(255,94,58,0.30); }
+.city-guide[data-city="xian"]     .city-guide__head { border-bottom-color: rgba(245,185,74,0.30); }
+.city-guide[data-city="shanghai"] .city-guide__head { border-bottom-color: rgba(78,199,143,0.30); }
+.city-guide[data-city="disney"]   .city-guide__head { border-bottom-color: rgba(180,139,255,0.30); }
+
+/* ── Guide block (one per category) ── */
+.guide-block {
+  margin: 0 0 2rem;
+}
+.guide-block__head {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin: 0 0 .9rem;
+  font-family: var(--lg-system);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: #fff;
+}
+.guide-block__head .gb-emoji {
+  font-size: 1.3rem;
+  filter: saturate(1.1);
+}
+.guide-block__head .gb-ar {
+  margin-left: auto;
+  font-size: .8rem;
+  color: var(--text-mute);
+  font-weight: 400;
+}
+.guide-block__intro {
+  font-size: .85rem;
+  color: var(--text-soft);
+  margin: -0.3rem 0 .9rem;
+  line-height: 1.55;
+}
+
+/* ── Item grid (info-cards inside) ── */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .75rem;
+}
+.guide-grid--wide {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ── Override info-card stripe per-block category ── */
+.guide-block[data-cat="parks"]    .info-card { border-left-color: var(--accent-shanghai) !important; }
+.guide-block[data-cat="parks"]    .info-card .info-card__label { color: var(--accent-shanghai) !important; }
+
+.guide-block[data-cat="shopping"] .info-card { border-left-color: var(--accent-beijing) !important; }
+.guide-block[data-cat="shopping"] .info-card .info-card__label { color: var(--accent-beijing) !important; }
+
+.guide-block[data-cat="malls"]    .info-card { border-left-color: var(--accent-disney) !important; }
+.guide-block[data-cat="malls"]    .info-card .info-card__label { color: var(--accent-disney) !important; }
+
+.guide-block[data-cat="halal"]    .info-card { border-left-color: #4ec78f !important; }
+.guide-block[data-cat="halal"]    .info-card .info-card__label { color: #4ec78f !important; }
+
+.guide-block[data-cat="market"]   .info-card { border-left-color: var(--accent-xian) !important; }
+.guide-block[data-cat="market"]   .info-card .info-card__label { color: var(--accent-xian) !important; }
+
+.guide-block[data-cat="bath"]     .info-card { border-left-color: #b48bff !important; }
+.guide-block[data-cat="bath"]     .info-card .info-card__label { color: #b48bff !important; }
+
+.guide-block[data-cat="transport"] .info-card { border-left-color: #ff5e3a !important; }
+.guide-block[data-cat="transport"] .info-card .info-card__label { color: #ff5e3a !important; }
+
+/* ── Tiny pills for tags inside cards ── */
+.guide-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: .55rem;
+}
+.guide-pill {
+  display: inline-block;
+  padding: .15rem .55rem;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-soft);
+  border: 1px solid var(--glass-stroke);
+}
+.guide-pill.is-free   { color: #4ec78f; border-color: rgba(78,199,143,.4); }
+.guide-pill.is-paid   { color: var(--accent-xian); border-color: rgba(245,185,74,.4); }
+.guide-pill.is-halal  { color: #4ec78f; border-color: rgba(78,199,143,.5); background: rgba(78,199,143,.10); }
+.guide-pill.is-best   { color: #b48bff; border-color: rgba(180,139,255,.5); background: rgba(180,139,255,.10); }
+.guide-pill.is-walk   { color: var(--accent-shanghai); border-color: rgba(78,199,143,.4); }
+
+/* ── Transport step list ── */
+.transport-steps {
+  list-style: none;
+  margin: .6rem 0 0;
+  padding: 0;
+}
+.transport-steps li {
+  position: relative;
+  padding: .5rem 0 .5rem 2rem;
+  font-size: .85rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+  border-bottom: 1px dashed rgba(255,255,255,.08);
+  counter-increment: tstep;
+}
+.transport-steps {
+  counter-reset: tstep;
+}
+.transport-steps li::before {
+  content: counter(tstep);
+  position: absolute;
+  left: 0;
+  top: .55rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: rgba(255,94,58,.15);
+  border: 1px solid rgba(255,94,58,.4);
+  color: #ff5e3a;
+  font-size: .72rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+.transport-steps li:last-child { border-bottom: none; }
+.transport-steps li strong { color: #fff; }
+
+/* ── Best-pick callout ── */
+.pg-callout {
+  margin-top: .9rem;
+  padding: .85rem 1.05rem;
+  background: rgba(78,199,143,.08);
+  border: 1px solid rgba(78,199,143,.3);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-size: .85rem;
+  line-height: 1.55;
+}
+.pg-callout strong { color: #4ec78f; }
+.pg-callout--warn {
+  background: rgba(255,94,58,.08);
+  border-color: rgba(255,94,58,.32);
+}
+.pg-callout--warn strong { color: #ff5e3a; }
+.pg-callout--info {
+  background: rgba(245,185,74,.07);
+  border-color: rgba(245,185,74,.32);
+}
+.pg-callout--info strong { color: var(--accent-xian); }
+
+/* ── Mobile tweaks ── */
+@media (max-width: 720px) {
+  .practical-guide { padding: 3rem .75rem; }
+  .city-guide__head { gap: .5rem; flex-direction: column; align-items: flex-start; }
+  .city-guide__sub { margin-left: 0; }
+  .guide-grid { grid-template-columns: 1fr; }
+  .guide-block__head .gb-ar { display: none; }
+  .pg-anchor { padding: .45rem .85rem; font-size: .76rem; }
+}
