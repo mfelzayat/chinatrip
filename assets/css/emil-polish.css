@@ -1,0 +1,307 @@
+/* ============================================================
+   emil-polish.css · v11.0
+   Design-engineering polish layer applying Emil Kowalski's
+   philosophy to the existing China-trip site.
+
+   Loaded LAST so it overrides earlier transition/easing decisions
+   without touching them. Adds:
+     · Stronger custom easing curves (replaces weak built-in `ease`)
+     · Button :active feedback (scale 0.97)
+     · Origin-aware card scaling (no scaling from center for triggers)
+     · Asymmetric enter/exit (slow enter, fast exit)
+     · Stagger entries via @starting-style
+     · prefers-reduced-motion fallback
+     · Hover gating behind (hover: hover) and (pointer: fine)
+     · Replaces `transition: all` patterns where they cause jank
+
+   Reference: emil-design-eng SKILL.md · animations.dev
+   ============================================================ */
+
+/* ────────────────────────────────────────────────────────────
+   1. Custom easing curves
+   ──────────────────────────────────────────────────────────── */
+:root {
+  /* Emil's recommended curves — stronger than the built-ins */
+  --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);    /* UI entrances, hover-on */
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);   /* on-screen movement */
+  --ease-drawer:        cubic-bezier(0.32, 0.72, 0, 1);    /* iOS-like drawer/sheet */
+  --ease-spring:        cubic-bezier(0.34, 1.56, 0.64, 1); /* subtle overshoot for delight */
+
+  /* Standard motion tokens (Emil's duration ranges) */
+  --dur-press:   140ms;  /* button press feedback */
+  --dur-tooltip: 160ms;  /* small popover */
+  --dur-card:    220ms;  /* card hover */
+  --dur-enter:   320ms;  /* section entrance */
+  --dur-exit:    180ms;  /* always faster than enter */
+}
+
+/* ────────────────────────────────────────────────────────────
+   2. Button feedback — scale on press
+   "Buttons must feel responsive." — Emil
+   ──────────────────────────────────────────────────────────── */
+.btn-maps,
+.btn-print,
+.btn-reset,
+.city-card__cta,
+button:not(.swiper-button-prev):not(.swiper-button-next),
+[role="button"],
+a.cta,
+.timeline-nav__item {
+  transition:
+    transform var(--dur-press) var(--ease-out-strong),
+    box-shadow var(--dur-press) var(--ease-out-strong),
+    background-color var(--dur-press) var(--ease-out-strong),
+    border-color var(--dur-press) var(--ease-out-strong),
+    color var(--dur-press) var(--ease-out-strong);
+  will-change: transform;
+}
+
+.btn-maps:active,
+.btn-print:active,
+.btn-reset:active,
+.city-card__cta:active,
+button:not(.swiper-button-prev):not(.swiper-button-next):active,
+[role="button"]:active,
+a.cta:active {
+  transform: scale(0.97);
+  transition-duration: 80ms; /* exit always faster than enter */
+}
+
+/* ────────────────────────────────────────────────────────────
+   3. Card hover — gated behind real hover devices
+   ──────────────────────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .city-card,
+  .event-card,
+  .info-card,
+  .glass,
+  .practical-guide__card,
+  .stop {
+    transform-origin: center bottom; /* lift from the base, not center */
+    transition:
+      transform var(--dur-card) var(--ease-out-strong),
+      box-shadow var(--dur-card) var(--ease-out-strong),
+      border-color var(--dur-card) var(--ease-out-strong);
+  }
+
+  .city-card:hover,
+  .event-card:hover,
+  .info-card:hover,
+  .practical-guide__card:hover,
+  .stop:hover {
+    transform: translateY(-4px) scale(1.005);
+    box-shadow:
+      0 20px 40px -20px rgba(0, 0, 0, 0.35),
+      0 8px 18px -8px rgba(190, 30, 45, 0.15);
+  }
+}
+
+/* Touch devices: skip hover-elevation, only press feedback */
+@media (hover: none) {
+  .city-card:active,
+  .event-card:active,
+  .info-card:active,
+  .practical-guide__card:active,
+  .stop:active {
+    transform: scale(0.985);
+    transition-duration: 90ms;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   4. Section entrance — @starting-style for clean reveals
+   "Nothing in the real world appears from nothing." Start at
+   scale(0.95) with opacity 0, never scale(0).
+   ──────────────────────────────────────────────────────────── */
+.day-section,
+.cities-section,
+.events-section,
+.route-map,
+.stat-strip,
+.practical-guide {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity var(--dur-enter) var(--ease-out-strong),
+    transform var(--dur-enter) var(--ease-out-strong);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   5. Stagger — items inside a list reveal sequentially
+   30–80ms between siblings (Emil's recommended range)
+   ──────────────────────────────────────────────────────────── */
+.cities-section .city-card,
+.events-section .event-card,
+.practical-guide .practical-guide__card,
+.day-section .stop,
+.day-section .info-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-enter) var(--ease-out-strong),
+    transform var(--dur-enter) var(--ease-out-strong);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.cities-section .city-card:nth-child(1),
+.events-section .event-card:nth-child(1),
+.practical-guide .practical-guide__card:nth-child(1) {
+  transition-delay: 0ms;
+}
+.cities-section .city-card:nth-child(2),
+.events-section .event-card:nth-child(2),
+.practical-guide .practical-guide__card:nth-child(2) {
+  transition-delay: 50ms;
+}
+.cities-section .city-card:nth-child(3),
+.events-section .event-card:nth-child(3),
+.practical-guide .practical-guide__card:nth-child(3) {
+  transition-delay: 100ms;
+}
+.cities-section .city-card:nth-child(4),
+.events-section .event-card:nth-child(4),
+.practical-guide .practical-guide__card:nth-child(4) {
+  transition-delay: 150ms;
+}
+.cities-section .city-card:nth-child(5),
+.events-section .event-card:nth-child(5),
+.practical-guide .practical-guide__card:nth-child(5) {
+  transition-delay: 200ms;
+}
+.cities-section .city-card:nth-child(6),
+.events-section .event-card:nth-child(6),
+.practical-guide .practical-guide__card:nth-child(6) {
+  transition-delay: 250ms;
+}
+
+/* ────────────────────────────────────────────────────────────
+   6. Image reveals — masked entry instead of fade
+   Smooth scroll-into-view feel without JS observers (relies on
+   the existing .in-view toggle, but improves the curve).
+   ──────────────────────────────────────────────────────────── */
+.photo-strip img,
+.place-photo,
+.info-card img {
+  transition:
+    opacity var(--dur-card) var(--ease-out-strong),
+    transform var(--dur-card) var(--ease-out-strong),
+    filter var(--dur-card) var(--ease-out-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photo-strip img:hover,
+  .place-photo:hover {
+    transform: scale(1.015);
+    filter: saturate(1.08) brightness(1.02);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   7. Tooltips & inline hints — subtle, fast
+   ──────────────────────────────────────────────────────────── */
+[data-tooltip]::after,
+.tip-box {
+  transition:
+    opacity var(--dur-tooltip) var(--ease-out-strong),
+    transform var(--dur-tooltip) var(--ease-out-strong);
+  transform-origin: top left;
+}
+
+/* ────────────────────────────────────────────────────────────
+   8. Replace `transition: all` patterns at the most user-facing
+   surfaces. Keeps existing behaviour but specifies properties
+   so the GPU only animates what should move.
+   "Only animate transform and opacity." — Emil
+   ──────────────────────────────────────────────────────────── */
+.city-card,
+.event-card,
+.practical-guide__card,
+.glass,
+.info-card {
+  /* Override `transition: all` from earlier files at higher specificity */
+  transition-property: transform, opacity, box-shadow, border-color, background-color;
+}
+
+/* ────────────────────────────────────────────────────────────
+   9. Sticky timeline nav — instant on subsequent activations
+   Once the user starts navigating, no animation lag.
+   ──────────────────────────────────────────────────────────── */
+.timeline-nav__item.is-active {
+  transition-duration: 80ms;
+}
+
+/* ────────────────────────────────────────────────────────────
+   10. Reduced motion — keep what helps comprehension, drop
+   what causes vestibular discomfort.
+   ──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.12s !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep opacity transitions (helpful) but kill movement */
+  .day-section,
+  .cities-section,
+  .events-section,
+  .practical-guide,
+  .city-card,
+  .event-card,
+  .practical-guide__card,
+  .stop {
+    transform: none !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   11. Focus-visible — keyboard polish
+   Crisp ring on keyboard focus, none on mouse click.
+   ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent, #be1e2d);
+  outline-offset: 3px;
+  border-radius: 6px;
+  transition: outline-offset 120ms var(--ease-out-strong);
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ────────────────────────────────────────────────────────────
+   12. Scrollbar polish — subtle, not noisy
+   ──────────────────────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(190, 30, 45, 0.30);
+    border-radius: 6px;
+    transition: background var(--dur-card) var(--ease-out-strong);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(190, 30, 45, 0.55);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* End emil-polish.css */
