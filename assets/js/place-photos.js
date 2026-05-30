@@ -39,39 +39,20 @@
     ['pizza marzano',          null, '🍕'],
     ['the schoolhouse',        null, '🍕'],
     ['opera bombana',          null, '🍝'],
-    // Xi'an
-    ['terracotta',             'xian-terracotta-1.jpg', '🗿'],
-    ['mausoleum',              'xian-terracotta-2.jpg', '🗿'],
-    ['xi\'an city wall',       'xian-city-wall-1.jpg', '🏯'],
-    ['city wall',              'xian-city-wall-1.jpg', '🏯'],
-    ['big wild goose',         'xian-pagoda-1.jpg', '🏯'],
-    ['wild goose pagoda',      'xian-pagoda-1.jpg', '🏯'],
-    ['da ci\'en',              'xian-pagoda-1.jpg', '🏯'],
-    ['tang paradise',          'xian-tang-paradise-1.jpg', '🌸'],
-    ['tang dynasty show',      null, '🎭'],
-    ['huaqing',                null, '♨️'],
-    ['shaanxi history museum', 'xian-shaanxi-museum-1.jpg', '🏺'],
-    ['muslim quarter',         'xian-muslim-quarter-1.jpg', '🏮'],
-    ['huimin',                 'xian-muslim-quarter-1.jpg', '🏮'],
-    ['bell tower',             'xian-bell-tower-1.jpg', '🔔'],
-    ['drum tower',             'xian-bell-tower-2.jpg', '🥁'],
-    // Xi'an restaurants & hotels
-    ['crowne plaza',           null, '🏨'],
-    ['sofitel',                null, '🏨'],
-    ['le grand',               null, '🍷'],
-    ['westin',                 null, '🏨'],
-    ['vinotech',               null, '🍷'],
-    ['wei jia',                null, '🍜'],
-    ['biangbiang',             null, '🍜'],
-    // Sleeper train
-    ['sleeper train',          null, '🛏️'],
-    ['soft sleeper',           null, '🛏️'],
-    ['d310',                   null, '🚆'],
-    ['z40',                    null, '🚆'],
+    // Beijing landmarks (replacing cancelled Xi'an entries)
+    ['drum tower',             null, '🥁'],
+    ['houhai',                 null, '🌊'],
+    ['longqing',               null, '🐉'],
+    ['shilinxia',              null, '🌉'],
+    ['mutianyu',               null, '🧱'],
+    ['silk street',            null, '🛍️'],
+    ['pearl market',           null, '💎'],
+    ['zhongguancun',           null, '💻'],
+    ['universal studios',      null, '🎢'],
+    // HSR
     ['hsr',                    null, '🚄'],
-    ['g653',                   null, '🚄'],
     ['high-speed rail',        null, '🚄'],
-    ['beijing west',           null, '🚄'],
+    ['beijing south',          null, '🚄'],
     // Shanghai — attractions
     ['shanghai disneyland',    'shanghai-disney-1.jpg', '🏰'],
     ['enchanted storybook',    'shanghai-disney-1.jpg', '🏰'],
@@ -131,7 +112,7 @@
     if (t.match(/shanghai|disney|bund|pudong|nanjing|yu garden|toy story|tron|pirates|soaring|zootopia|peninsula|lost heaven|jean georges/)) {
       return 'linear-gradient(135deg, #4ec78f, #6bdbb0)';
     }
-    if (t.match(/cairo|dubai|emirates|ek\s|airport|flight|sleeper|hsr|train|g653|d310|z40/)) {
+    if (t.match(/cairo|dubai|emirates|ek\s|airport|flight|hsr|train/)) {
       return 'linear-gradient(135deg, #b48bff, #d4b3ff)';
     }
     return 'linear-gradient(135deg, #6e6a82, #9e96b8)';

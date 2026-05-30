@@ -27,11 +27,7 @@
           <span class="mobile-tab__icon">🏯</span>
           <span class="mobile-tab__label">Beijing</span>
         </button>
-        <button class="mobile-tab" data-target="xian" data-jump="6" aria-label="Xi'an days">
-          <span class="mobile-tab__icon">🗿</span>
-          <span class="mobile-tab__label">Xi'an</span>
-        </button>
-        <button class="mobile-tab" data-target="shanghai" data-jump="10" aria-label="Shanghai days">
+        <button class="mobile-tab" data-target="shanghai" data-jump="7" aria-label="Shanghai days">
           <span class="mobile-tab__icon">🏰</span>
           <span class="mobile-tab__label">Disney</span>
         </button>
@@ -70,9 +66,8 @@
     // Auto-update active tab based on scroll position
     const dayToCity = (d) => {
       const n = parseInt(d, 10);
-      if (n >= 2 && n <= 5) return 'beijing';
-      if (n >= 6 && n <= 9) return 'xian';
-      if (n >= 10 && n <= 13) return 'shanghai';
+      if (n >= 2 && n <= 6) return 'beijing';
+      if (n >= 7 && n <= 13) return 'shanghai';
       return 'top';
     };
 

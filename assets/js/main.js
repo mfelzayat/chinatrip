@@ -252,11 +252,10 @@
   /* ── Optional: live weather widget (Open-Meteo, no API key) ── */
   const wxEl = document.getElementById('weatherWidget');
   if (wxEl && 'fetch' in window) {
-    // Beijing 39.9042,116.4074 · Xi'an 34.3416,108.9398 · Shanghai 31.2304,121.4737
+    // Beijing 39.9042,116.4074 · Shanghai 31.2304,121.4737
     const cities = [
-      ['Beijing', 39.9042, 116.4074],
-      ['Xi\'an',  34.3416, 108.9398],
-      ['Shanghai',31.2304, 121.4737],
+      ['Beijing',  39.9042, 116.4074],
+      ['Shanghai', 31.2304, 121.4737],
     ];
     Promise.all(cities.map(([name, lat, lon]) =>
       fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&temperature_unit=celsius`)
